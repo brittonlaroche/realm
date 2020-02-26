@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="action_settings">Logout</string>
+    <string name="title_activity_items">Things ToDo!</string>
+
+    <!-- Strings related to login -->
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+
+    <!-- Other strings -->
+    <string name="project_description">Project description</string>
+
+</resources>
