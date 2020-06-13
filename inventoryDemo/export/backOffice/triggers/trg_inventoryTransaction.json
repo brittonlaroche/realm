@@ -1,0 +1,20 @@
+{
+    "id": "5edff02dd97062370e811453",
+    "name": "trg_inventoryTransaction",
+    "type": "DATABASE",
+    "config": {
+        "operation_types": [
+            "INSERT",
+            "UPDATE",
+            "REPLACE"
+        ],
+        "database": "InventoryDemo",
+        "collection": "InventoryItem",
+        "service_name": "mongodb-atlas",
+        "match": {},
+        "full_document": false,
+        "unordered": false
+    },
+    "function_name": "fnc_transactions",
+    "disabled": false
+}

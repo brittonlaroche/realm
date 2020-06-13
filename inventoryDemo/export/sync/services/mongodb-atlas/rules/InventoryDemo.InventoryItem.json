@@ -1,0 +1,43 @@
+{
+    "id": "5ededcfc0357c7e5750226fb",
+    "database": "InventoryDemo",
+    "collection": "InventoryItem",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {
+        "title": "InventoryItem",
+        "bsonType": "object",
+        "required": [
+            "_id",
+            "_partition",
+            "name",
+            "price",
+            "quantity"
+        ],
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            },
+            "_partition": {
+                "bsonType": "string"
+            },
+            "name": {
+                "bsonType": "string"
+            },
+            "price": {
+                "bsonType": "double"
+            },
+            "quantity": {
+                "bsonType": "long"
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "app_id": "inventory-rccnj",
+    "config_version": 20180301,
+    "name": "Inventory",
+    "location": "US-VA",
+    "deployment_model": "GLOBAL",
+    "security": {},
+    "hosting": {
+        "enabled": true,
+        "app_default_domain": "inventory-rccnj.mongodbstitch.com"
+    },
+    "custom_user_data_config": {
+        "enabled": false
+    },
+    "sync": {
+        "development_mode_enabled": false
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "5ee00c0b78ce5341c324097a",
+    "database": "covid",
+    "collection": "timeseries",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {}
+}

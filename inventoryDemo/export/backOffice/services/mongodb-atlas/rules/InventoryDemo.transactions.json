@@ -1,0 +1,16 @@
+{
+    "id": "5ee00c2078ce5341c3241882",
+    "database": "InventoryDemo",
+    "collection": "transactions",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {}
+}
