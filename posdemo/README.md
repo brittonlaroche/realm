@@ -1,3 +1,7 @@
+# DO NOT USE
+
+This project has been depricated with the release of the NEW realm beta on June 10 2020!
+
 # My first Realm App
 
 [![GitHub license](https://img.shields.io/badge/license-Apache-blue.svg)](https://raw.githubusercontent.com/realm/my-first-realm-app/LICENSE)
