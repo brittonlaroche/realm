@@ -1,7 +1,7 @@
 # Welcome to the Realm Inventory Demo.   
 
 ## Overview:
-This demo has 3 distinct parts.  
+This demo has three distinct parts that interact to show end to end functionality of Realm and Atlas with other systems.  
 
 - The first part consits of a mobile demo with syncronized access to Atlas data.  
 - The second part takes advantage of Atlas integration with serverless functions and triggers that interact with REST, Kafka and Twilio.   
