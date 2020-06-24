@@ -114,7 +114,7 @@
               });
               document.getElementById("companyLogo").value = cCompanyLogo;
               var logoHtml = "<img src=\""+ cCompanyLogo + "\">";
-              document.getElementById("displayLogo").innerHTML = logoHtml;
+              //document.getElementById("displayLogo").innerHTML = logoHtml;
             });
         }
         async function updateCompany() {
@@ -202,7 +202,7 @@
 	<td>
 		<div id="contact" class="container">
       <h3>Item Search</h3>
-      <div id=displayLogo></div>
+      <div id=displayLogo><img src="logo.png"></div>
 		  <p id="user"></p>
           <fieldset><input type="text" placeholder="Store Id:" id="sPartition"></fieldset>
           <fieldset><input type="text" placeholder="Item Id:" id="sItemId"></fieldset>

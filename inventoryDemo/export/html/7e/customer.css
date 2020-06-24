@@ -39,9 +39,9 @@ body {
 
 #contact {
   background: #F9F9F9;
-  padding: 15px;
-  margin: 20px 20px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 25px;
+  margin: 30px 30px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 #floater h1 {
@@ -107,7 +107,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: rgb(120, 120, 150);
+  background: rgb(55, 127, 99);
   color: #FFF;
   margin: 0 0 5px;
   padding: 7px;
@@ -115,7 +115,7 @@ fieldset {
 }
 
 #contact button[type="submit"]:hover {
-  background: rgb(170, 170, 190);
+  background: rgb(219, 53, 53);
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
