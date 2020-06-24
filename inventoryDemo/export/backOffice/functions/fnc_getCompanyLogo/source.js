@@ -12,6 +12,12 @@ exports = async function(arg){
 
     Try running in the console below.
   */
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   
   var collection = context.services.get("mongodb-atlas").db("InventoryDemo").collection("codes");
   

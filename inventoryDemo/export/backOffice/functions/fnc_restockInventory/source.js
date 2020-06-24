@@ -38,6 +38,12 @@ exports = function(changeEvent) {
 
     Learn more about http client here: https://docs.mongodb.com/realm/functions/context/#context-http
   */
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   
   var transactions = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transactions");
   var inventory = context.services.get("mongodb-atlas").db("InventoryDemo").collection("InventoryItem");

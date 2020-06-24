@@ -1,0 +1,16 @@
+{
+    "id": "5ee7bc1a3e8ed6ec833280a4",
+    "database": "InventoryDemo",
+    "collection": "kafka_sink",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {}
+}

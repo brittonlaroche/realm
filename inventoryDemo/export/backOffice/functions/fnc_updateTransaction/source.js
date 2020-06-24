@@ -12,7 +12,12 @@ exports = async function(aPhone, aResponse){
 
     Try running in the console below.
   */
-
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   var transactions = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transactions");
   var vDate = new Date();
   console.log("inside fnc_updateTransaction");

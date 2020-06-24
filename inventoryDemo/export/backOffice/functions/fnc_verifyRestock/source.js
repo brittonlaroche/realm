@@ -1,4 +1,10 @@
-exports = async function(recipient, aStoreId, aItemName, aQuantity) {
+exports = async function(recipient, aStoreId, aItemName, aQuantity, aMinQuantity) {
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   
   const twilio = context.services.get("SupplierService");
   const ourNumber = context.values.get("ourNumber");
@@ -12,7 +18,7 @@ exports = async function(recipient, aStoreId, aItemName, aQuantity) {
   twilio.send({
     from: ourNumber,
     to: recipient,
-    body: `Hello from ${vcompanyName}. We are below our minimum quantity and need to restock.  We only have ${aQuantity} units of ${aItemName} for store ${aStoreId}. Reply with the number of items you can deliver in the next 24 hours. Use 0 if you can not deliver.`,
+    body: `Hello from ${vcompanyName}. We have ${aQuantity} units of ${aItemName} for store ${aStoreId}, we need a minimum of ${aMinQuantity}. Please reply with the number of units you can deliver. 0 if you can not deliver.`,
     mediaUrl: vcompanyLogo
   });
 };

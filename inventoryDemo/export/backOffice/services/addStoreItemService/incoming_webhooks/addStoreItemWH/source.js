@@ -1,5 +1,11 @@
 // This function is the webhook's request handler.
 exports = async function(payload) {
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
     // Data can be extracted from the request as follows:
     console.log(JSON.stringify("findStoreItemsWH called ... executing..." ));
     var inventory = context.services.get("mongodb-atlas").db("InventoryDemo").collection("InventoryItem");

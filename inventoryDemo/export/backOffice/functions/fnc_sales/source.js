@@ -38,9 +38,17 @@ exports = async function(changeEvent) {
 
     Learn more about http client here: https://docs.mongodb.com/realm/functions/context/#context-http
   */
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   const fullDocument = changeEvent.fullDocument;
   const sales = context.services.get("mongodb-atlas").db("InventoryDemo").collection("sales");
-  const transaction_hist = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transaction_hist");
+  const inventoryHist = context.services.get("mongodb-atlas").db("InventoryDemo").collection("inventory_hist");
+  const last = context.services.get("mongodb-atlas").db("InventoryDemo").collection("inventory_last");
+  console.log("inside fnc_sales")
   
   //check to make sure we have a full document
   if (fullDocument){
@@ -64,6 +72,47 @@ exports = async function(changeEvent) {
   fullCopy.Item_id = fullDocument._id;
   delete fullCopy._id;
   fullCopy.Date = vDate;
+  
+  //stuff it in the history
+  console.log("inside fnc_sales. Inserting into inventory_hist");
+  inventoryHist.insertOne(fullCopy);
+  
+  //get the last document for this Item_id
+  //determine the differnce in inventory quantity from the curent document.
+  //If the last is greater than current its a sale
+  //If the last is less than current its a restock
+  var lastUpdate = await last.find({"Item_id": fullCopy.Item_id}).toArray()
+    .then(docs => {
+      var lastQuantity = 0;
+      docs.map(c => {
+        if (c) {
+              lastQuantity =  c.quantity;
+        }
+      });
+      if (lastQuantity > fullCopy.quantity) {
+        //we have gone down in inventory insert into sales collection
+        var vSoldQuantity = lastQuantity - fullCopy.quantity;
+        var vPrice = fullCopy.price;
+        var vSoldPrice = vSoldQuantity * vPrice;
+        fullCopy.sold_quantity =  vSoldQuantity;
+        fullCopy.sold_price =  vSoldPrice;
+        sales.insertOne(fullCopy);
+      }
+    });
+  //update the last document
+    last.updateOne(
+      { "Item_id": fullCopy.Item_id},
+      {$set: 
+        { "_partition": fullCopy._partition,
+          "name": fullCopy.name,
+          "price": fullCopy.price,
+          "quantity": fullCopy.quantity,
+          "min_quantity": fullCopy.min_quantity,
+          "supplier": fullCopy.supplier,
+          "date": fullCopy.date
+      }},
+      {upsert: true}
+    );
   
   //Lets calculate the number sold based on the last inventory amount. 
   

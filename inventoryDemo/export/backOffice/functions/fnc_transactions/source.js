@@ -31,7 +31,12 @@ exports = async function(changeEvent) {
     To call other named functions:
     var result = context.functions.execute("function_name", arg1, arg2);
   */
-  
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   var fullDocument = changeEvent.fullDocument;
   console.log("Inside fnc_transactions");
   //------------------------------------------------
@@ -65,7 +70,7 @@ exports = async function(changeEvent) {
     return;
   }
   
-  if (fullDocument.quantity > fullDocument.min_quantity){
+  if (fullDocument.quantity >= fullDocument.min_quantity){
     console.log("Quantity for " + fullDocument.name + " exceeds min quantity, we have enough Items");
     return;
   }
@@ -101,7 +106,7 @@ exports = async function(changeEvent) {
       }},
       {upsert: true}
     );
-  context.functions.execute("fnc_verifyRestock", fullCopy.supplier, fullCopy._partition, fullCopy.name, fullCopy.quantity );
+  context.functions.execute("fnc_verifyRestock", fullCopy.supplier, fullCopy._partition, fullCopy.name, fullCopy.quantity, fullCopy.min_quantity );
 
   
 };

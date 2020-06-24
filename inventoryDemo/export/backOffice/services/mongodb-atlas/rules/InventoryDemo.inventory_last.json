@@ -1,0 +1,16 @@
+{
+    "id": "5ee4387ccb3cfe059cf995f0",
+    "database": "InventoryDemo",
+    "collection": "inventory_last",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "write": true,
+            "insert": true,
+            "delete": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {}
+}

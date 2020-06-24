@@ -1,5 +1,10 @@
 exports = async function(recipient) {
-  
+  /*===============================================================
+  - Date:       Author:           Version:        Notes:
+  -----------------------------------------------------------------
+  - 2020-06-24  Britton LaRoche   1.0            Initial Release
+  -
+  ===============================================================*/
   const twilio = context.services.get("SupplierService");
   const ourNumber = context.values.get("ourNumber");
   var codes = context.services.get("mongodb-atlas").db("InventoryDemo").collection("codes");

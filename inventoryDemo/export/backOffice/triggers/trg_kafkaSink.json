@@ -1,6 +1,6 @@
 {
-    "id": "5ee3cd0f2d97c277c36b3b8e",
-    "name": "trg_sales",
+    "id": "5ee796440ecdf7a0e92e5129",
+    "name": "trg_kafkaSink",
     "type": "DATABASE",
     "config": {
         "operation_types": [
@@ -9,12 +9,12 @@
             "REPLACE"
         ],
         "database": "InventoryDemo",
-        "collection": "InventoryItem",
+        "collection": "kafka_sink",
         "service_name": "mongodb-atlas",
         "match": {},
         "full_document": true,
         "unordered": false
     },
-    "function_name": "fnc_sales",
+    "function_name": "fnc_kafkaSync",
     "disabled": false
 }

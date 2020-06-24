@@ -1,4 +1,4 @@
-exports = function(changeEvent) {
+exports = async function(changeEvent) {
   /*
     A Database Trigger will always call a function with a changeEvent.
     Documentation on ChangeEvents: https://docs.mongodb.com/manual/reference/change-events/
@@ -44,14 +44,24 @@ exports = function(changeEvent) {
   - 2020-06-24  Britton LaRoche   1.0            Initial Release
   -
   ===============================================================*/
-  const history = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transaction_hist");
-  const transactions = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transactions");
   const fullDocument = changeEvent.fullDocument;
+  const inventory = context.services.get("mongodb-atlas").db("InventoryDemo").collection("InventoryItem");
+  const kafka = context.services.get("mongodb-atlas").db("InventoryDemo").collection("kafka_sink");
   
-  var fullCopy = fullDocument;
-  fullCopy.parent_id = fullDocument._id;
-  delete fullCopy._id;
+  console.log("inside fnc_kafkaSync");
+  console.log("fullDocument: " + JSON.stringify(fullDocument));
   
-  history.insertOne(fullCopy);
+  var objId = new BSON.ObjectId(fullDocument.Item_id);
+  var vAddQuantity = parseInt(fullDocument.ack);
+  var vPartition = fullDocument.partition;
   
+  var result = await inventory.updateOne(
+      { "_id": objId},
+      {$inc: 
+        { 
+          "quantity": vAddQuantity
+      }}
+    );
+  console.log("fullDocument: " + JSON.stringify(result)); 
+  return result; 
 };
