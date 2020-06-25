@@ -12,5 +12,30 @@
             "additional_fields": {}
         }
     ],
-    "schema": {}
+    "schema": {
+        "title": "InventoryItem",
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            },
+            "_partition": {
+                "bsonType": "string"
+            },
+            "min_quantity": {
+                "bsonType": "int"
+            },
+            "name": {
+                "bsonType": "string"
+            },
+            "price": {
+                "bsonType": "double"
+            },
+            "quantity": {
+                "bsonType": "int"
+            },
+            "supplier": {
+                "bsonType": "string"
+            }
+        }
+    }
 }
