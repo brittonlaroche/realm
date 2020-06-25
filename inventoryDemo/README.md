@@ -10,4 +10,4 @@ Checkout the README.md in each directory!
 # License
 
 Distributed under the Apache license. See ``LICENSE`` for more information.
-![analytics](https://ga-beacon.appspot.com/UA-50247013-2/my-first-realm-app/README?pixel)
+
