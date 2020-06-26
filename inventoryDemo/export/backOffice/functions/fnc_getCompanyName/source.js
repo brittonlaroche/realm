@@ -1,4 +1,4 @@
-exports = async function(arg){
+exports = async function(aStoreId){
   /*
     Accessing application's values:
     var x = context.values.get("value_name");
@@ -21,8 +21,8 @@ exports = async function(arg){
   
   var collection = context.services.get("mongodb-atlas").db("InventoryDemo").collection("codes");
   
-  var doc = await collection.findOne({CODE_TYPE: "COMPANY_NAME"});
-  var vcompanyName = doc.VALUE;
+  var doc = await collection.findOne({STORE_ID: aStoreId});
+  var vcompanyName = doc.COMPANY_NAME;
   console.log("Company Name: " + vcompanyName);
   
   return vcompanyName;

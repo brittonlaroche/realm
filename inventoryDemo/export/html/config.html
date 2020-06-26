@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <title>Item Maintenance</title>
+    <!-- ====================================================================================================================== -->
+    <!-- Date:       Author:           Version:        Notes:                                                                   -->
+    <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+    <!-- 2020-06-24  Britton LaRoche   1.0            Initial Release                                                           -->
+    <!-- 2020-06-26  Britton LaRoche   1.1            Updated for multi tennant                                                 -->
+    <!-- ====================================================================================================================*/ -->
+    <link rel="stylesheet" type="text/css" href="./customer.css">
+    <link rel="shortcut icon" href="./img/config.png">
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.5.0/stitch.js"></script>
+    <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        const sdk = new ChartsEmbedSDK;
+        const client = stitch.Stitch.initializeDefaultAppClient('inventory-rccnj');
+        const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
+        "mongodb-atlas").db('InventoryDemo');
+
+        function displayItemsOnLoad() {
+          client.auth
+            .loginWithCredential(new stitch.AnonymousCredential())
+            .then(displayCodes)
+            .catch(console.error);
+        }
+
+        function editItem( aCompanyName, aCompanyLogo, aOwner, aStoreId, aButtonColor, aHoverColor){
+            document.getElementById("companyName").value = aCompanyName;
+            document.getElementById("companyLogo").value = aCompanyLogo;
+            document.getElementById("owner").value = aOwner;
+            document.getElementById("storeId").value = aStoreId;
+            document.getElementById("buttonColor").value = aButtonColor;
+            document.getElementById("hoverColor").value = aHoverColor;
+        }
+        function displayCodes() {
+          var searchDoc = {"COMPANY_NAME": { $exists: true}};
+          var vStoreId = document.getElementById('sStoreId');
+          var vCompanyName = document.getElementById('sCompanyName');
+          var vOwner = document.getElementById('sOwner');
+          if ( vStoreId.value != "") {
+          searchDoc["STORE_ID"] =  {$regex: new RegExp(vStoreId.value)};
+          }
+          if ( vCompanyName.value != "") {
+          searchDoc["COMPANY_NAME"] = { $regex: new RegExp(vCompanyName.value) };
+          }
+          if ( vOwner.value != "") {
+          searchDoc["OWNER"] = { $regex: new RegExp(vOwner.value) };
+          }
+          console.log("Search doc: "+ JSON.stringify(searchDoc));
+              var theader = "<th>Company Name</th><th>Company Logo</th><th>Owner</th><th>Store ID</th><th>Button Color</th><th>Hover Color</th><th>Edit</th>";
+              db.collection('codes').find(searchDoc,{limit: 100}).asArray()
+                .then(docs => {
+                  var thtml = "";
+                  var project = "";
+                  docs.map(c => {
+                    if (c) {
+                          thtml = thtml + "<tr>" +
+                          "<td>" + c.COMPANY_NAME + "</td>" +
+                          "<td>" + c.COMPANY_LOGO + "</td>" +
+                          "<td>" + c.OWNER + "</td>" +
+                          "<td>" + c.STORE_ID + "</td>" +
+                          "<td>" + c.BUTTON_COLOR + "</td>" +
+                          "<td>" + c.HOVER_COLOR + "</td>" +
+                          "<td>" +
+                            "<button type=\"checkbox\" class=\"blueTable\"" +
+                            "onClick=\"editItem(" +
+                                "\'"+ c.COMPANY_NAME + "\'," +
+                                "\'"+ c.COMPANY_LOGO + "\'," +
+                                "\'"+ c.OWNER + "\'," +
+                                "\'"+ c.STORE_ID + "\'," +
+                                "\'"+ c.BUTTON_COLOR + "\'," +
+                                "\'"+ c.HOVER_COLOR + "\'" +
+                            ")\">" +
+                            "<i class=\"material-icons\" style=\"font-size:18px\">" +
+                            "mode_edit</i></button>" +
+                            "</td>" +
+                          "</tr>";
+                    }
+                  });
+
+                  //var version = docs.map(c => c.__stitch_sync_version.v).join("");
+                  //var taskVersion = task + ", version: " + version + "<br>";
+                  document.getElementById("items").innerHTML = "<div><table class=\"blueTable\">" + theader + thtml + "</table></div>";
+
+                });
+       }
+      async function updateCodes() {
+            var vCompanyName = document.getElementById('companyName').value;
+            var vCompanyLogo = document.getElementById('companyLogo').value;
+            var vOwner = document.getElementById('owner').value;
+            var vStoreId = document.getElementById('storeId').value;
+            var vButtonColor = document.getElementById('buttonColor').value;
+            var vHoverColor = document.getElementById('hoverColor').value;
+
+            if (vCompanyName === ""){
+              alert("Company Name is required");
+              return;
+            }
+            if (vStoreId === ""){
+              alert("Store ID is required");
+              return;
+            }
+            var codeResult = await db.collection('codes').updateOne(
+  	        { "COMPANY_NAME":  vCompanyName},
+            { $set: {   
+              "COMPANY_LOGO": vCompanyLogo,
+              "OWNER": vOwner,
+              "STORE_ID": vStoreId,
+              "BUTTON_COLOR": vButtonColor,
+              "HOVER_COLOR": vHoverColor
+            } },
+                {upsert: true}
+            );
+            document.getElementById("codeResult").value = "";
+            console.log("codeResult: " + JSON.stringify(codeResult));
+            document.getElementById("codeResult").value = JSON.stringify(codeResult);
+            displayCodes();
+        }
+        function resetResults(){
+            document.getElementById("dbResult1").value = "";
+            document.getElementById("dbResult2").value = "";
+            document.getElementById("dbResult3").value = "";
+        }
+        async function deleteInventoryTransactions() {
+            resetResults();
+            var vStoreId = document.getElementById('deleteStoreId').value;
+            if (vStoreId === ""){
+              alert("Store ID is required");
+              return;
+            }
+            var deleteDoc = {"_partition": vStoreId};
+            var result1 = await db.collection('transactions').deleteMany(deleteDoc);
+            console.log("transactions: " + JSON.stringify(result1));
+            document.getElementById("dbResult1").value = "transactions: " +JSON.stringify(result1);
+            var result2 = await db.collection('transaction_hist').deleteMany({});
+            document.getElementById("dbResult2").value = "transaction_hist:" + JSON.stringify(result2);
+            console.log("result2: " + JSON.stringify(result2));
+            var result3 = await db.collection('kafka_sink').deleteMany({});
+            document.getElementById("dbResult3").value = "kafka_sink: " + JSON.stringify(result3);
+            console.log("result3: " + JSON.stringify(result3));
+            displayCodes();
+        }
+        async function deleteInventoryItems() {
+            resetResults();
+            var vStoreId = document.getElementById('deleteStoreId').value;
+            if (vStoreId === ""){
+              alert("Store ID is required");
+              return;
+            }
+            var deleteDoc = {"_partition": vStoreId};
+            var result1 = await db.collection('InventoryItem').deleteMany(deleteDoc);
+            console.log("result1: " + JSON.stringify(result1));
+            document.getElementById("dbResult1").value = "InventoryItem: " + JSON.stringify(result1);
+            displayCodes();
+        }
+        async function deleteSales() {
+            resetResults();
+            var vStoreId = document.getElementById('deleteStoreId').value;
+            if (vStoreId === ""){
+              alert("Store ID is required");
+              return;
+            }
+            var deleteDoc = {"_partition": vStoreId};
+            var result1 = await db.collection('sales').deleteMany(deleteDoc);
+            console.log("result1: " + JSON.stringify(result1));
+            document.getElementById("dbResult1").value = "sales: " + JSON.stringify(result1);
+            displayCodes();
+        }
+        async function deleteInventoryHistory() {
+            resetResults()
+            var vStoreId = document.getElementById('deleteStoreId').value;
+            if (vStoreId === ""){
+              alert("Store ID is required");
+              return;
+            }
+            var deleteDoc = {"_partition": vStoreId};
+            var result1 = await db.collection('inventory_hist').deleteMany(deleteDoc);
+            console.log("result1: " + JSON.stringify(result1));
+            document.getElementById("dbResult1").value = "inventory_hist" + JSON.stringify(result1);
+            var result2 = await db.collection('inventory_last').deleteMany({});
+            console.log("result1: " + JSON.stringify(result2));
+            document.getElementById("dbResult2").value = "inventory_last: " + JSON.stringify(result2);
+            displayCodes();
+        }
+    </script>
+
+    </head>
+  <body onload="displayItemsOnLoad()">
+	<table>
+	<tr>
+	<td>
+    <div id="contact" class="leftpane">
+      <h3>Search Demo Data Codes</h3>
+      <div id=displayLogo></div>
+      <fieldset><input type="text" placeholder="Company Name:" id="sCompanyName"></fieldset>
+      <fieldset><input type="text" placeholder="Store Id:" id="sStoreId"></fieldset>
+      <fieldset><input type="text" placeholder="Owner:" id="sOwner"></fieldset>
+      <button type="submit" id="search" onClick="displayCodes()">Search</button>
+	</div>
+	</td>
+	<td>...</td>
+	<td>
+    <div id="contact" class="container">
+      <h1>Demo Configuration</h1>
+      <h4>Enter the Company information below and come up with a unique code for your demo.
+      Enter a unique number for your starting store id.
+      The demo will allow 4 additional stores in sequential order.  For example if you use store 100 then stores 100,101,102,103,104 will be part of your demo</h4>
+      <div id="chart1"></div>
+      <fieldset><input type="text" placeholder="Company Name:" id="companyName"></fieldset>
+      <fieldset><input type="text" placeholder="Company Logo:" id="companyLogo"></fieldset>
+      <fieldset><input type="text" placeholder="Owner:" id="owner"></fieldset>
+      <fieldset><input type="text" placeholder="Unique Store ID:" id="storeId"></fieldset>
+      <fieldset><input type="text" placeholder="Button Color:" id="buttonColor"></fieldset>
+      <fieldset><input type="text" placeholder="Hover Color:" id="hoverColor"></fieldset>
+      <button type="submit" id="contact-submit" onClick="updateCodes()">Update Codes</button>
+      <fieldset><input type="text" placeholder="Codes Update Result..." id="codeResult"></fieldset>
+    </div>
+		<div id="contact" class="container">
+          <h3>Remove Data</h3>
+          <fieldset><input type="text" placeholder="Delete Store ID:" id="deleteStoreId"></fieldset>
+          <button type="submit" id="contact-submit" onClick="deleteInventoryItems()">Delete Inventory Items</button>
+          <fieldset><input type="text" placeholder="Results 1:" id="dbResult1"></fieldset>
+          <fieldset><input type="text" placeholder="Results 2:" id="dbResult2"></fieldset>
+          <fieldset><input type="text" placeholder="Results 3:" id="dbResult3"></fieldset>
+          <button type="submit" id="contact-submit" onClick="deleteInventoryTransactions()">Delete Transactions</button>
+          <button type="submit" id="contact-submit" onClick="deleteInventoryHistory()">Delete Inventory History</button>
+          <button type="submit" id="contact-submit" onClick="deleteSales()">Delete Sales</button>
+    </div>
+
+		<div id="contact" class= container>
+		<hr>
+			<button type="submit" id="refresh" onClick="displayCodes()">Refresh Display</button>
+		<hr>
+		<div id="items">Loading...<br><img src="loading.gif"></div>
+    </div>
+
+	</td>
+	</tr>
+	</table>
+  </body>
+
+</html>

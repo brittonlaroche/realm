@@ -21,7 +21,7 @@
           client.auth
             .loginWithCredential(new stitch.AnonymousCredential())
             .then(displayItems)
-            .then(showCompany)
+            .then(defaultCompany)
             .catch(console.error);
         }
 
@@ -93,7 +93,7 @@
 
                 });
        }
-       async function showCompany(){
+       async function defaultCompany(){
             db.collection('codes').find({"CODE_TYPE":"COMPANY_NAME"},{limit: 100}).asArray()
               .then(docs => {
                 var cCompanyName = "";

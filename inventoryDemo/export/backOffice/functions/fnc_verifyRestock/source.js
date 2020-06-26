@@ -9,8 +9,8 @@ exports = async function(recipient, aStoreId, aItemName, aQuantity, aMinQuantity
   const twilio = context.services.get("SupplierService");
   const ourNumber = context.values.get("ourNumber");
   var codes = context.services.get("mongodb-atlas").db("InventoryDemo").collection("codes");
-  var vcompanyName = await context.functions.execute("fnc_getCompanyName");
-  var vcompanyLogo = await context.functions.execute("fnc_getCompanyLogo");
+  var vcompanyName = await context.functions.execute("fnc_getCompanyName",aStoreId);
+  var vcompanyLogo = await context.functions.execute("fnc_getCompanyLogo",aStoreId);
 
   console.log(JSON.stringify("fnc_verifyRestock called with arguments: " + recipient + ", " + aStoreId + ", " + aItemName + ", " + aQuantity));
   console.log("COMPANY_NAME: "+ vcompanyName);
