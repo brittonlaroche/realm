@@ -11,6 +11,10 @@
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+:root{
+  --button-color: rgb(213, 52, 42);
+  --hover-color: rgb(255, 203, 8);
+}
 
 body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -23,6 +27,13 @@ body {
 
 .container {
   max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.leftpane {
+  max-width: 400px;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -107,7 +118,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: rgb(120, 120, 150);
+  background: var(--button-color);
   color: #FFF;
   margin: 0 0 5px;
   padding: 7px;
@@ -115,7 +126,7 @@ fieldset {
 }
 
 #contact button[type="submit"]:hover {
-  background: rgb(170, 170, 190);
+  background: var(--hover-color);
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
