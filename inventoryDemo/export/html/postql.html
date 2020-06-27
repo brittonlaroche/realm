@@ -33,7 +33,7 @@
           <tr><td> VERB:</td><td> <input type="text" id="input_verb" name="input_verb" value="POST" /></td></tr>
           <tr><td> Input Document:</td><td> <textarea class="form-control" id="input_json" rows="5">
             {
-              "username":"admin@gmail.com",
+              "username":"demo_user@gmail.com",
               "password":"EnterPasswordHere"
             }
           </textarea></td></tr>
@@ -57,7 +57,7 @@
           <tr><td> VERB:</td><td> <input type="text" id="input_qlverb" name="input_qlverb" value="POST" /></td></tr>
           <tr><td> Input Query:</td><td> <textarea class="form-control" id="input_qljson" rows="5">
             query {
-              inventoryItem {
+              inventoryItem ( query: { name: "My Product"} ){
                 _id
                 _partition
                 min_quantity
