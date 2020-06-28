@@ -43,7 +43,7 @@ The first step is to crete an Atlas cluster.
 We will now import the realm sync project.
 
 ## Set up the mobile development environment   
-The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will 
+The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will need to downlaod and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
 
 ## Import the "Back Office" application
 
