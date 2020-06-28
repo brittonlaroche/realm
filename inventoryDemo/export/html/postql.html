@@ -55,7 +55,7 @@
           <tr><td style="padding: 10">URL:</td><td> <input style="min-width: 1000px;" type="text" id="input_qlurl" name="input_qlurl" 
             value="https://stitch.mongodb.com/api/client/v2.0/app/inventory-rccnj/graphql"/></td></tr>
           <tr><td> VERB:</td><td> <input type="text" id="input_qlverb" name="input_qlverb" value="POST" /></td></tr>
-          <tr><td> Input Query:</td><td> <textarea class="form-control" id="input_qljson" rows="5">
+          <tr><td> Input GraphQL Query:</td><td> <textarea class="form-control" id="input_qljson" rows="5">
             query {
               inventoryItem ( query: { name: "My Product"} ){
                 _id
@@ -68,7 +68,7 @@
               }
             }
           </textarea></td></tr>
-          <tr><td>Grpahql Results: </td><td> <textarea class="form-control" id="qlresults" rows="10"></textarea></td></tr>
+          <tr><td>GraphQL Results: </td><td> <textarea class="form-control" id="qlresults" rows="10"></textarea></td></tr>
         </table>
       </form>
       <button type="submit" onclick="sendGraphQL()">Send</button>
