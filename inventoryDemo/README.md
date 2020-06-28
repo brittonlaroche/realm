@@ -20,5 +20,10 @@ This demo has three distinct parts that interact to show end to end functionalit
 - __backOffice__ takes advantage of Atlas integration with serverless functions and triggers that interact with REST, Kafka and Twilio.   
 - __html__ is a Realm hosted application written with dymanic HTML and the browser SDK to act as an admin console showing inventory items across all stores.
 
+This documentation is focused on helping you install and confiure the Realm Demo.  Special thanks to __Nate Cotino__ for creating the Android application written in Kotlin with Android studio.  Also special thanks to Chris Grabosky who created a great GraphQL tutorial on how to connect to Atlas and use GraphQL.  Both of their githubs are linked below and will be used as part of this demo.
+
+https://github.com/nathan-contino-mongo/inventory-system
+https://github.com/graboskyc/MongoDBStitchGraphQL
+
  # Diagram
 ![Overview Diagram](./export/html/img/RealmInventoryDemo.png)
