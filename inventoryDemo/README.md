@@ -21,3 +21,4 @@ This demo has three distinct parts that interact to show end to end functionalit
 - __html__ is a Realm hosted application written with dymanic HTML and the browser SDK to act as an admin console showing inventory items across all stores.
 
  # Diagram
+![Overview Diagram](./export/html/img/RealmInventoryDemo.png)
