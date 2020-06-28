@@ -29,7 +29,22 @@ This project integrated mobile devices with an Atlas cluster and allows for seam
 
 We show how all the pieces fit together in the Orthoginal Diagram below.
 
- # Diagram
+## Diagram
 ![Overview Diagram](./export/html/img/RealmInventoryDemo.png)
 
 
+## Philosophy   
+We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and IOS as well as other development platforms.
+
+## Create and Atlas Cluster
+The first step is to crete an Atlas cluster.
+
+## Configure the RealmSync Project   
+We will now import the realm sync project.
+
+## Set up the mobile development environment   
+The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will 
+
+## Import the "Back Office" application
+
+## Host the HTML
