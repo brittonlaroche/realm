@@ -89,6 +89,20 @@ The final step is to download at least 3 different android virtual devices.  I p
 
 ![AVD](./img/androidAVD.png)  
 
+#### 3.6. Launch the Android Application
+You can run the Inventroy Demo on a single AVD.  Just press the green arrow on the toolbar and it will run the AVD selected in the drop list to the left.  However to show syncronization to Atlas and then back to multiple devices you may want to run the application on multiple AVDs.
+
+
+![AVD](./img/runMutiple.png)  
+
+
+#### 3.7. Run on Mutliple Devices
+
+![AVD](./img/multipleAVD.png)  
+
+#### 3.8. Connect to Atlas via Realm Authentication
+
+![Login](./img/login.png)  
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
