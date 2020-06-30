@@ -51,6 +51,11 @@ stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=rep
 ```
 
 #### 2.1. Creating the inventorySync project Manually.
+(./img/2.1.createRealmSync.png)
+(./img/2.2.appName.png)
+(./img/2.3.realmAppId.png)
+(./img/2.4.realmSchema.png)
+(./img/2.5.realmSync.png)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
