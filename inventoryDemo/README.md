@@ -54,7 +54,9 @@ When android opens a small popup window opens.  Select the "Open Existing Projec
 
 ![existing Project](./img/gradleSync.png)    
 
+On the left hand navigation pane and expand the __Gradle Scripts__ and select the build.gradle(Module: app) file.  Find the appId variable and set it to the realm sync project configured in step 2.
 
+![existing Project](./img/appId.png)    
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
