@@ -36,7 +36,9 @@ We show how all the pieces fit together in the Orthoginal Diagram below.
 ## Philosophy   
 We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and IOS as well as other development platforms.
 
-## Create and Atlas Cluster
+https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png
+
+## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png)Create and Atlas Cluster
 The first step is to crete an Atlas cluster.
 
 ## Configure the RealmSync Project   
