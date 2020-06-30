@@ -36,7 +36,7 @@ We show how all the pieces fit together in the Orthoginal Diagram below.
 ## Philosophy   
 We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and IOS as well as other development platforms.
 
-Its a 5 step process to install the end to end Realm Inventory System Demo.  The follow sections will walk us through each step in great detail.
+Its a 5 step process to install the end to end Realm Inventory System Demo.  The following sections walk us through each step in great detail.
 
 ## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png) Create an Atlas Cluster
 Our first step is to create an atlas cluster. In our example we wont be able to create a free tier cluster known as an M0. The reason is that Realm Sync requires MongoDB version 4.4 and it is not available on the free tier at this time (2020-06-30).  Additionally we have more than 5 triggers in our demo.  Realm sync by default will work on an M0 in the future. For now select an M2 through M10 to get started. If you are interetsed in using the Atlas Kafka connector through Confluent CLound you will want to create an AWS cluster in East US 2.  You can always migrate your cluster to this region in the future.
@@ -44,7 +44,11 @@ Our first step is to create an atlas cluster. In our example we wont be able to 
 Click the following link https://cloud.mongodb.com to sign up. Additional instructions on creating an Atlas cluster are available here: [Atlas getting started Guide](https://docs.atlas.mongodb.com/getting-started/)  
 
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
-We will now import the realm sync project.
+We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 executing the following code to link the sync project... the path is the only chnage.
+
+```
+stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
+```
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
