@@ -44,7 +44,9 @@ The first step is to crete an Atlas cluster.
 We will now import the realm sync project.
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment   
-The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will need to downlaod and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
+The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will need to download and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
+
+Move the zip file to the folder of your choice. Double click the zip file and unzip the contents. Open android studio.  
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
