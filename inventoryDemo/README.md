@@ -60,6 +60,38 @@ stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=rep
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
+
+
+```js
+{
+  "title": "InventoryItem",
+  "bsonType": "object",
+  "required": [
+    "_id",
+    "_partition",
+    "name",
+    "price",
+    "quantity"
+  ],
+  "properties": {
+    "_id": {
+      "bsonType": "objectId"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "price": {
+      "bsonType": "double"
+    },
+    "quantity": {
+      "bsonType": "long"
+    }
+  }
+}
+```
 ![Realm Schema](./img/2.4.realmSchema.png)
 
 #### 2.5. Turn on Sync   
