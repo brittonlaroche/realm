@@ -36,17 +36,16 @@ We show how all the pieces fit together in the Orthoginal Diagram below.
 ## Philosophy   
 We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and IOS as well as other development platforms.
 
-https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png
 
-## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png)Create and Atlas Cluster
+## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png) Create an Atlas Cluster
 The first step is to crete an Atlas cluster.
 
-## Configure the RealmSync Project   
+## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We will now import the realm sync project.
 
-## Set up the mobile development environment   
+## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment   
 The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will need to downlaod and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
 
-## Import the "Back Office" application
+## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
-## Host the HTML
+## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
