@@ -63,8 +63,7 @@ Once you have installed Android Studio you will need to download and install the
 Move the zip file to the folder of your choice. Double click the zip file and unzip the contents. Open android studio.  
 
 #### 3.2. Open the Inventory project 
-![existing Project](./img/openExistingProject.png)   
-<img src="./img/openExistingProject.png" width="400">
+<img src="./img/openExistingProject.png" width="700">
 
 When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  
 
@@ -99,11 +98,11 @@ You can run the Inventroy Demo on a single AVD.  Just press the green arrow on t
 
 #### 3.7. Run on Mutliple Devices
 
-![AVD](./img/multipleAVD.png)  
+<img src="./img/multipleAVD.png" width="700">
 
 #### 3.8. Connect to Atlas via Realm Authentication
 
-![Login](./img/login.png)  
+<img src="./img/login.png" width="500">
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
