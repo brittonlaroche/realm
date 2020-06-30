@@ -48,9 +48,13 @@ The next step is to download Android Studio 4.0 (minimum required version is 4.0
 
 Move the zip file to the folder of your choice. Double click the zip file and unzip the contents. Open android studio.  
 
-![existing Project](./img/openExistingProject.png)
+![existing Project](./img/openExistingProject.png)    
 
-When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  The project will load and a small staus window will ask you to syncronize the gradle files.  Chose the options to syncronize.
+When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  The project will load and a small staus window will ask you to syncronize the gradle files.  Chose the options to syncronize.  If you miss the prompt you can select File / Sync Project with Gradle Files.
+
+![existing Project](./img/gradleSync.png)   
+
+
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
