@@ -43,18 +43,28 @@ Our first step is to create an atlas cluster. In our example we wont be able to 
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We will now import the realm sync project.
 
-## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment   
-The next step is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). Once you have installed Android Studio you will need to download and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
+## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
+
+#### 3.0 Install Android Studio  
+The first step to start developing Android Apps is to download Android Studio 4.0 (minimum required version is 4.0) [here](https://developer.android.com/studio). 
+
+#### 3.1 Download the Android Inventory project from github  
+Once you have installed Android Studio you will need to download and install the mobile application from this github: https://github.com/nathan-contino-mongo/inventory-system
 
 Move the zip file to the folder of your choice. Double click the zip file and unzip the contents. Open android studio.  
 
+#### 3.2 Open the Inventory project 
 ![existing Project](./img/openExistingProject.png)    
 
 When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  The project will load and a small staus window will ask you to syncronize the gradle files.  Chose the options to syncronize.  If you miss the prompt you can select File / Sync Project with Gradle Files.
 
 ![existing Project](./img/gradleSync.png)    
 
+#### 3.3 Syncronize the Gradle Scripts 
 On the left hand navigation pane and expand the __Gradle Scripts__ and select the build.gradle(Module: app) file.  Find the appId variable and set it to the realm sync project configured in step 2.
+
+#### 3.4 Install Andoid SDK 29 
+Ah the sheer joy of working with android mobile apps begins with the all the dependencies.  Now we need to download the andoroid sdk 29.  Incase you missed the subtle prompt at the bottom right to install the SDK 29 and you did not click to install you have another option by going to the menu bar and selectin Tools >
 
 ![existing Project](./img/appId.png)    
 
