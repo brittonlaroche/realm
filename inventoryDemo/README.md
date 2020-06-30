@@ -30,7 +30,7 @@ This project integrated mobile devices with an Atlas cluster and allows for seam
 We show how all the pieces fit together in the Orthoginal Diagram below.
 
 ## Diagram
-![Overview Diagram](./img/RealmInventoryDemo2.png)
+![Overview Diagram](./export/html/img/RealmInventoryDemo.png)
 
 
 ## Philosophy   
@@ -68,11 +68,18 @@ On the left hand navigation pane and expand the __Gradle Scripts__ and select th
 
 ![app](./img/appId.png)   
 
-#### 3.4. Install Andoid SDK 29 
-Ah the sheer joy of working with android mobile apps begins with the all the dependencies.  Now we need to download the andoroid sdk 29.  Incase you missed the subtle prompt at the bottom right to install the SDK 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
+#### 3.4. Install Andoid SDK 10.0 API Level 29 
+Ah the sheer joy of working with android mobile apps begins with the all the dependencies.  Now we need to download the andoroid sdk 10.0 API level 29.  Incase you missed the subtle prompt at the bottom right to install the SDK 10 API Level 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
 
 ![SDK](./img/androidSDK.png)  
  
+After the SDK 10.0 with API level 29 has installed you will notice that the build has begun.  You can click the build tab at the lower left to see it running.
+
+#### 3.5. Install Andoid Virtual Devices
+The final step is to download at least 3 different android virtual devices.  I prefer a Galaxy, Nexus and a Pixel.  The AVD's can be managed and downlaoded from the AVD Manager located in the main menu under __Tools > AVD Manager__
+
+![AVD](./img/androidAVD.png)  
+
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
