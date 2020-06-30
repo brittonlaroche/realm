@@ -9,13 +9,9 @@
     <!-- ====================================================================================================================*/ -->
     <!-- https://datatables.net/examples/styling/bootstrap4 -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.5.0/stitch.js"></script>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.9.0/stitch.js"></script>
     <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/> 
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <link rel="shortcut icon" href="./img/demo.png">
     <script>
         const sdk = new ChartsEmbedSDK;
@@ -58,6 +54,10 @@
             document.getElementById("mQuantity").value = aMinQuantity;
             document.getElementById("supplier").value = aSupplier;
         }
+        function escape(aString){
+          var fixedString = aString.replace(/'/g, "\\'");
+          return fixedString;
+        }
         function displayItems() {
           var searchDoc = {};
           var vPartition = document.getElementById('sPartition');
@@ -97,7 +97,7 @@
                             "onClick=\"editItem(" +
                                 "\'"+ c._partition + "\'," +
                                 "\'"+ c._id + "\'," +
-                                "\'"+ c.name + "\'," +
+                                "\'"+ escape(c.name) + "\'," +
                                 "\'"+ c.price + "\'," +
                                 "\'"+ c.quantity + "\'," +
                                 "\'"+ c.min_quantity + "\'," +
@@ -189,6 +189,12 @@
             var vQuantity = parseInt(document.getElementById('quantity').value);
             var vMinQuantity = parseInt(document.getElementById('mQuantity').value);
             var vSupplier = document.getElementById('supplier').value;
+            if ( isNaN(vQuantity)){
+              vQuantity = 0;
+            }
+            if ( isNaN(vMinQuantity)){
+              vMinQuantity = 0;
+            }
             var result1 = await db.collection('InventoryItem').updateOne(
   	        { _id:  vItemId},
   	        { $set: {   "name": vName, 

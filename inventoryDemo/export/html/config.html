@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Item Maintenance</title>
+    <title>Configuration</title>
     <!-- ====================================================================================================================== -->
     <!-- Date:       Author:           Version:        Notes:                                                                   -->
     <!-- ---------------------------------------------------------------------------------------------------------------------- -->
@@ -9,7 +9,7 @@
     <!-- ====================================================================================================================*/ -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
     <link rel="shortcut icon" href="./img/config.png">
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.5.0/stitch.js"></script>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.9.0/stitch.js"></script>
     <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
@@ -44,6 +44,10 @@
           }
           return "";
         }
+        function escape(aString){
+          var fixedString = aString.replace(/'/g, "\\'");
+          return fixedString;
+        }
         async function showCompany(){
             var vCompanyName = getCookie("CompanyName");
             if (vCompanyName === ""){
@@ -68,7 +72,6 @@
                 var logoHtml = "<img width=\"205px\" src=\""+ cCompanyLogo + "\">";
                 document.getElementById("displayLogo").innerHTML = logoHtml;
                 document.getElementById("defaultStore").innerHTML = " Default Store ID: " + cStoreId;
-                //document.getElementById("sPartition").value = cStoreId;
                 var bodyStyles = document.body.style;
                 if(cButtonColor){
                     bodyStyles.setProperty('--button-color', cButtonColor);
@@ -80,7 +83,7 @@
             document.getElementById("companyName").value = aCompanyName;
             document.getElementById("companyLogo").value = aCompanyLogo;
             document.getElementById("owner").value = aOwner;
-            document.getElementById("storeId").value = aStoreId;
+            document.getElementById("deleteStoreId").value = aStoreId;
             document.getElementById("buttonColor").value = aButtonColor;
             document.getElementById("hoverColor").value = aHoverColor;
         }
@@ -116,7 +119,7 @@
                           "<td>" +
                             "<button type=\"checkbox\" class=\"blueTable\"" +
                             "onClick=\"editItem(" +
-                                "\'"+ c.COMPANY_NAME + "\'," +
+                                "\'"+ escape(c.COMPANY_NAME) + "\'," +
                                 "\'"+ c.COMPANY_LOGO + "\'," +
                                 "\'"+ c.OWNER + "\'," +
                                 "\'"+ c.STORE_ID + "\'," +
@@ -136,23 +139,48 @@
 
                 });
        }
+      
       async function updateCodes() {
             var vCompanyName = document.getElementById('companyName').value;
             var vCompanyLogo = document.getElementById('companyLogo').value;
             var vOwner = document.getElementById('owner').value;
-            var vStoreId = document.getElementById('storeId').value;
             var vButtonColor = document.getElementById('buttonColor').value;
             var vHoverColor = document.getElementById('hoverColor').value;
-
             if (vCompanyName === ""){
               alert("Company Name is required");
               return;
             }
-            if (vStoreId === ""){
-              alert("Store ID is required");
-              return;
+            const pipeline = [
+              { $group:{ _id: null,
+                    MaxStore: {
+                      $max: "$STORE_ID"
+                    }
+                  }
+              }];
+
+            await db.collection('codes').aggregate(
+              pipeline
+            ).asArray().then(
+              docs => {
+                  var thtml = "";
+                  var project = "";
+                  docs.map(c => {
+                    if (c) {
+                      vStoreId = c.MaxStore
+                    }
+                  })
+                }
+            );
+            console.log("max store_id: " + vStoreId);
+            if ( isNaN(vStoreId)) {
+              prompt("Please enter a unic nueric store id or remove "+ vStoreId + " from the data.", "");
+            } else {
+              vStoreId = (parseInt(vStoreId) + 10);
+              vStoreId = vStoreId.toString();
+              console.log("New Unique StoreId: " + vStoreId);
             }
-            setCookie("CompnayName", vCompanyName, 365);
+            
+            setCookie("CompanyName", vCompanyName, 365);
             var codeResult = await db.collection('codes').updateOne(
   	        { "COMPANY_NAME":  vCompanyName},
             { $set: {   
@@ -265,9 +293,8 @@
       <fieldset><input type="text" placeholder="Company Name:" id="companyName"></fieldset>
       <fieldset><input type="text" placeholder="Company Logo:" id="companyLogo"></fieldset>
       <fieldset><input type="text" placeholder="Owner:" id="owner"></fieldset>
-      <fieldset><input type="text" placeholder="Unique Store ID:" id="storeId"></fieldset>
-      <fieldset><input type="text" placeholder="Button Color:" id="buttonColor"></fieldset>
-      <fieldset><input type="text" placeholder="Hover Color:" id="hoverColor"></fieldset>
+      <fieldset><input type="text" placeholder="Button Color: Something like #EE3125 or rgb(120,100,50)" id="buttonColor"></fieldset>
+      <fieldset><input type="text" placeholder="Hover Color: Something like #EE3125 or rgb(120,100,50)" id="hoverColor"></fieldset>
       <button type="submit" id="contact-submit" onClick="updateCodes()">Update Codes</button>
       <fieldset><input type="text" placeholder="Codes Update Result..." id="codeResult"></fieldset>
     </div>
