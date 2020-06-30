@@ -52,7 +52,7 @@ Move the zip file to the folder of your choice. Double click the zip file and un
 
 When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  The project will load and a small staus window will ask you to syncronize the gradle files.  Chose the options to syncronize.  If you miss the prompt you can select File / Sync Project with Gradle Files.
 
-![existing Project](./img/gradleSync.png)   
+![existing Project](./img/gradleSync.png)    
 
 
 
