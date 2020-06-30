@@ -69,7 +69,7 @@ On the left hand navigation pane and expand the __Gradle Scripts__ and select th
 ![app](./img/appId.png)   
 
 #### 3.4. Install Andoid SDK 10.0 API Level 29 
-Ah the sheer joy of working with android mobile apps begins with the all the dependencies.  Now we need to download the andoroid sdk 10.0 API level 29.  Incase you missed the subtle prompt at the bottom right to install the SDK 10 API Level 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
+Ah, the sheer joy of working with android mobile apps begins with the all the dependencies!  Now we need to download the andoroid sdk 10.0 API level 29. Click the menu popup in the lower right telling you that you need to install the new Android SDK API level 29 for this project and install it.  In case you missed the subtle prompt at the bottom right to install the SDK 10 API Level 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
 
 ![SDK](./img/androidSDK.png)  
  
