@@ -62,6 +62,8 @@ stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=rep
 #### 2.4. Creating the Schema   
 
 
+
+![Realm Schema](./img/2.4.realmSchema.png)
 ```js
 {
   "title": "InventoryItem",
@@ -92,7 +94,6 @@ stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=rep
   }
 }
 ```
-![Realm Schema](./img/2.4.realmSchema.png)
 
 #### 2.5. Turn on Sync   
 ![Sync](./img/2.5.realmSync.png)
