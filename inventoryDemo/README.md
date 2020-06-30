@@ -98,11 +98,11 @@ You can run the Inventroy Demo on a single AVD.  Just press the green arrow on t
 
 #### 3.7. Run on Mutliple Devices
 
-<img src="./img/multipleAVD.png" width="700">
+<img src="./img/multipleAVD.png" width="400">
 
 #### 3.8. Connect to Atlas via Realm Authentication
 
-<img src="./img/login.png" width="500">
+<img src="./img/login.png" width="400">
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
