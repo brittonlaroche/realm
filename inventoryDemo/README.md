@@ -50,12 +50,20 @@ We have two options to create the realm sync Atlas project.  One is to import th
 stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```
 
-#### 2.1. Creating the inventorySync project Manually.
-(./img/2.1.createRealmSync.png)
-(./img/2.2.appName.png)
-(./img/2.3.realmAppId.png)
-(./img/2.4.realmSchema.png)
-(./img/2.5.realmSync.png)
+#### 2.1. Creating the inventorySync project Manually.   
+![createapp](./img/2.1.createRealmSync.png)
+
+#### 2.2. Name the App InventorySync   
+![Name App](./img/2.2.appName.png)
+
+#### 2.3. Copy the AppID   
+![App ID](./img/2.3.realmAppId.png)
+
+#### 2.4. Creating the Schema   
+![Realm Schema](./img/2.4.realmSchema.png)
+
+#### 2.5. Turn on Sync   
+![Sync](./img/2.5.realmSync.png)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
