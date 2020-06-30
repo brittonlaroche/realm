@@ -63,7 +63,7 @@ Once you have installed Android Studio you will need to download and install the
 Move the zip file to the folder of your choice. Double click the zip file and unzip the contents. Open android studio.  
 
 #### 3.2. Open the Inventory project 
-![existing Project](./img/openExistingProject.png)    
+![existing Project](./img/openExistingProject.png | width=400)    
 
 When android opens a small popup window opens.  Select the "Open Existing Project" open the folder where you installed the zip file /inventory-system-master.  
 
