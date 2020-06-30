@@ -30,7 +30,7 @@ This project integrated mobile devices with an Atlas cluster and allows for seam
 We show how all the pieces fit together in the Orthoginal Diagram below.
 
 ## Diagram
-![Overview Diagram](./export/html/img/RealmInventoryDemo2.png)
+![Overview Diagram](./img/RealmInventoryDemo2.png)
 
 
 ## Philosophy   
