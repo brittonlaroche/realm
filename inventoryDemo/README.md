@@ -60,4 +60,78 @@ On the left hand navigation pane and expand the __Gradle Scripts__ and select th
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
+#### 4.0. Download the realm github repository
+Begin by downlaoding the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
+
+The following section shows how to import the application via this GitHub and the stitch command line tool __"stitch-cli"__. Knowledge of how the stitch command line works is important as you can integrate stitch-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development enviroment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
+
+
+#### 4.1. Install the stitch-cli tool
+Begin by [Installing the Stitch Command Line Interface tool](https://docs.mongodb.com/stitch/import-export/stitch-cli-reference/)
+
+#### 4.2. Creat a project API key
+Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.   
+
+Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
+
+#### 4.3. Log in via stitch-cli
+log into your atlas cluster with your API key (public and private keys) with the stich command line tool.
+
+Sample login instructions:
+```
+stitch-cli login --api-key=my-api-key --private-api-key=my-private-api-key
+```
+
+Example login (Don't worry its not a real api key):
+```
+stitch-cli login --api-key=ytqictxq --private-api-key=8137b118-4a36-4197-a3c7-23b73ba49775
+←[0;0myou have successfully logged in as ytqictxq←[0m
+```
+
+#### 4.4 Import the inventory back office application
+After logging in the command line maintains the connection until you execute the command __stitch-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unziped the realm git hub zip file in step 4.0. 
+```
+stitch-cli import --path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
+```
+
+Follow the prompts and respond __y__ when asked if you would like to create a new app. Press enter to accept the default values.  Change the values to match your configuration.  An example is provided below.
+
+```
+stitch-cli import \path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
+←[0;0mUnable to find app with ID: "invnetory-ekqoy": would you like to create a new app? [y/n]:←[0m y
+←[0;0mApp name [inventory]:←[0m
+←[0;0mAvailable Projects:←[0m
+←[0;0mProject 0 - 5ce58a9fc56c98145d922e93←[0m
+←[0;0mAtlas Project Name or ID [Project 0]:←[0m
+←[0;0mLocation [US-VA]:←[0m
+←[0;0mDeployment Model [GLOBAL]:←[0m
+←[0;0mNew app created: inventory-vibtf←[0m
+←[0;0mImporting app...←[0m
+←[0;0mDone.←[0m
+←[0;0mSuccessfully imported 'inventory-vibtf'←[0m
+
+stitch-cli logout
+
+```
+
+If you named your cluster anything other than the default __"Cluster0"__ then you will need to modify a json document to reflect your cluster name. The document is located in your directory here: /realm-master/inventoryDemo/export/backOffice/services/mongodb-atlas/config.json
+
+If you named your cluster "DevCluster" for example you would change the __"clusterName":__ field from __"Cluster0"__ to __"DevCluster"__.  An example has been provided below.
+
+```
+
+{
+    "id": "5d218cb4e0601bec3de065c7",
+    "name": "mongodb-atlas",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "DevCluster",
+        "readPreference": "primary",
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}
+```
+Once you save your changes you are ready to try the import again.
+
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
