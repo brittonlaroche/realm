@@ -215,10 +215,11 @@
           $('#itemList').addClass('bs-select');
 
         }
-        function showCharts(){
+        async function showCharts(){
           var ck = document.getElementById('showCharts').checked;
           //alert(ck);
           if(ck){
+            var vStoreId = document.getElementById('sPartition').value;
             const chart = sdk
               .createChart({
                 baseUrl: 'https://charts.mongodb.com/charts-britton-fpgad',
@@ -226,8 +227,7 @@
                 width: 800,
                 height: 400,
                 refreshInterval: 60
-              })
-              .render(document.getElementById('chart1'));
+              });
             const chart2 = sdk
               .createChart({
                 baseUrl: 'https://charts.mongodb.com/charts-britton-fpgad',
@@ -235,8 +235,11 @@
                 width: 800,
                 height: 400,
                 refreshInterval: 60
-              })
-              .render(document.getElementById('chart2'));
+              });
+              await chart.render(document.getElementById('chart1'));
+              await chart.setFilter({ "_partition": vStoreId });
+              await chart2.render(document.getElementById('chart2'))
+              await chart2.setFilter({ "_partition": vStoreId });
           } else {
             document.getElementById("chart1").innerHTML = "";
             document.getElementById("chart2").innerHTML = "";
