@@ -100,7 +100,11 @@ Next we create a schema for our mobile application. Slected the rules tab and cr
 ```
 
 #### 2.5. Turn on Sync   
+Now that we have created our schema we are ready to turn on Sync.  CLick on the "__Sync__" menu item on the left hand naviagtion menu of the Realm console.  The Sync configuration windo appears and we specify the cluster to sync with and the partion key as well as define permissions.  Use __" \_partition"__ as the partition key and leave the permissions to the default empty doucment __"{}"__
+
 ![Sync](./img/2.5.realmSync.png)
+
+We are now ready to sync our mobile application.
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
