@@ -109,7 +109,11 @@ We are now ready to sync our mobile application.  Start the sync process by savi
 #### 2.6. Create some user accounts
 There are many ways to authenticate to Realm from the mobile device. For our inventory demo we will create some users that will authenticate via email and password.  Begin by selecting the __"Users"__ menu item from the left Navigation menu pane of the Realm console.
 
+![User Providers](./img/users1.png)
 
+![User Password](./img/users2.png)
+
+![User Creation](./img/users3.png)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
