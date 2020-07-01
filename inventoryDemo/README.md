@@ -34,7 +34,7 @@ We show how all the pieces fit together in the Orthoginal Diagram below.
 
 
 ## Philosophy   
-We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and IOS as well as other development platforms.
+We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. Additionally Kotlin compiles to native code and has a light foot print on the mobile device in terms of CPU, Memory and Battery consumption.  Additionally, the vast majority of hand held devices manufactured for use in commercial endeavors is on Android as it is a better choice than Apple devices from a cost and custom look and feel perspective. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and iOS as well as other development platforms.
 
 Its a 5 step process to install the end to end Realm Inventory System Demo.  The following sections walk us through each step in great detail.
 
