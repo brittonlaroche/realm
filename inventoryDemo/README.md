@@ -50,7 +50,9 @@ We have two options to create the realm sync Atlas project.  One is to import th
 stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```
 
-#### 2.1. Creating the inventorySync project Manually.   
+#### 2.1. Creating the inventorySync project Manually.
+To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create new Realm Application"__ button in the upper right.
+
 ![createapp](./img/2.1.createRealmSync.png)
 
 #### 2.2. Name the App InventorySync   
