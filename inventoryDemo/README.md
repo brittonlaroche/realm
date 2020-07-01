@@ -104,7 +104,7 @@ Now that we have created our schema we are ready to turn on Sync.  CLick on the 
 
 ![Sync](./img/2.5.realmSync.png)
 
-We are now ready to sync our mobile application.
+We are now ready to sync our mobile application.  Start the sync process by saving the config and pressing the start sync button and deploy the changes.  If for any reason sync seems to fail feel free to pause sync, deploy the changes.  After a few moments start sync again and deploy the changes.  Terminating sync requires rebuilding the schema and starting over.
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
