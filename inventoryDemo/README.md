@@ -51,18 +51,20 @@ stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=rep
 ```
 
 #### 2.1. Creating the inventorySync project Manually.
-To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create new Realm Application"__ button in the upper right.
+To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
 
 ![createapp](./img/2.1.createRealmSync.png)
 
-#### 2.2. Name the App InventorySync   
+#### 2.2. Name the App InventorySync  
+This brings up the __"New Application"__ Dialog window.  We give the application a name __"InventorySync"__ and select our atlas cluster to link the application.  Then we press the Create Realm Application Button.   
 ![Name App](./img/2.2.appName.png)
 
 #### 2.3. Copy the AppID   
+When the application is created we need to copy the AppID into our clipboard and save it for later use when connecting our mobile device to Atlas (Step 3.4 Below)
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
-
+Next we create a schema for our mobile application. Slected the rules tab and creat a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the sechema below into the schema for the application.  This schema is responsible for transalting the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window laucnhed by selecting the __sync__ menu item on the left navigation panel of the Realm console.
 
 
 ![Realm Schema](./img/2.4.realmSchema.png)
