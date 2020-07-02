@@ -115,6 +115,13 @@ Set the provider __"Enabled"__ to __"On"__ by moving the slider.  Select __"Auto
 
 ![User Password](./img/users2.png)
 
+Now we create several new users.  These will be the users that log in through the mobile devices.  For our demo we created the following users, one at a time.  The username includes an email address.
+
+__demo_user@gmail.com__   
+__demo_user1@gmail.com__   
+__demo_user2@gmail.com__   
+
+
 ![User Creation](./img/users3.png)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
