@@ -107,9 +107,11 @@ Now that we have created our schema we are ready to turn on Sync.  CLick on the 
 We are now ready to sync our mobile application.  Start the sync process by saving the config and pressing the start sync button and deploy the changes.  If for any reason sync seems to fail feel free to pause sync, deploy the changes.  After a few moments start sync again and deploy the changes.  Terminating sync requires rebuilding the schema and starting over.
 
 #### 2.6. Create some user accounts
-There are many ways to authenticate to Realm from the mobile device. For our inventory demo we will create some users that will authenticate via email and password.  Begin by selecting the __"Users"__ menu item from the left Navigation menu pane of the Realm console.
+There are many ways to authenticate to Realm from the mobile device. For our inventory demo we will create some users that will authenticate via email and password.  Begin by selecting the __"Users"__ menu item from the left Navigation menu pane of the Realm console.  This brings up the Realm Users window.  Click on the providers tab.  We see many ways that users can authenticate.   Click on __"Email / Password."__   
 
 ![User Providers](./img/users1.png)
+
+Set the provider __"Enabled"__ to __"On"__ by moving the slider.  Select __"Automatically Confirm Users"__ and chose a password reset function, then select __"Create New Function"__ go with the default reset funtion and then save.
 
 ![User Password](./img/users2.png)
 
