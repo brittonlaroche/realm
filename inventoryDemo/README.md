@@ -17,6 +17,7 @@ Distributed under the Apache license. See ``LICENSE`` for more information.
 [Overview](#-overview)
 1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
 2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
 
 
 ## Overview:
