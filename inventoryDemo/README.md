@@ -13,6 +13,12 @@ Distributed under the Apache license. See ``LICENSE`` for more information.
 
 # Welcome to the Realm Inventory Demo.   
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+
+
 ## Overview:
 This demo has three distinct parts that interact to show end to end functionality of Realm and Atlas with other systems.  
 
@@ -253,3 +259,6 @@ If you named your cluster "DevCluster" for example you would change the __"clust
 Once you save your changes you are ready to try the import again.
 
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
+
+![Hosting 1](./img/hosting1.png)  
+![Hosting 2](./img/hosting2.png)  
