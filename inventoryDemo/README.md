@@ -261,4 +261,4 @@ Once you save your changes you are ready to try the import again.
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
 ![Hosting 1](./img/hosting1.png)  
-![Hosting 2](./img/hosting2.png)  
+![Hosting 2](./img/hosting1a.png)  
