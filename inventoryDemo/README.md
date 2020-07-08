@@ -278,3 +278,7 @@ Once you save your changes you are ready to try the import again.
             .catch(console.error);
         }
 ```
+
+```
+https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH
+```
