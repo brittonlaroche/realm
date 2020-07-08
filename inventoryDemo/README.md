@@ -263,3 +263,18 @@ Once you save your changes you are ready to try the import again.
 
 ![Hosting 1](./img/hosting1.png)  
 ![Hosting 2](./img/hosting1a.png)  
+
+```
+    <script>
+        const sdk = new ChartsEmbedSDK;
+        const client = stitch.Stitch.initializeDefaultAppClient('<your-appId>');
+        const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
+        "mongodb-atlas").db('InventoryDemo');
+        function displayItemsOnLoad() {
+          client.auth
+            .loginWithCredential(new stitch.AnonymousCredential())
+            .then(displayItems)
+            .then(defaultCompany)
+            .catch(console.error);
+        }
+```
