@@ -284,5 +284,7 @@ https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/
 ```
 
 Twilio Respinse webhook is on twilio side...
+https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/SupplierService/incoming_webhook/TwilioWH
+in SMS
 
 Charts
