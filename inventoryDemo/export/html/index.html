@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="./img/demo.png">
     <script>
         const sdk = new ChartsEmbedSDK;
-        const client = stitch.Stitch.initializeDefaultAppClient('inventory-rccnj');
+        const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
         const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
         "mongodb-atlas").db('InventoryDemo');
         function displayItemsOnLoad() {
@@ -222,16 +222,16 @@
             var vStoreId = document.getElementById('sPartition').value;
             const chart = sdk
               .createChart({
-                baseUrl: 'https://charts.mongodb.com/charts-britton-fpgad',
-                chartId: '93810a80-8cc3-4d65-bb8a-58bc31e1bb10',
+                baseUrl: 'https://charts.mongodb.com/charts-realmdemo-pzehs',
+                chartId: 'ccdf9e55-d234-4bd1-8444-3196bb5851f6',
                 width: 800,
                 height: 400,
                 refreshInterval: 60
               });
             const chart2 = sdk
               .createChart({
-                baseUrl: 'https://charts.mongodb.com/charts-britton-fpgad',
-                chartId: 'ad354307-ba02-4bc5-82db-60a2dc63242b',
+                baseUrl: 'https://charts.mongodb.com/charts-realmdemo-pzehs',
+                chartId: '43baaa27-6452-45fa-953d-10735b154d43',
                 width: 800,
                 height: 400,
                 refreshInterval: 60

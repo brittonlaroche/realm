@@ -1,5 +1,5 @@
 {
-    "id": "5edee9730357c7e575097d4f",
+    "id": "5f0604f50057e876776c8433",
     "database": "InventoryDemo",
     "collection": "InventoryItem",
     "roles": [
@@ -13,7 +13,6 @@
         }
     ],
     "schema": {
-        "title": "InventoryItem",
         "properties": {
             "_id": {
                 "bsonType": "objectId"
@@ -36,6 +35,7 @@
             "supplier": {
                 "bsonType": "string"
             }
-        }
+        },
+        "title": "InventoryItem"
     }
 }

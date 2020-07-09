@@ -1,5 +1,5 @@
 {
-    "id": "5ededcfc0357c7e5750226fb",
+    "id": "5f0600e10809e1af78efca57",
     "database": "InventoryDemo",
     "collection": "InventoryItem",
     "roles": [
@@ -13,15 +13,7 @@
         }
     ],
     "schema": {
-        "title": "InventoryItem",
         "bsonType": "object",
-        "required": [
-            "_id",
-            "_partition",
-            "name",
-            "price",
-            "quantity"
-        ],
         "properties": {
             "_id": {
                 "bsonType": "objectId"
@@ -38,6 +30,14 @@
             "quantity": {
                 "bsonType": "long"
             }
-        }
+        },
+        "required": [
+            "_id",
+            "_partition",
+            "name",
+            "price",
+            "quantity"
+        ],
+        "title": "InventoryItem"
     }
 }

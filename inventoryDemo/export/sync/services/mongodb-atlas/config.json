@@ -1,9 +1,9 @@
 {
-    "id": "5ededcca2d64908607d790c0",
+    "id": "5f0600e10809e1af78efca4c",
     "name": "mongodb-atlas",
     "type": "mongodb-atlas",
     "config": {
-        "clusterName": "DevCluster",
+        "clusterName": "RealmCluster",
         "readPreference": "primary",
         "sync": {
             "state": "enabled",
@@ -15,8 +15,7 @@
                     "read": {},
                     "write": {}
                 }
-            },
-            "last_disabled": 1591994616
+            }
         },
         "wireProtocolEnabled": false
     },
