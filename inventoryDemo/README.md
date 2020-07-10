@@ -197,6 +197,9 @@ The following section shows how to import the application via this GitHub and th
 
 
 #### 4.1. Install the realm-cli tool
+http://stitch-docs-old.s3-website-us-east-1.amazonaws.com/deploy/stitch-cli-reference/#install-stitch-cli
+npm install -g mongodb-stitch-cli --force
+
 Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb.com/realm/deploy/realm-cli-reference/#installation)
 
 #### 4.2. Creat a project API key
