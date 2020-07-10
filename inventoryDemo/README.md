@@ -59,11 +59,13 @@ Click the following link https://cloud.mongodb.com to sign up. Additional instru
 We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 execute the following code to link the sync project... the path __"/realm-master/inventoryDemo/export/sync"__ is the only change.
 
 ```
-stitch-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
+realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```
 
+__NOTE: YOU DO NOT NEED TO DO AY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP GO TO SECTION 3__
+
 #### 2.1. Creating the inventorySync project Manually.
-To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
+If you wish to create the SYNC application from scratch follow th enext few step in section 2. To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
 
 ![createapp](./img/2.1.createRealmSync.png)
 
