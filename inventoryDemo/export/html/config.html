@@ -146,40 +146,52 @@
             var vOwner = document.getElementById('owner').value;
             var vButtonColor = document.getElementById('buttonColor').value;
             var vHoverColor = document.getElementById('hoverColor').value;
+            var vStoreId = "";
             if (vCompanyName === ""){
               alert("Company Name is required");
               return;
             }
-            const pipeline = [
+            await db.collection('codes').find({"COMPANY_NAME":vCompanyName},{limit: 100}).asArray()
+              .then(docs => {
+                docs.map(c => {
+                  if (c) {
+                    vStoreId = c.STORE_ID;
+                  }
+                });
+            });
+
+            //check to see if we have a store id, if not lets get one
+            if (vStoreId === "") {
+              //We need to generate a new store id
+              const pipeline = [
               { $group:{ _id: null,
                     MaxStore: {
                       $max: "$STORE_ID"
                     }
                   }
               }];
-
-            await db.collection('codes').aggregate(
-              pipeline
-            ).asArray().then(
-              docs => {
-                  var thtml = "";
-                  var project = "";
-                  docs.map(c => {
-                    if (c) {
-                      vStoreId = c.MaxStore
-                    }
-                  })
-                }
-            );
-            console.log("max store_id: " + vStoreId);
-            if ( isNaN(vStoreId)) {
-              prompt("Please enter a unique numeric store id or remove "+ vStoreId + " from the data.", "");
-            } else {
-              vStoreId = (parseInt(vStoreId) + 10);
-              vStoreId = vStoreId.toString();
-              console.log("New Unique StoreId: " + vStoreId);
-            }
-            
+              await db.collection('codes').aggregate(
+                pipeline
+              ).asArray().then(
+                docs => {
+                    var thtml = "";
+                    var project = "";
+                    docs.map(c => {
+                      if (c) {
+                        vStoreId = c.MaxStore
+                      }
+                    })
+                  }
+              );
+              console.log("max store_id: " + vStoreId);
+              if ( isNaN(vStoreId)) {
+                prompt("Please enter a unique numeric store id or remove "+ vStoreId + " from the data.", "");
+              } else {
+                vStoreId = (parseInt(vStoreId) + 10);
+                vStoreId = vStoreId.toString();
+                console.log("New Unique StoreId: " + vStoreId);
+              }
+            }            
             setCookie("CompanyName", vCompanyName, 365);
             var codeResult = await db.collection('codes').updateOne(
   	        { "COMPANY_NAME":  vCompanyName},
