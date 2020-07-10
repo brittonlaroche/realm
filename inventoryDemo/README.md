@@ -259,6 +259,9 @@ If you named your cluster "DevCluster" for example you would change the __"clust
 ```
 Once you save your changes you are ready to try the import again.
 
+### 4.5 Set up user accounts
+
+
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
 ![Hosting 1](./img/hosting1.png)  
@@ -283,8 +286,19 @@ Once you save your changes you are ready to try the import again.
 https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH
 ```
 
+## ![6](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/6b.png)  Set up Twilio
 Twilio Respinse webhook is on twilio side...
 https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/SupplierService/incoming_webhook/TwilioWH
 in SMS
+![Twilio](./img/twilio1.png) 
+![Twilio](./img/twilio3.png) 
 
+
+## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
 Charts
+![CHARTS](./img/chartsEmbed.png)  
+
+
+## ![8](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/8b.png)  Integrate with Kafka
+![Kafka](./img/Kafka1.png) 
+![Kafka](./img/Kafka2.png) 
