@@ -188,41 +188,57 @@ You can run the Inventroy Demo on a single AVD.  Just press the green arrow on t
 #### 4.0. Download the realm github repository
 Begin by downlaoding the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
 
-The following section shows how to import the application via this GitHub and the stitch command line tool __"stitch-cli"__. Knowledge of how the stitch command line works is important as you can integrate stitch-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development enviroment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
+The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development enviroment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
 
 
-#### 4.1. Install the stitch-cli tool
-Begin by [Installing the Stitch Command Line Interface tool](https://docs.mongodb.com/stitch/import-export/stitch-cli-reference/)
+#### 4.1. Install the realm-cli tool
+Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb.com/realm/deploy/realm-cli-reference/#installation)
 
 #### 4.2. Creat a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.   
 
 Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
-#### 4.3. Log in via stitch-cli
+#### 4.3. Log in via realm-cli
 log into your atlas cluster with your API key (public and private keys) with the stich command line tool.
 
 Sample login instructions:
 ```
-stitch-cli login --api-key=my-api-key --private-api-key=my-private-api-key
+realm-cli login --api-key=my-api-key --private-api-key=my-private-api-key
 ```
 
 Example login (Don't worry its not a real api key):
 ```
-stitch-cli login --api-key=ytqictxq --private-api-key=8137b118-4a36-4197-a3c7-23b73ba49775
+realm-cli login --api-key=ytqictxq --private-api-key=8137b118-4a36-4197-a3c7-23b73ba49775
 ←[0;0myou have successfully logged in as ytqictxq←[0m
 ```
 
-#### 4.4 Import the inventory back office application
-After logging in the command line maintains the connection until you execute the command __stitch-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unziped the realm git hub zip file in step 4.0. 
+
+#### 4.3.1 Create a Supplier Secret Value for Twilio
+https://docs.mongodb.com/realm/deploy/realm-cli-reference/#create-a-secret   
+
+We need to create a supplier secret for Twilio that we will update later in order to import the back office application.  Once we have logged in we run the following command:
+
 ```
-stitch-cli import --path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
+realm-cli secrets add --name SupplierSecret --value=TobeUpdated
+```
+
+#### 4.4 Import the inventory back office application
+After logging in the command line maintains the connection until you execute the command __realm-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unziped the realm git hub zip file in step 4.0. 
+```
+realm-cli import --path=./realm-master/inventoryDemo/export/backOffice --strategy=replace   
+```   
+
+...or cd to the backOffice directory and run 
+
+```
+realm-cli import --strategy=replace
 ```
 
 Follow the prompts and respond __y__ when asked if you would like to create a new app. Press enter to accept the default values.  Change the values to match your configuration.  An example is provided below.
 
 ```
-stitch-cli import \path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
+realm-cli import \path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
 ←[0;0mUnable to find app with ID: "invnetory-ekqoy": would you like to create a new app? [y/n]:←[0m y
 ←[0;0mApp name [inventory]:←[0m
 ←[0;0mAvailable Projects:←[0m
@@ -235,7 +251,7 @@ stitch-cli import \path=./realm-master/inventoryDemo/export/backOffice --strateg
 ←[0;0mDone.←[0m
 ←[0;0mSuccessfully imported 'inventory-vibtf'←[0m
 
-stitch-cli logout
+realm-cli logout
 
 ```
 
