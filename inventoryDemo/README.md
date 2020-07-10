@@ -18,6 +18,11 @@ Distributed under the Apache license. See ``LICENSE`` for more information.
 1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
 2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
 3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Offcie Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 
 ## Overview:
