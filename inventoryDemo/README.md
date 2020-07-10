@@ -273,6 +273,7 @@ realm-cli import \path=./realm-master/inventoryDemo/export/backOffice --strategy
 realm-cli logout
 
 ```
+If you get an error: __app already exists with name "Inventory"__ then the replace option did not work as expected.  Feel free to click on the realm tab and delete the existing inventory application displayed.
 
 If you named your cluster anything other than the default __"Cluster0"__ then you will need to modify a json document to reflect your cluster name. The document is located in your directory here: /realm-master/inventoryDemo/export/backOffice/services/mongodb-atlas/config.json
 
