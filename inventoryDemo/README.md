@@ -295,7 +295,7 @@ If you named your cluster "DevCluster" for example you would change the __"clust
 Once you save your changes you are ready to try the import again.
 
 ### 4.5 Set up user accounts
-Follow the same process as in [2.6 Set up User accounts](realm-cli secrets add --name SupplierSecret --value=TobeUpdated)  We will be creating back end users that have differnt access to the data than the froint end mobile users.  Creating two sets of users gives us greater ability to create and control who has access to what data.  
+Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-accounts)  We will be creating back end users that have differnt access to the data than the froint end mobile users.  Creating two sets of users gives us greater ability to create and control who has access to what data.  
 
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
