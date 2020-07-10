@@ -1,6 +1,5 @@
 {
-    "id": "5edfe72b91d16186122acf85",
-    "name": "SupplierWH",
+    "name": "TwilioWH",
     "run_as_authed_user": false,
     "run_as_user_id": "",
     "run_as_user_id_script_source": "",

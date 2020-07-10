@@ -1,5 +1,4 @@
 {
-    "id": "5f0600e10809e1af78efca4c",
     "name": "mongodb-atlas",
     "type": "mongodb-atlas",
     "config": {
@@ -15,7 +14,8 @@
                     "read": {},
                     "write": {}
                 }
-            }
+            },
+            "last_disabled": 1594320770
         },
         "wireProtocolEnabled": false
     },

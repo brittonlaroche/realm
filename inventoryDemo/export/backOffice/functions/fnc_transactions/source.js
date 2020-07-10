@@ -92,6 +92,7 @@ exports = async function(changeEvent) {
   fullCopy.date = vDate;
   fullCopy.ack = "No Response";
   //cTransactions.insertOne(fullCopy); 
+  console.log("Inside fnc_transactions. about to UPDATE!");
   cTransactions.updateOne(
       { "Item_id": fullCopy.Item_id},
       {$set: 
@@ -106,6 +107,7 @@ exports = async function(changeEvent) {
       }},
       {upsert: true}
     );
+  console.log("Inside fnc_transactions. AFTER UPDATE!");
   context.functions.execute("fnc_verifyRestock", fullCopy.supplier, fullCopy._partition, fullCopy.name, fullCopy.quantity, fullCopy.min_quantity );
 
   

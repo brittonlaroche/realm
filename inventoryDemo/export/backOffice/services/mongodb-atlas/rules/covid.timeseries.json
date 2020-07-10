@@ -1,15 +1,19 @@
 {
-    "id": "5f0604f50057e876776c843c",
     "database": "covid",
     "collection": "timeseries",
     "roles": [
         {
             "name": "default",
             "apply_when": {},
-            "write": true,
+            "fields": {
+                "price": {}
+            },
             "insert": true,
             "delete": true,
-            "additional_fields": {}
+            "additional_fields": {
+                "write": true,
+                "read": true
+            }
         }
     ],
     "schema": {}

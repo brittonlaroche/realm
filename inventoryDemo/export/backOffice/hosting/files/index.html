@@ -147,16 +147,6 @@
               var logoHtml = "<img width=\"205px\" src=\""+ cCompanyLogo + "\">";
               document.getElementById("displayLogo").innerHTML = logoHtml;
             });
-            db.collection('codes').find({"CODE_TYPE":"COMPANY_STORE"},{limit: 100}).asArray()
-            .then(docs => {
-              var cStoreId = "";
-              docs.map(c => {
-                if (c) {
-                  cStoreId = c.VALUE;
-                }
-              });
-              document.getElementById("sPartition").value = cStoreId;
-            });
         }
         async function showCompany(){
             var vCompanyName = document.getElementById("companyName").value;
@@ -248,7 +238,7 @@
               });
               await chart.render(document.getElementById('chart1'));
               await chart.setFilter({ "_partition": vStoreId });
-              await chart2.render(document.getElementById('chart2'));
+              await chart2.render(document.getElementById('chart2'))
               await chart2.setFilter({ "_partition": vStoreId });
           } else {
             document.getElementById("chart1").innerHTML = "";

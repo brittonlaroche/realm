@@ -1,5 +1,4 @@
 {
-    "id": "5f0604f50057e876776c844a",
     "name": "trg_kafkaSink",
     "type": "DATABASE",
     "config": {

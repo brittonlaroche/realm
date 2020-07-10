@@ -1,10 +1,12 @@
 {
-    "app_id": "inventorysync-cqhvc",
-    "config_version": 20180301,
-    "name": "InventorySync",
+    "config_version": 20200603,
+    "name": "Inventory",
     "location": "US-VA",
     "deployment_model": "GLOBAL",
     "security": {},
+    "hosting": {
+        "enabled": true
+    },
     "custom_user_data_config": {
         "enabled": false
     },

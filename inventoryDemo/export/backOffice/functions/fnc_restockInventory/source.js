@@ -54,7 +54,7 @@ exports = function(changeEvent) {
   console.log("fullDocument: " + JSON.stringify(fullDocument));
 
   if (fullDocument.ack){
-    if (fullDocument.ack == "No Reponse"){
+    if (fullDocument.ack == "No Response"){
       console.log("reset detected returning");
       return;
     }
