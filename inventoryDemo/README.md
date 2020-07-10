@@ -62,7 +62,7 @@ We have two options to create the realm sync Atlas project.  One is to import th
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```
 
-__NOTE: YOU DO NOT NEED TO DO AY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP GO TO SECTION 3__
+__NOTE: YOU DO NOT NEED TO DO AY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP. GO TO SECTION 3.__
 
 #### 2.1. Creating the inventorySync project Manually.
 If you wish to create the SYNC application from scratch follow th enext few step in section 2. To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
@@ -199,13 +199,12 @@ The following section shows how to import the application via this GitHub and th
 
 
 #### 4.1. Install the realm-cli tool
-http://stitch-docs-old.s3-website-us-east-1.amazonaws.com/deploy/stitch-cli-reference/#install-stitch-cli
-npm install -g mongodb-stitch-cli --force
-
 Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb.com/realm/deploy/realm-cli-reference/#installation)
 
 #### 4.2. Creat a project API key
-Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.   
+Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.  
+
+
 
 Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
