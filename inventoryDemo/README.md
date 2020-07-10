@@ -290,8 +290,8 @@ https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/
 Twilio Respinse webhook is on twilio side...
 https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/SupplierService/incoming_webhook/TwilioWH
 in SMS
-![CHARTS](./img/twilio1.png) 
-![CHARTS](./img/twilio3.png) 
+![Twilio](./img/twilio1.png) 
+![Twilio](./img/twilio3.png) 
 
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
@@ -300,4 +300,5 @@ Charts
 
 
 ## ![8](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/8b.png)  Integrate with Kafka
-Kafka
+![Kafka](./img/kafka1.png) 
+![Kafka](./img/kafka2.png) 
