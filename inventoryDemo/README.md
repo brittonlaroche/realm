@@ -288,6 +288,9 @@ Follow the same process as in [2.6 Set up User accounts](realm-cli secrets add -
 
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
+ We will need to modify the files in the following directory.  Replace the appId to "inventory-hhsot" your to your application id.
+ realm/inventoryDemo/export/backOffice/hosting/files/
+
 ![Hosting 1](./img/hosting1.png)  
 ![Hosting 2](./img/hosting1a.png)  
 
