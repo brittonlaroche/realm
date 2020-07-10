@@ -204,9 +204,19 @@ Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb
 #### 4.2. Creat a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.  
 
+![Api Key](./img/APIKey1.png)
 
 
 Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
+
+![Api Key](./img/APIKey2.png)
+
+Be sure to give project owner access.    
+![Api Key](./img/APIKey3.png)
+
+Also be sure to add your IP adress
+
+![Api Key](./img/APIKey4.png)
 
 #### 4.3. Log in via realm-cli
 log into your atlas cluster with your API key (public and private keys) with the stich command line tool.
