@@ -223,21 +223,25 @@ Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-acc
 
 Its a bit tricky to get started as there are two types of API keys, one for Organizations and one for Projects.  We need to create an API key for our __project__ begin by selecting the __Realm__ tab in the Atlas console.  This should display a list of realm applications.  WHen we are finished we will have two realm applications as seen below: __InventorySync__ and __Inventory__.  
 
-At this point we have only created the __InventorySync__ application.  To generate ethe appropriate API key click the __"Access Manager"__ drop list and select __"Project Access"__
-<img src="./img/APIKey1.png" width="600">
+At this point we have only created the __InventorySync__ application.  To generate ethe appropriate API key click the __"Access Manager"__ drop list and select __"Project Access"__   
 
-After clicking the __"Access Manager"__ drop list and selecting __"Project Access"__ We should be presented with the Project Access Manager console as seen below.
-<img src="./img/APIKey2.png" width="800">
+<img src="./img/APIKey1.png" width="600">   
+
+After clicking the __"Access Manager"__ drop list and selecting __"Project Access"__ We should be presented with the Project Access Manager console as seen below. 
+
+![API Key](./img/APIKey2.png" width="800")
 
 Click the __"API Keys"__ tab and then click the __"Create API Key"__ button.   
 
-Be sure to give project owner access.    
-<img src="./img/APIKey3.png" width="400">
+Be sure to give project owner access.  Copy the private key to a safe location where you can keep it for future use.
 
-Also be sure to add your IP adress
+<img src="./img/APIKey3.png" width="600">
+
+Also be sure to whitelist your current IP address, click the next button to do so.
 
 <img src="./img/APIKey4.png" width="400">
 
+When finished whitelisting IP adresses click done.  Congratulations, You now have an API key for command line access into your Realm project!
 
 #### 4.3. Log in via realm-cli
 log into your atlas cluster with your API key (public and private keys) with the stich command line tool.
