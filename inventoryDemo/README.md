@@ -331,7 +331,7 @@ https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/
 in SMS
 ![Twilio](./img/twilioSupplierService.png) 
 ![Twilio](./img/twilioWh.png) 
-![TwilioSettings](./img/twilioWhSettings.png) 
+![TwilioSettings](./img/twilioWHSettings.png) 
 
 ![Twilio](./img/twilio1.png) 
 ![Twilio](./img/twilio3.png) 
