@@ -327,8 +327,9 @@ Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-ac
 
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
- We will need to modify the files in the following directory.  Replace the appId to "inventory-hhsot" your to your application id.
- realm/inventoryDemo/export/backOffice/hosting/files/
+ We will need to modify the files in the following directory.  The next few steps will be to replace the default appId __"inventory-hhsot"__ your to your new application id in many of the html files.  Once we are finished we will need to upload them to the hosting directory.  At the time of the writing of this readme, the hosting import does not work correctly and we need to reset hosting as well.    
+ 
+realm/inventoryDemo/export/backOffice/hosting/files/
 
 ![Hosting 1](./img/hosting1.png)  
 ![Hosting 2](./img/hosting1a.png)  
