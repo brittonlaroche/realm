@@ -229,7 +229,7 @@ At this point we have only created the __InventorySync__ application.  To genera
 
 After clicking the __"Access Manager"__ drop list and selecting __"Project Access"__ We should be presented with the Project Access Manager console as seen below. 
 
-![API Key](./img/APIKey2.png" width="800")
+![API Key](./img/APIKey2.png")
 
 Click the __"API Keys"__ tab and then click the __"Create API Key"__ button.   
 
@@ -239,7 +239,7 @@ Be sure to give project owner access.  Copy the private key to a safe location w
 
 Also be sure to whitelist your current IP address, click the next button to do so.
 
-<img src="./img/APIKey4.png" width="400">
+<img src="./img/APIKey4.png" width="600">
 
 When finished whitelisting IP adresses click done.  Congratulations, You now have an API key for command line access into your Realm project!
 
