@@ -209,7 +209,7 @@ Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-acc
 
 Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
-![Api Key](./img/APIKey2.png)
+<img src="./img/APIKey2.png" width="400">
 
 Be sure to give project owner access.    
 ![Api Key](./img/APIKey3.png)
