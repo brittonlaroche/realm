@@ -129,13 +129,13 @@ Set the provider __"Enabled"__ to __"On"__ by moving the slider.  Select __"Auto
 
 ![User Password](./img/users2.png)
 
-Now we create several new users.  These will be the users that log in through the mobile devices.  For our demo we created the following users, one at a time.  The username includes an email address.
+Now we create several new users.  These will be the users that log in through the mobile devices.  For our demo we created the following users, one at a time.  The username is an email address.
 
 __demo_user@gmail.com__   
 __demo_user1@gmail.com__   
 __demo_user2@gmail.com__      
-
-
+   
+   
 ![User Creation](./img/users3.png)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
@@ -229,7 +229,7 @@ At this point we have only created the __InventorySync__ application.  To genera
 
 After clicking the __"Access Manager"__ drop list and selecting __"Project Access"__ We should be presented with the Project Access Manager console as seen below. 
 
-![API Key](./img/APIKey2.png")
+![API Key](./img/APIKey2.png)
 
 Click the __"API Keys"__ tab and then click the __"Create API Key"__ button.   
 
@@ -241,7 +241,9 @@ Also be sure to whitelist your current IP address, click the next button to do s
 
 <img src="./img/APIKey4.png" width="600">
 
-When finished whitelisting IP adresses click done.  Congratulations, You now have an API key for command line access into your Realm project!
+When finished whitelisting IP adresses click __"done"__.   
+Congratulations, You now have an API key for command line access into your Realm project!   
+
 
 #### 4.3. Log in via realm-cli
 log into your atlas cluster with your API key (public and private keys) with the stich command line tool.
