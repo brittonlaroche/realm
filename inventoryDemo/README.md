@@ -335,6 +335,7 @@ in SMS
 
 ![Twilio](./img/twilio1.png) 
 ![Twilio](./img/twilio3.png) 
+![Twilio](./img/twilioAuthToken.png) 
 ![Twilio](./img/twilioSupplierSecret.png) 
 
 
