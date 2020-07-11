@@ -55,6 +55,8 @@ Our first step is to create an atlas cluster. In our example we wont be able to 
 
 Click the following link https://cloud.mongodb.com to sign up. Additional instructions on creating an Atlas cluster are available here: [Atlas getting started Guide](https://docs.atlas.mongodb.com/getting-started/)  
 
+When you create your account you will be asked to create a project.  If you have gone with the default __"Project0"__ then create a new project and name it __"RealmDemo"__.  This is not necssary, but it is good form to cleary identify what your project is.
+
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 execute the following code to link the sync project... the path __"/realm-master/inventoryDemo/export/sync"__ is the only change.
 
