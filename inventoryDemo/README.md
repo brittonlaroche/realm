@@ -133,7 +133,7 @@ Now we create several new users.  These will be the users that log in through th
 
 __demo_user@gmail.com__   
 __demo_user1@gmail.com__   
-__demo_user2@gmail.com__   
+__demo_user2@gmail.com__      
 
 
 ![User Creation](./img/users3.png)
@@ -185,11 +185,16 @@ You can run the Inventroy Demo on a single AVD.  Just press the green arrow on t
 #### 3.7. Run on Mutliple Devices
 Once the dialog is open, select two or three devices to run the demo on.  It is helpful to show syncronization across devices. I trypically have two devcies in the same store and one device in another store.  I like to show how changing the Store ID in the Item Manintenace console can move items off of the current stores device and have it added to the other stores device in real time.
 
-<img src="./img/multipleAVD.png" width="400">
+<img src="./img/multipleAVD.png" width="400">   
+
+Once you have the AVDs selected click the run button.  
 
 #### 3.8. Connect to Atlas via Realm Authentication
+When the AVDs Launch, you can log in with the user name (email address) and passwords you defined in step 2.6.  Login in with demo_user@gmail.com and the Store ID (\_partition) for your demo.
 
-<img src="./img/login.png" width="400">
+<img src="./img/login.png" width="300">
+
+I prefer two in one store to show syncronization, and one in a third.
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
