@@ -335,8 +335,9 @@ in SMS
 
 ![Twilio](./img/twilio1.png) 
 ![Twilio](./img/twilio3.png) 
-![Twilio](./img/twilioSupplierSecret.png) 
 ![Twilio](./img/twilioSupplierService.png) 
+![Twilio](./img/twilioSupplierSecret.png) 
+
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
 Charts
