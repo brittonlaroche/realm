@@ -194,7 +194,7 @@ When the AVDs Launch, you can log in with the user name (email address) and pass
 
 <img src="./img/login.png" width="300">
 
-I prefer two in one store to show syncronization, and one in a third.
+I prefer two in one store to show syncronization.  The third AVD is nice to show an inventory item tranferred from one store to another, or the fact that diffrent stores have different inventories, and that the user sees the inventory relevant to his or her store.
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
