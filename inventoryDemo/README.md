@@ -62,7 +62,7 @@ We have two options to create the realm sync Atlas project.  One is to import th
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```   
 
-Be sure to copy the APPID value in the upper left (click the copy button next to the InventorySync name) and save the value for a future step.
+Be sure to copy the APPID value in the upper left (click the copy button next to the InventorySync name) and save the value for Step 3.4 Below.
 
 __NOTE: YOU DO NOT NEED TO DO ANY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP. GO TO SECTION 2.6 AND CREATE USER ACCOUNTS__
 
@@ -76,8 +76,7 @@ This brings up the __"New Application"__ Dialog window.  We give the application
 ![Name App](./img/2.2.appName.png)
 
 #### 2.3. Copy the AppID   
-When the application is created we need to copy the AppID into our clipboard and save it for later use when connecting our mobile device to Atlas (Step 3.4 Below)  
-Click the copy button next to the __InventorySync__ name at the upper left of the realm console window and save the value for a future step.
+When the application is created we need to copy the AppID into our clipboard and save it for later use when connecting our mobile device to Atlas. Click the copy button next to the __InventorySync__ name at the upper left of the realm console window and save the value for Step 3.4 Below. 
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
