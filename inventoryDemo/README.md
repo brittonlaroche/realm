@@ -332,7 +332,7 @@ in SMS
 ![Twilio](./img/twilioSupplierService.png) 
 ![Twilio](./img/twilioWh.png) 
 ![Twilio](./img/twilioWhFunction.png) 
-![Twilio](./img/twilioWhSettings.png) 
+![TwilioSettings](./img/twilioWhSettings.png) 
 
 ![Twilio](./img/twilio1.png) 
 ![Twilio](./img/twilio3.png) 
