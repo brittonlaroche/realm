@@ -344,5 +344,6 @@ Charts
 
 
 ## ![8](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/8b.png)  Integrate with Kafka
+https://confluent.cloud/login
 ![Kafka](./img/Kafka1.png) 
 ![Kafka](./img/Kafka2.png) 
