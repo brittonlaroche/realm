@@ -218,12 +218,12 @@ yarn global add mongodb-realm-cli
 ```
 
 #### 4.2. Creat a project API key
-Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application, additionally be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
+Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you create the API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application. Additionally, be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
 
-Its a bit tricky to get started as there are two types of API keys, one for Organizations and one for Projects.  We need to create an API key for our __project__ begin by selecting the __Realm__ tab in the Atlas console.  This should display a list of realm applications.  WHen we are finished we will have two realm applications as seen below: __InventorySync__ and __Inventory__.  
+Its a bit tricky to get started as there are two types of API keys, one for Organizations and one for Projects.  We need to create an API key for our __project__. Begin by selecting the __Realm__ tab in the Atlas console.  This should display a list of realm applications.  When we are finished, we will have two realm applications as seen below: __InventorySync__ and __Inventory__.  
 
-At this point we have only created the __InventorySync__ application.  To generate ethe appropriate API key click the __"Access Manager"__ drop list and select __"Project Access"__   
+At this point we have only created the __InventorySync__ application created.  To generate the appropriate API key click the __"Access Manager"__ drop list and select __"Project Access"__   
 
 <img src="./img/APIKey1.png" width="600">   
 
