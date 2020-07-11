@@ -207,15 +207,31 @@ The following section shows how to import the application via this GitHub and th
 #### 4.1. Install the realm-cli tool
 Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb.com/realm/deploy/realm-cli-reference/#installation)
 
+__NPM__   
+```
+npm install -g mongodb-realm-cli
+```
+
+__Yarn__   
+```
+yarn global add mongodb-realm-cli
+```
+
 #### 4.2. Creat a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application, additionally be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
-<img src="./img/APIKey1.png" width="400">
 
+Its a bit tricky to get started as there are two types of API keys, one for Organizations and one for Projects.  We need to create an API key for our __project__ begin by selecting the __Realm__ tab in the Atlas console.  This should display a list of realm applications.  WHen we are finished we will have two realm applications as seen below: __InventorySync__ and __Inventory__.  
 
+At this point we have only created the __InventorySync__ application.  To generate ethe appropriate API key click the __"Access Manager"__ drop list and select __"Project Access"__
+<img src="./img/APIKey1.png" width="600">
+
+After clicking the __"Access Manager"__ drop list and selecting __"Project Access"__ We should be presented with the Project Access Manager console as seen below.
 <img src="./img/APIKey2.png" width="800">
 
-Be sure to give project owner access. 
+Click the __"API Keys"__ tab and then click the __"Create API Key"__ button.   
+
+Be sure to give project owner access.    
 <img src="./img/APIKey3.png" width="400">
 
 Also be sure to add your IP adress
