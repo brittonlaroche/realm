@@ -18,7 +18,7 @@ Distributed under the Apache license. See ``LICENSE`` for more information.
 1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
 2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
 3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
-4. [Import the Back Offcie Application](#-import-the-back-office-application)
+4. [Import the Back Office Application](#-import-the-back-office-application)
 5. [Host the HTML](#--host-the-html)
 6. [Set up Twilio](#--set-up-twilio)
 7. [Set up Charts](#--set-up-charts)
@@ -60,7 +60,9 @@ We have two options to create the realm sync Atlas project.  One is to import th
 
 ```
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
-```
+```   
+
+Be sure to copy the APPID value in the upper left (click the copy button next to the InventorySync name) and save the value for a future step.
 
 __NOTE: YOU DO NOT NEED TO DO ANY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP. GO TO SECTION 2.6 AND CREATE USER ACCOUNTS__
 
@@ -74,7 +76,8 @@ This brings up the __"New Application"__ Dialog window.  We give the application
 ![Name App](./img/2.2.appName.png)
 
 #### 2.3. Copy the AppID   
-When the application is created we need to copy the AppID into our clipboard and save it for later use when connecting our mobile device to Atlas (Step 3.4 Below)
+When the application is created we need to copy the AppID into our clipboard and save it for later use when connecting our mobile device to Atlas (Step 3.4 Below)  
+Click the copy button next to the __InventorySync__ name at the upper left of the realm console window and save the value for a future step.
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
