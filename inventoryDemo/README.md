@@ -183,6 +183,7 @@ You can run the Inventroy Demo on a single AVD.  Just press the green arrow on t
 
 
 #### 3.7. Run on Mutliple Devices
+Once the dialog is open, select two or three devices to run the demo on.  It is helpful to show syncronization across devices. I trypically have two devcies in the same store and one device in another store.  I like to show how changing the Store ID in the Item Manintenace console can move items off of the current stores device and have it added to the other stores device in real time.
 
 <img src="./img/multipleAVD.png" width="400">
 
