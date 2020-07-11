@@ -204,12 +204,12 @@ Begin by [Installing the Realm Command Line Interface tool](https://docs.mongodb
 #### 4.2. Creat a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you createthe API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application.  
 
-![Api Key](./img/APIKey1.png)
+<img src="./img/APIKey1.png" width="400">
 
 
 Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
 
-<img src="./img/APIKey2.png" width="400">
+<img src="./img/APIKey2.png" width="700">
 
 Be sure to give project owner access.    
 ![Api Key](./img/APIKey3.png)
