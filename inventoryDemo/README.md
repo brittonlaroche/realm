@@ -63,6 +63,10 @@ We have two options to create the realm sync Atlas project.  One is to import th
 ```
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```   
+or cd to the ./realm-master/inventoryDemo/export/sync directory and run   
+```
+realm-cli import --strategy=replace
+```   
 
 Be sure to copy the APPID value in the upper left (click the copy button next to the InventorySync name) and save the value for Step 3.4 Below.
 
