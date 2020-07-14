@@ -4,4 +4,4 @@
 Click here for the Realm Inventory Demo
 
 <a href="./inventoryDemo">__Inventory Demo:__</a>
-<a href="./inventoryDemo"><img src="./inventoryDemo/img/RealmInventoryDemo2.png"></a>
+<a href="./inventoryDemo"><img src="./inventoryDemo/img/RealmInventoryDemo3.png"></a>
