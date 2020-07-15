@@ -33,8 +33,8 @@ This demo has three distinct parts that interact to show end to end functionalit
 - -> __html files__ inside the back office is a Realm hosted application written with dymanic HTML and the browser SDK to act as an admin console showing inventory items across all stores.
 
 
-<a href="https://youtu.be/nFSHW2_VzpQ" target="video">Click for Video</a>
-<a href="https://youtu.be/nFSHW2_VzpQ" target="video"><img src="./img/DemoScreenShot.png"></a>
+<a href="https://www.youtube.com/watch?v=KSXUFZE0JfM&feature=youtu.be" target="video">Click for Video</a>
+<a href="https://www.youtube.com/watch?v=KSXUFZE0JfM&feature=youtu.be" target="video"><img src="./img/DemoScreenShot.png"></a>
 
 
 This documentation is focused on helping you install and confiure the Realm Demo.  Special thanks to __Nate Cotino__ for creating the Realm Android mobile application written in Kotlin with Android studio.  Also special thanks to __Chris Grabosky__ who created a great GraphQL tutorial on how to connect to Atlas and use GraphQL.  Both of their githubs are linked below and will be used as part of this demo.
