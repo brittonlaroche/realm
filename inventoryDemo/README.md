@@ -37,7 +37,7 @@ This demo has three distinct parts that interact to show end to end functionalit
 <a href="https://www.youtube.com/watch?v=S2KmEDq8-CI&feature=youtu.be" target="video"><img src="./img/DemoScreenShot.png"></a>
 
 
-This documentation is focused on helping you install and confiure the Realm Demo.  Special thanks to __Nate Cotino__ for creating the Realm Android mobile application written in Kotlin with Android studio.  Also special thanks to __Chris Grabosky__ who created a great GraphQL tutorial on how to connect to Atlas and use GraphQL.  Both of their githubs are linked below and will be used as part of this demo.
+This documentation is focused on helping you install and configure the Realm Demo.  Special thanks to __Nate Cotino__ for creating the Realm Android mobile application written in Kotlin with Android studio.  Also special thanks to __Chris Grabosky__ who created a great GraphQL tutorial on how to connect to Atlas and use GraphQL.  Both of their githubs are linked below and will be used as part of this demo.
 
 https://github.com/nathan-contino-mongo/inventory-system   
 https://github.com/graboskyc/MongoDBStitchGraphQL   
