@@ -163,7 +163,6 @@ Finally... create a default company in the codes collection.
 
 ```
 {
-"_id":{"$oid":"5f0b7c092fb13adb6846a191"},
 "COMPANY_NAME":"Brave Organics",
 "BUTTON_COLOR":"RGB(112,162,43)",
 "COMPANY_LOGO":"https://inventory-hhsot.mongodbstitch.com/img/BraveOrganics.png",
