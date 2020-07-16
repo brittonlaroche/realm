@@ -159,6 +159,20 @@ __demo_user2@gmail.com__
    
 ![User Creation](./img/users3.png)
 
+Finally... create a default company in the codes collection.
+
+```
+{
+"_id":{"$oid":"5f0b7c092fb13adb6846a191"},
+"COMPANY_NAME":"Brave Organics",
+"BUTTON_COLOR":"RGB(112,162,43)",
+"COMPANY_LOGO":"https://inventory-hhsot.mongodbstitch.com/img/BraveOrganics.png",
+"HOVER_COLOR":"RGB(227,121,38)",
+"OWNER":"Your Name Here",
+"STORE_ID":"101"
+}
+```
+
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
 #### 3.0. Install Android Studio  
