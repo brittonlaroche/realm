@@ -5,7 +5,27 @@
         {
             "name": "default",
             "apply_when": {},
-            "write": true,
+            "fields": {
+                "_id": {
+                    "write": true
+                },
+                "_partition": {
+                    "write": true
+                },
+                "min_quantity": {
+                    "write": true
+                },
+                "price": {
+                    "write": true
+                },
+                "quantity": {
+                    "write": true
+                },
+                "supplier": {
+                    "write": true
+                }
+            },
+            "read": true,
             "insert": true,
             "delete": true,
             "additional_fields": {}
