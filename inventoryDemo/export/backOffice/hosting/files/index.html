@@ -9,7 +9,7 @@
     <!-- ====================================================================================================================*/ -->
     <!-- https://datatables.net/examples/styling/bootstrap4 -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.9.0/stitch.js"></script>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.5.0/stitch.js"></script>
     <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="./img/demo.png">
@@ -188,9 +188,9 @@
             var vPartition = document.getElementById('partition').value;
             var vItemId = new stitch.BSON.ObjectId(document.getElementById('itemId').value);
             var vName = document.getElementById('name').value;
-            var vPrice = parseFloat(document.getElementById('price').value);
-            var vQuantity = parseInt(document.getElementById('quantity').value);
-            var vMinQuantity = parseInt(document.getElementById('mQuantity').value);
+            var vPrice = document.getElementById('price').value;
+            var vQuantity = document.getElementById('quantity').value;
+            var vMinQuantity = document.getElementById('mQuantity').value;
             var vSupplier = document.getElementById('supplier').value;
             if ( isNaN(vQuantity)){
               vQuantity = 0;
@@ -202,9 +202,9 @@
   	        { _id:  vItemId},
   	        { $set: {   "name": vName, 
                         "_partition": vPartition, 
-                        "price": vPrice, 
-                        "quantity": vQuantity,
-                        "min_quantity": vMinQuantity,
+                        "price": {"$numberDouble": vPrice}, 
+                        "quantity": {"$numberInt": vQuantity},
+                        "min_quantity": {"$numberInt": vMinQuantity},
                         "supplier": vSupplier	}
                 },
                 {upsert: true}
