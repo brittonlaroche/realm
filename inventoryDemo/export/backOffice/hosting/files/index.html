@@ -55,7 +55,10 @@
             document.getElementById("supplier").value = aSupplier;
         }
         function escape(aString){
-          var fixedString = aString.replace(/'/g, "\\'");
+          var fixedString = aString;
+          if (aString) {
+            var fixedString = aString.replace(/'/g, "\\'");
+          }
           return fixedString;
         }
         function displayItems() {

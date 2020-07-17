@@ -15,6 +15,9 @@
                 "min_quantity": {
                     "write": true
                 },
+                "name": {
+                    "write": true
+                },
                 "price": {
                     "write": true
                 },
@@ -25,7 +28,6 @@
                     "write": true
                 }
             },
-            "read": true,
             "insert": true,
             "delete": true,
             "additional_fields": {}
