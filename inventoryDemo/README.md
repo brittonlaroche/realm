@@ -284,16 +284,6 @@ realm-cli login --api-key=ytqictxq --private-api-key=8137b118-4a36-4197-a3c7-23b
 ←[0;0myou have successfully logged in as ytqictxq←[0m
 ```
 
-
-#### 4.3.1 Create a Supplier Secret Value for Twilio
-https://docs.mongodb.com/realm/deploy/realm-cli-reference/#create-a-secret   
-
-We need to create a supplier secret for Twilio that we will update later in order to import the back office application.  Once we have logged in we run the following command:
-
-```
-realm-cli secrets add --name SupplierSecret --value=TobeUpdated
-```
-
 #### 4.4 Import the inventory back office application
 After logging in the command line maintains the connection until you execute the command __realm-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unziped the realm git hub zip file in step 4.0. 
 ```
@@ -305,8 +295,33 @@ realm-cli import --path=./realm-master/inventoryDemo/export/backOffice --strateg
 ```
 realm-cli import --strategy=replace
 ```
+Follow the prompts and respond __y__ when asked if you would like to create a new app. Press enter to accept the default values.  Change the values to match your configuration. Expect an error...
 
-Follow the prompts and respond __y__ when asked if you would like to create a new app. Press enter to accept the default values.  Change the values to match your configuration.  An example is provided below.
+
+#### 4.4.1 Create a Supplier Secret Value for Twilio
+__DON't PANIC__ After you recieve the error that the Import failed because we didn't have a SupplierSecret, we will create a SupplierSecret value to be updated later.  (We can't have our secrets in github)
+
+https://docs.mongodb.com/realm/deploy/realm-cli-reference/#create-a-secret   
+
+We need to create a supplier secret for Twilio that we will update later in order to import the back office application.  Once we have logged in we run the following command:
+
+```
+realm-cli secrets add --name SupplierSecret --value=TobeUpdated
+```   
+
+Again we import...   
+
+```
+realm-cli import --path=./realm-master/inventoryDemo/export/backOffice --strategy=replace   
+```   
+
+...or cd to the backOffice directory and run 
+
+```
+realm-cli import --strategy=replace
+```
+
+Follow the prompts and respond __y__ when asked if you would like to create a new app. Press enter to accept the default values.  Change the values to match your configuration.  An example is provided below.  You may get another error...
 
 ```
 realm-cli import \path=./realm-master/inventoryDemo/export/backOffice --strategy=replace
