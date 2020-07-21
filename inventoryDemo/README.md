@@ -44,9 +44,10 @@ This documentation is focused on helping you install and configure the Realm Dem
 https://github.com/nathan-contino-mongo/inventory-system   
 https://github.com/graboskyc/MongoDBStitchGraphQL   
 
-This project integrated mobile devices with an Atlas cluster and allows for seamless syncroniaztion of mobile data with the MongoDB Atlas database running in the cloud.  Additionally it shows how to use realm functions and triggers to integrate with other cloud poviders and tools such as Kafka running in the Confluent Cloud, or being able to send an SMS message through twilio to any mobile device.  This demonstration shows how to create rest, and GraphQL endpoints for integration with business to business  or business to customer consumers allowing third party applications to query data stored in Atlas across all mobile devices.  As data is changed in Atlas it is automatically sycnronized with the mobile devices.
+This project integrated mobile devices with an Atlas cluster and allows for seamless synchronization of mobile data with the MongoDB Atlas database running in the cloud. Additionally it shows how to use realm functions and triggers to integrate with other cloud providers and tools such as Kafka running in the Confluent Cloud, or being able to send an SMS message through twilio to any mobile device. This demonstration shows how to create rest, and GraphQL endpoints for integration with business to business or business to customer consumers allowing third party applications to query data stored in Atlas across all mobile devices. As data is changed in Atlas it is automatically synchronized with the mobile devices.   
 
-We show how all the pieces fit together in the Orthoginal Diagram below.
+We show how all the pieces fit together in the Orthogonal Diagram below.
+
 
 ## Diagram
 <a href="https://docs.google.com/presentation/d/e/2PACX-1vRjgoyZ7EWCBecjxbUL2w6lXcqhRegQohptNAh8TY2FDBRUi2DfN9wecihJOVcxP4aqVeU5UNeI4a5X/pub?start=true&loop=true&delayms=100" target="animation">Click for animation</a>
