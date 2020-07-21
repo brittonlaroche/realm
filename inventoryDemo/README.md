@@ -370,29 +370,50 @@ Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-ac
 
  We will need to modify the files in the following directory.  The next few steps will be to replace the default appId __"inventory-hhsot"__ your to your new application id in many of the html files.  Once we are finished we will need to upload them to the hosting directory.  At the time of the writing of this readme, the hosting import does not work correctly and we need to reset hosting as well.    
  
+Begin the process by navigationg to the following directory:
+ 
 realm/inventoryDemo/export/backOffice/hosting/files/
+
+We will edit the following files:
+
+### addStoreItem.html
+line 32
+```
+            value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
+```   
+
+### config.html
+line 17
+```
+const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
+```   
+
+### findStoreItem.html
+```
+            value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/findStoreItemsService/incoming_webhook/findStoreItemsWH"/></td></tr>
+```   
+
+### index.html
+line 18
+```
+const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
+```
+
+### postql.html
+lines 31-32
+```
+          <tr><td style="padding: 10">URL:</td><td> <input style="min-width: 1000px;" type="text" id="input_url" name="input_url" 
+            value="https://stitch.mongodb.com/api/client/v2.0/app/inventory-hhsot/auth/providers/local-userpass/login"/></td></tr>
+```   
+lines 55-56   
+```
+          <tr><td style="padding: 10">URL:</td><td> <input style="min-width: 1000px;" type="text" id="input_qlurl" name="input_qlurl" 
+            value="https://stitch.mongodb.com/api/client/v2.0/app/inventory-hhsot/graphql"/></td></tr>
+```
 
 ![Hosting 1](./img/hosting1.png)  
 ![Hosting 2](./img/hosting1a.png)  
 
-```
-    <script>
-        const sdk = new ChartsEmbedSDK;
-        const client = stitch.Stitch.initializeDefaultAppClient('<your-appId>');
-        const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
-        "mongodb-atlas").db('InventoryDemo');
-        function displayItemsOnLoad() {
-          client.auth
-            .loginWithCredential(new stitch.AnonymousCredential())
-            .then(displayItems)
-            .then(defaultCompany)
-            .catch(console.error);
-        }
-```
-
-```
-https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH
-```
 
 ## ![6](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/6b.png)  Set up Twilio
 Twilio Response webhook is on twilio side...
