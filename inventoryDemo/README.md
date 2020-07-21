@@ -58,20 +58,20 @@ We show how all the pieces fit together in the Orthogonal Diagram below.
 ## Philosophy   
 We believe that there is power in simpliclicity.  We did not include any frameworks and kept to a minimalist "hand rolled" design to showcase functionality.  To that end when forced to make a choice on a mobile development platform we chose Android Kotlin as we felt it was the easiest for a new developer to work with. Additionally Kotlin compiles to native code and has a light foot print on the mobile device in terms of CPU, Memory and Battery consumption.   
 
-The vast majority of hand held devices manufactured for use in commercial applications in our experience are using Android for two primary reasons, lower costs and greater configurability. Because of its open software which allows it to run on mutliple devices, Android provides greater flexiblity to design a customized look and feel as well as greater control of the components used in manufacturing to determine the mobile device performance.   
+The vast majority of handheld devices manufactured for use in commercial applications in our experience are using Android for two primary reasons, lower costs and greater configurability. Because of its open software which allows it to run on multiple devices, Android provides greater flexibility to design a customized look and feel as well as greater control of the components used in manufacturing to determine the mobile device performance.   
 
-Finaly, the barrier to entry as a mobile developer is much higher for iOS development as it requires upgrading to the latest version of the Mac OS just to install Xcode. Once installed, the security certificate set up is not intuitive, and no development can begin until the certificates have been set properly.  For these reasons we went with a simple Android Kotlin application for this demo.  That being said Realm supports iOS development.
+Finally, the barrier to entry as a mobile developer is much higher for iOS development as it requires upgrading to the latest version of the Mac OS just to install Xcode. Once installed, the security certificate set up is not intuitive, and no development can begin until the certificates have been set properly.  For these reasons we went with a simple Android Kotlin application for this demo.  That being said Realm supports iOS development.
 
 Realm supports iOS and a wide variety of mobile platforms. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and iOS as well as other development platforms.
 
-Its an 8 step process to install the end to end Realm Inventory System Demo.  The following sections walk us through each step in great detail.  Its not a difficult process but it does require following a prescribed set of steps to be succesful.  Estimated time to completion about 60 to 90 minutes.  Each step yields its own independent results so you will see great progress and powerful features along the way.
+Its an 8 step process to install the end to end Realm Inventory System Demo.  The following sections walk us through each step in great detail.  Its not a difficult process but it does require following a prescribed set of steps to be successful.  Estimated time to completion about 60 to 90 minutes.  Each step yields its own independent results so you will see great progress and powerful features along the way.
 
 ## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png) Create an Atlas Cluster
-Our first step is to create an atlas cluster. In our example we wont be able to create a free tier cluster known as an M0. The reason is that Realm Sync requires MongoDB version 4.4 and it is not available on the free tier at this time (2020-06-30).  Additionally we have more than 5 triggers in our demo.  Realm sync by default will work on an M0 in the future. For now select an M2 through M10 to get started. If you are interetsed in using the Atlas Kafka connector through Confluent Cloud you will want to create an AWS cluster in East US 2.  You can always migrate your cluster to this region in the future.
+Our first step is to create an atlas cluster. In our example we wont be able to create a free tier cluster known as an M0. The reason is that Realm Sync requires MongoDB version 4.4 and it is not available on the free tier at this time (2020-06-30).  Additionally we have more than 5 triggers in our demo.  Realm sync by default will work on an M0 in the future. For now select an M2 through M10 to get started. If you are interested in using the Atlas Kafka connector through Confluent Cloud you will want to create an AWS cluster in East US 2.  You can always migrate your cluster to this region in the future.
 
 Click the following link https://cloud.mongodb.com to sign up. Additional instructions on creating an Atlas cluster are available here: [Atlas getting started Guide](https://docs.atlas.mongodb.com/getting-started/)  
 
-When you create your account you will be asked to create a project.  If you have gone with the default __"Project0"__ then create a new project and name it __"RealmDemo"__.  This is not necssary, but it is good form to cleary identify what your project is.
+When you create your account you will be asked to create a project.  If you have gone with the default __"Project0"__ then create a new project and name it __"RealmDemo"__.  This is not necessary, but it is good form to clearly identify what your project is.
 
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 execute the following code to link the sync project... the path __"/realm-master/inventoryDemo/export/sync"__ is the only change.
@@ -89,7 +89,7 @@ Be sure to copy the APPID value in the upper left (click the copy button next to
 __NOTE: YOU DO NOT NEED TO DO ANY OF THE REST OF THE STEPS IN SECTION 2 IF YOU IMPORT THE APP. GO TO SECTION 2.6 AND CREATE USER ACCOUNTS__
 
 #### 2.1. Creating the inventorySync project Manually.
-If you wish to create the SYNC application from scratch follow th enext few step in section 2. To start the sync process we need to create and Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
+If you wish to create the SYNC application from scratch follow the next few steps in section 2. To start the sync process we need to create an Atlas realm application to sync data from the mobile device to the Atlas database.  We start by clicking the "__Realm__" tab in the upper middle tab of the Atlas console.  Then we select the green __"Create a New App"__ button in the upper right.
 
 ![createapp](./img/2.1.createRealmSync.png)
 
@@ -102,7 +102,7 @@ When the application is created we need to copy the AppID into our clipboard and
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
-Next we create a schema for our mobile application. Slected the rules tab and creat a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the sechema below into the schema for the application.  This schema is responsible for transalting the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window laucnhed by selecting the __sync__ menu item on the left navigation panel of the Realm console.
+Next we create a schema for our mobile application. Selected the rules tab and creat a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the schema below into the schema for the application.  This schema is responsible for translating the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window launched by selecting the __sync__ menu item on the left navigation panel of the Realm console.
 
 
 ![Realm Schema](./img/2.4.realmSchema.png)
@@ -138,7 +138,7 @@ Next we create a schema for our mobile application. Slected the rules tab and cr
 ```
 
 #### 2.5. Turn on Sync   
-Now that we have created our schema we are ready to turn on Sync.  CLick on the "__Sync__" menu item on the left hand naviagtion menu of the Realm console.  The Sync configuration windo appears and we specify the cluster to sync with and the partion key as well as define permissions.  Use __" \_partition"__ as the partition key and leave the permissions to the default empty doucment __"{}"__
+Now that we have created our schema we are ready to turn on Sync.  CLick on the "__Sync__" menu item on the left hand navigation menu of the Realm console.  The Sync configuration window appears and we specify the cluster to sync with and the partition key as well as define permissions.  Use __" \_partition"__ as the partition key and leave the permissions to the default empty document __"{}"__
 
 ![Sync](./img/2.5.realmSync.png)
 
@@ -149,7 +149,7 @@ There are many ways to authenticate to Realm from the mobile device. For our inv
 
 ![User Providers](./img/users1.png)
 
-Set the provider __"Enabled"__ to __"On"__ by moving the slider.  Select __"Automatically Confirm Users"__ and chose a password reset function, then select __"Create New Function"__ go with the default reset funtion and then save.
+Set the provider __"Enabled"__ to __"On"__ by moving the slider.  Select __"Automatically Confirm Users"__ and choose a password reset function, then select __"Create New Function"__ go with the default reset function and then save.
 
 ![User Password](./img/users2.png)
 
@@ -189,27 +189,27 @@ On the left hand navigation pane and expand the __Gradle Scripts__ and select th
 
 ![app](./img/appId.png)   
 
-#### 3.4. Install Andoid SDK 10.0 API Level 29 
-Ah, the sheer joy of working with android mobile apps begins with the all the dependencies!  Now we need to download the andoroid sdk 10.0 API level 29. Click the menu popup in the lower right telling you that you need to install the new Android SDK API level 29 for this project and install it.  In case you missed the subtle prompt at the bottom right to install the SDK 10 API Level 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
+#### 3.4. Install Android SDK 10.0 API Level 29 
+Ah, the sheer joy of working with android mobile apps begins with the all the dependencies!  Now we need to download the android sdk 10.0 API level 29. Click the menu popup in the lower right telling you that you need to install the new Android SDK API level 29 for this project and install it.  In case you missed the subtle prompt at the bottom right to install the SDK 10 API Level 29, and you did not click to install, you have another option by going to the menu bar and selecting __Tools > SDK Manager__   
 
 ![SDK](./img/androidSDK.png)  
  
 After the SDK 10.0 with API level 29 has installed you will notice that the build has begun.  You can click the build tab at the lower left to see it running.
 
-#### 3.5. Install Andoid Virtual Devices
-The final step is to download at least 3 different android virtual devices.  I prefer a Galaxy, Nexus and a Pixel.  The AVD's can be managed and downlaoded from the AVD Manager located in the main menu under __Tools > AVD Manager__
+#### 3.5. Install Android Virtual Devices
+The final step is to download at least 3 different android virtual devices.  I prefer a Galaxy, Nexus and a Pixel.  The AVD's can be managed and downloaded from the AVD Manager located in the main menu under __Tools > AVD Manager__
 
 ![AVD](./img/androidAVD.png)  
 
 #### 3.6. Launch the Android Application
-You can run the Inventroy Demo on a single AVD.  Just press the green arrow on the toolbar and it will run the AVD selected in the drop list to the left.  However to show syncronization to Atlas and then back to multiple devices you may want to run the application on multiple AVDs.
+You can run the Inventory Demo on a single AVD.  Just press the green arrow on the toolbar and it will run the AVD selected in the drop list to the left.  However to show synchronization to Atlas and then back to multiple devices you may want to run the application on multiple AVDs.
 
 
 ![AVD](./img/runMutiple.png)  
 
 
-#### 3.7. Run on Mutliple Devices
-Once the dialog is open, select two or three devices to run the demo on.  It is helpful to show syncronization across devices. I trypically have two devcies in the same store and one device in another store.  I like to show how changing the Store ID in the Item Manintenace console can move items off of the current stores device and have it added to the other stores device in real time.
+#### 3.7. Run on Multiple Devices
+Once the dialog is open, select two or three devices to run the demo on.  It is helpful to show synchronization across devices. I typically have two devices in the same store and one device in another store.  I like to show how changing the Store ID in the Item Maintenance console can move items off of the current stores device and have it added to the other stores device in real time.
 
 <img src="./img/multipleAVD.png" width="400">   
 
@@ -220,14 +220,14 @@ When the AVDs Launch, you can log in with the user name (email address) and pass
 
 <img src="./img/login.png" width="300">
 
-I prefer two in one store to show syncronization.  The third AVD is nice to show an inventory item tranferred from one store to another, or the fact that diffrent stores have different inventories, and that the user sees the inventory relevant to his or her store.
+I prefer two in one store to show synchronization.  The third AVD is nice to show an inventory item transferred from one store to another, or the fact that different stores have different inventories, and that the user sees the inventory relevant to his or her store.
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
 #### 4.0. Download the realm github repository
-Begin by downlaoding the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
+Begin by downloading the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
 
-The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development enviroment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
+The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development environment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
 
 
 #### 4.1. Install the realm-cli tool
@@ -244,7 +244,7 @@ yarn global add mongodb-realm-cli
 ```
 
 #### 4.2. Creat a project API key
-Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you create the API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application. Additionally, be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow intrsuction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future refence.
+Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you create the API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application. Additionally, be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow instruction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future reference.
 
 
 Its a bit tricky to get started as there are two types of API keys, one for Organizations and one for Projects.  We need to create an API key for our __project__. Begin by selecting the __Realm__ tab in the Atlas console.  This should display a list of realm applications.  When we are finished, we will have two realm applications as seen below: __InventorySync__ and __Inventory__.  
@@ -267,7 +267,7 @@ Also be sure to whitelist your current IP address, click the next button to do s
 
 <img src="./img/APIKey4.png" width="600">
 
-When finished whitelisting IP adresses click __"done"__.   
+When finished whitelisting IP addresses click __"done"__.   
 Congratulations, You now have an API key for command line access into your Realm project!   
 
 
@@ -286,7 +286,7 @@ realm-cli login --api-key=ytqictxq --private-api-key=8137b118-4a36-4197-a3c7-23b
 ```
 
 #### 4.4 Import the inventory back office application
-After logging in the command line maintains the connection until you execute the command __realm-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unziped the realm git hub zip file in step 4.0. 
+After logging in the command line maintains the connection until you execute the command __realm-cli logout__.  We are now ready to import the application. The following command below should work.  Navigate to the folder where you unzipped the realm github zip file in step 4.0. 
 ```
 realm-cli import --path=./realm-master/inventoryDemo/export/backOffice --strategy=replace   
 ```   
@@ -300,7 +300,7 @@ Follow the prompts and respond __y__ when asked if you would like to create a ne
 
 
 #### 4.4.1 Create a Supplier Secret Value for Twilio
-__DON't PANIC__ After you recieve the error that the Import failed because we didn't have a SupplierSecret, we will create a SupplierSecret value to be updated later.  (We can't have our secrets in github)
+__DON't PANIC__ After you receive the error that the Import failed because we didn't have a SupplierSecret, we will create a SupplierSecret value to be updated later.  (We can't have our secrets in github)
 
 https://docs.mongodb.com/realm/deploy/realm-cli-reference/#create-a-secret   
 
@@ -364,7 +364,7 @@ If you named your cluster "DevCluster" for example you would change the __"clust
 Once you save your changes you are ready to try the import again.
 
 ### 4.5 Set up user accounts
-Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-accounts)  We will be creating back end users that have differnt access to the data than the froint end mobile users.  Creating two sets of users gives us greater ability to create and control who has access to what data.  
+Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-accounts)  We will be creating back end users that have different access to the data than the front end mobile users.  Creating two sets of users gives us greater ability to create and control who has access to what data.  
 
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
@@ -395,7 +395,7 @@ https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/
 ```
 
 ## ![6](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/6b.png)  Set up Twilio
-Twilio Respinse webhook is on twilio side...
+Twilio Response webhook is on twilio side...
 https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/SupplierService/incoming_webhook/TwilioWH
 in SMS
 ![Twilio](./img/twilioSupplierService.png) 
@@ -418,3 +418,5 @@ Charts
 https://confluent.cloud/login
 ![Kafka](./img/Kafka1.png) 
 ![Kafka](./img/Kafka2.png) 
+
+
