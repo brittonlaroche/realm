@@ -162,7 +162,16 @@ __demo_user2@gmail.com__
    
 ![User Creation](./img/users3.png)
 
-
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![3](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/3b.png) Set up the mobile development environment  
 
@@ -221,6 +230,17 @@ When the AVDs Launch, you can log in with the user name (email address) and pass
 <img src="./img/login.png" width="300">
 
 I prefer two in one store to show synchronization.  The third AVD is nice to show an inventory item transferred from one store to another, or the fact that different stores have different inventories, and that the user sees the inventory relevant to his or her store.
+
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![4](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/4b.png) Import the "Back Office" application
 
@@ -366,6 +386,17 @@ Once you save your changes you are ready to try the import again.
 ### 4.5 Set up user accounts
 Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-accounts)  We will be creating back end users that have different access to the data than the front end mobile users.  Creating two sets of users gives us greater ability to create and control who has access to what data.  
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
+
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
  We will need to modify the files in the following directory.  The next few steps will be to replace the default appId __"inventory-hhsot"__ your to your new application id in many of the html files.  Once we are finished we will need to upload them to the hosting directory.  At the time of the writing of this readme, the hosting import does not work correctly and we need to reset hosting as well.    
@@ -414,6 +445,16 @@ lines 55-56
 ![Hosting 1](./img/hosting1.png)  
 ![Hosting 2](./img/hosting1a.png)  
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![6](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/6b.png)  Set up Twilio
 Twilio Response webhook is on twilio side...
@@ -429,11 +470,31 @@ in SMS
 ![Twilio](./img/twilioSupplierSecret.png) 
 ![Twilio](./img/twilioAccountSID2.png) 
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
 Charts
 ![CHARTS](./img/chartsEmbed.png)  
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![8](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/8b.png)  Integrate with Kafka
 https://confluent.cloud/login
@@ -441,3 +502,13 @@ https://confluent.cloud/login
 ![Kafka](./img/Kafka2.png) 
 
 
+## Tutorial Contents 
+[Overview](#-overview)
+1. [Create the Atlas Cluster](#-create-an-atlas-cluster)
+2. [Configure the RealmSync Project](#-configure-the-realmsync-project)
+3. [Set up the mobile development environment](#-set-up-the-mobile-development-environment)
+4. [Import the Back Office Application](#-import-the-back-office-application)
+5. [Host the HTML](#--host-the-html)
+6. [Set up Twilio](#--set-up-twilio)
+7. [Set up Charts](#--set-up-charts)
+8. [Integrate with Kafka](#--integrate-with-kafka)
