@@ -501,6 +501,8 @@ Charts
 https://confluent.cloud/login
 ![Kafka](./img/Kafka1.png) 
 ![Kafka](./img/Kafka2.png) 
+![Kafka](./img/kafka3.png) 
+![Kafka](./img/kafka4.png) 
 
 
 ## Tutorial Contents 
