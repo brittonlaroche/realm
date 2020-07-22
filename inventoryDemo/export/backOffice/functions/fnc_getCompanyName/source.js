@@ -20,10 +20,33 @@ exports = async function(aStoreId){
   ===============================================================*/
   
   var collection = context.services.get("mongodb-atlas").db("InventoryDemo").collection("codes");
-  
+  var vcompanyName = "";
+  var storeIDLength = aStoreId.length;
+  var storeIDLengthTrimmed = storeIDLength -1;
+  console.log("Inside fnc_getCompanyName looking for store_id: " + aStoreId);
+    
   var doc = await collection.findOne({STORE_ID: aStoreId});
-  var vcompanyName = doc.COMPANY_NAME;
-  console.log("Company Name: " + vcompanyName);
+  
+  if(doc) {
+    if(doc.COMPANY_NAME){
+      vcompanyName = doc.COMPANY_NAME;
+      console.log("Company Name: " + vcompanyName);
+    }
+  }
+    
+  if (vcompanyName === ""){
+    // we didn't get the company name so we might have a default of 161
+    // and they are using store 162
+    // lets look for a regex starting with 16
+    var fisrtPartOfSToreID = aStoreId.substring(0,storeIDLengthTrimmed );
+    console.log("Inside fnc_getCompanyName fisrtPartOfSToreID: " + fisrtPartOfSToreID);
+    
+    var searchDoc = {"STORE_ID": { "$regex": BSON.BSONRegExp(fisrtPartOfSToreID) }}
+     console.log("searchDoc: " + JSON.stringify(searchDoc));
+    doc = await collection.findOne(searchDoc);
+    vcompanyName = doc.COMPANY_NAME;
+    console.log("Company Name: " + vcompanyName);
+  }
   
   return vcompanyName;
   
