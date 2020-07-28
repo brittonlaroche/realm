@@ -251,7 +251,7 @@ I prefer two in one store to show synchronization.  The third AVD is nice to sho
 Begin by downloading the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
 
 <a href="https://youtu.be/RC36sO0HgdU" target="video">Click for a short video on importing the application</a>
-<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>
+<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>   
 
 The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development environment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
 
@@ -406,6 +406,9 @@ Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-ac
 ## ![5](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/5b.png)  Host the HTML
 
  We will need to modify the files in the following directory.  The next few steps will be to replace the default appId __"inventory-hhsot"__ your to your new application id in many of the html files.  Once we are finished we will need to upload them to the hosting directory.  At the time of the writing of this readme, the hosting import does not work correctly and we need to reset hosting as well.    
+ 
+<a href="https://youtu.be/sdHcQYlMUm0" target="video">Click for a short video on hosting the application html</a>
+<a href="https://youtu.be/sdHcQYlMUm0" target="video"><img src="./img/hostingVideo.png"></a>
  
 Begin the process by navigationg to the following directory:
  
