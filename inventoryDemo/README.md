@@ -419,8 +419,14 @@ We will edit the following files:
 ### addStoreItem.html
 line 32
 ```
-            value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
+value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
 ```   
+Again, we are chaging __"inventory-hhsot"__ to your AppId in the string above.  If your AppId is __"inventory-abcde"__ then your edit would look like the following:   
+```
+value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-abcde/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
+```   
+
+
 
 ### config.html
 line 17
