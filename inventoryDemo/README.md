@@ -76,6 +76,9 @@ When you create your account you will be asked to create a project.  If you have
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 execute the following code to link the sync project... the path __"/realm-master/inventoryDemo/export/sync"__ is the only change.
 
+<a href="https://youtu.be/RC36sO0HgdU" target="video">Click for a short video on importing the application</a>
+<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>
+
 ```
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```   
@@ -246,6 +249,9 @@ I prefer two in one store to show synchronization.  The third AVD is nice to sho
 
 #### 4.0. Download the realm github repository
 Begin by downloading the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
+
+<a href="https://youtu.be/RC36sO0HgdU" target="video">Click for a short video on importing the application</a>
+<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>
 
 The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development environment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
 
