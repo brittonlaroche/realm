@@ -420,6 +420,7 @@ const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
 ```   
 
 ### findStoreItem.html
+line 32
 ```
             value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/findStoreItemsService/incoming_webhook/findStoreItemsWH"/></td></tr>
 ```   
@@ -500,6 +501,8 @@ Charts
 https://confluent.cloud/login
 ![Kafka](./img/Kafka1.png) 
 ![Kafka](./img/Kafka2.png) 
+![Kafka](./img/kafka3.png) 
+![Kafka](./img/kafka4.png) 
 
 
 ## Tutorial Contents 
