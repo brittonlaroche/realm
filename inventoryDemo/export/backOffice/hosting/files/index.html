@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="./img/demo.png">
     <script>
         const sdk = new ChartsEmbedSDK;
-        const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
+        const inventoryAppID = "inventory-hhsot";
+        const client = stitch.Stitch.initializeDefaultAppClient(inventoryAppID);
         const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
         "mongodb-atlas").db('InventoryDemo');
         function displayItemsOnLoad() {
@@ -123,32 +124,43 @@
        async function defaultCompany(){
             var vCompanyName = getCookie("CompanyName");
             
+            //if we have no cookie set then check the text field and see if the user has typed one in
             if (vCompanyName != "") {
               document.getElementById("companyName").value = vCompanyName;
               showCompany();
               return;
             } 
             
-            db.collection('codes').find({"CODE_TYPE":"COMPANY_NAME"},{limit: 100}).asArray()
+            // We have no cookie and the user has not typed one in lets go with our
+            // "Brave Organics" default company
+            // Find Brave Organics
+            await db.collection('codes').find({"COMPANY_NAME":"Brave Organics"},{limit: 100}).asArray()
               .then(docs => {
-                var cCompanyName = "";
+                var cCompanyName = "Brave Organics";
+                var companyLogo = `https://${inventoryAppID}.mongodbstitch.com/img/BraveOrganics.png`;
                 docs.map(c => {
                   if (c) {
-                      cCompanyName = c.VALUE;
+                      cCompanyName = c.COMPANY_NAME;
+                  } else {
+                    // we don't have the default company "Brave Organics" set up in the database
+                    // we will create the default company here.
+                    db.collection('codes').insertOne({
+                        "COMPANY_NAME":cCompanyName,
+                        "COMPANY_LOGO":companyLogo,
+                        "BUTTON_COLOR":"RGB(112,162,43)",
+                        "HOVER_COLOR":"rgb(50,110,120)",
+                        "OWNER":"Open",
+                        "STORE_ID":"101"
+                      }
+                    );
                   }
                 });
+                console.log("default cCompanyName: " + cCompanyName);
+                console.log("default companyLogo: " + companyLogo);
                 document.getElementById("companyName").value = cCompanyName;
-            });
-            db.collection('codes').find({"CODE_TYPE":"COMPANY_LOGO"},{limit: 100}).asArray()
-            .then(docs => {
-              var cCompanyLogo = "";
-              docs.map(c => {
-                if (c) {
-                  cCompanyLogo = c.VALUE;
-                }
-              });
-              var logoHtml = "<img width=\"205px\" src=\""+ cCompanyLogo + "\">";
-              document.getElementById("displayLogo").innerHTML = logoHtml;
+                var logoHtml = "<img width=\"205px\" src=\""+ companyLogo + "\">";
+                document.getElementById("displayLogo").innerHTML = logoHtml;
+                showCompany();
             });
         }
         async function showCompany(){
