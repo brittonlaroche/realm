@@ -76,6 +76,9 @@ When you create your account you will be asked to create a project.  If you have
 ## ![2](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/2b.png) Configure the RealmSync Project   
 We have two options to create the realm sync Atlas project.  One is to import the existing project in this github, and the other is to create it by hand.  To import the realm project follow the instructions outlined in step 4.  When you get to step 4.4 execute the following code to link the sync project... the path __"/realm-master/inventoryDemo/export/sync"__ is the only change.
 
+<a href="https://youtu.be/RC36sO0HgdU" target="video">Click for a short video on importing the application</a>
+<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>
+
 ```
 realm-cli import --path=./realm-master/inventoryDemo/export/sync --strategy=replace
 ```   
@@ -102,7 +105,7 @@ When the application is created we need to copy the AppID into our clipboard and
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
-Next we create a schema for our mobile application. Selected the rules tab and creat a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the schema below into the schema for the application.  This schema is responsible for translating the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window launched by selecting the __sync__ menu item on the left navigation panel of the Realm console.
+Next we create a schema for our mobile application. Selected the rules tab and create a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the schema below into the schema for the application.  This schema is responsible for translating the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window launched by selecting the __sync__ menu item on the left navigation panel of the Realm console.
 
 
 ![Realm Schema](./img/2.4.realmSchema.png)
@@ -247,6 +250,9 @@ I prefer two in one store to show synchronization.  The third AVD is nice to sho
 #### 4.0. Download the realm github repository
 Begin by downloading the zip file or performing a check out of the [realm inventory application in this github](https://github.com/brittonlaroche/realm) The easiest method is to select the green clone button and download a zip file.  Take the zip file and unzip it in a directory of your choice.
 
+<a href="https://youtu.be/RC36sO0HgdU" target="video">Click for a short video on importing the application</a>
+<a href="https://youtu.be/RC36sO0HgdU" target="video"><img src="./img/import.png"></a>
+
 The following section shows how to import the application via this GitHub and the stitch command line tool __"realm-cli"__. Knowledge of how the stitch command line works is important as you can integrate realm-cli with your CICD (continuous integration and continuous delivery) tools.  This allows you to work in your native development environment, commit changes to GitHub and then deploy and test as you would normally through your CICD work flow. A good overview of the stitch command line tool is provided here: [Stitch Command Line Blog Overview](https://www.mongodb.com/blog/post/mongodb-stitch-command-line-interface)
 
 
@@ -263,7 +269,7 @@ __Yarn__
 yarn global add mongodb-realm-cli
 ```
 
-#### 4.2. Creat a project API key
+#### 4.2. Create a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you create the API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application. Additionally, be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow instruction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future reference.
 
 
