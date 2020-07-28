@@ -432,9 +432,9 @@ line 32
 ```   
 
 ### index.html
-line 18
+line 19
 ```
-const client = stitch.Stitch.initializeDefaultAppClient('inventory-hhsot');
+const inventoryAppID = "inventory-hhsot";
 ```
 
 ### postql.html
