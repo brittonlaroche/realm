@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <title>Item Maintenance</title>
@@ -136,25 +137,32 @@
             // Find Brave Organics
             await db.collection('codes').find({"COMPANY_NAME":"Brave Organics"},{limit: 100}).asArray()
               .then(docs => {
-                var cCompanyName = "Brave Organics";
+                var cCompanyName = "";
                 var companyLogo = `https://${inventoryAppID}.mongodbstitch.com/img/BraveOrganics.png`;
+                console.log("Looking for default company");
+
                 docs.map(c => {
+                  console.log("docs.map c: " + JSON.stringify(c));
                   if (c) {
                       cCompanyName = c.COMPANY_NAME;
-                  } else {
-                    // we don't have the default company "Brave Organics" set up in the database
-                    // we will create the default company here.
-                    db.collection('codes').insertOne({
-                        "COMPANY_NAME":cCompanyName,
-                        "COMPANY_LOGO":companyLogo,
-                        "BUTTON_COLOR":"RGB(112,162,43)",
-                        "HOVER_COLOR":"rgb(50,110,120)",
-                        "OWNER":"Open",
-                        "STORE_ID":"101"
-                      }
-                    );
-                  }
+                      console.log("Found default company: " + cCompanyName);
+                  } 
                 });
+                if (cCompanyName === "") {
+                  // we don't have the default company "Brave Organics" set up in the database
+                  // we will create the default company here.
+                  cCompanyName = "Brave Organics";
+                  console.log("Inserting  default company: " + cCompanyName);
+                  db.collection('codes').insertOne({
+                      "COMPANY_NAME":cCompanyName,
+                      "COMPANY_LOGO":companyLogo,
+                      "BUTTON_COLOR":"RGB(112,162,43)",
+                      "HOVER_COLOR":"rgb(50,110,120)",
+                      "OWNER":"Open",
+                      "STORE_ID":"101"
+                    }
+                  );
+                }
                 console.log("default cCompanyName: " + cCompanyName);
                 console.log("default companyLogo: " + companyLogo);
                 document.getElementById("companyName").value = cCompanyName;
