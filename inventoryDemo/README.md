@@ -461,10 +461,28 @@ lines 55-56
 ```
           <tr><td style="padding: 10">URL:</td><td> <input style="min-width: 1000px;" type="text" id="input_qlurl" name="input_qlurl" 
             value="https://stitch.mongodb.com/api/client/v2.0/app/inventory-hhsot/graphql"/></td></tr>
-```
+```   
+Save all the edits and then open the hosting console by selecting the __"Hosting"__ menu item from the left navigation pane of the Realm console window.
 
 ![Hosting 1](./img/hosting1.png)  
+
+Be sure to enable hosting.  Once hosting is enabled click the upload button and load all of the files in the following directory
+
+```
+realm-master/inventoryDemo/export/backOffice/hosting/files/
+```   
+
+Once the HTML files are loaded we create a new /img dirctory in the __"Hosting"__ console window by pressing the green __"+ Create Folder"__ button.
+
 ![Hosting 2](./img/hosting1a.png)  
+
+Once the img directory is created open it and navigate to the image directory in the following directory.
+```
+realm-master/inventoryDemo/export/backOffice/hosting/img/
+```   
+
+Upload all of the image files into the hosted img directory.  When finished press the __"Review and Deploy"__ button to ensure all of the changes are deployed on your server.
+
 
 ## Tutorial Contents 
 [Overview](#-overview)
