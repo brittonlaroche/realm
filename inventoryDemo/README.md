@@ -417,7 +417,7 @@ realm-master/inventoryDemo/export/backOffice/hosting/files/
 
 First get your application id from the atlas console.  If you need to click the "Realm" tab and open the inventory application by clicking on the icon.  When in the realm inventory application console select the copy button next to the Application ID in the upper left navigation pane.  An image is provided below.  You may need to click the copy button several times.
 
-<img src="./img/copyAppId.png" width="600">
+<img src="./img/copyAppId.png" width="400">
 
 
 We will edit the following files:
@@ -427,11 +427,10 @@ line 32
 ```
 value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-hhsot/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
 ```   
-Again, we are chaging __"inventory-hhsot"__ to your AppId in the string above.  If your AppId is __"inventory-abcde"__ then your edit would look like the following:   
+Again, we are changing __"inventory-hhsot"__ to your AppId in the string above.  If your AppId is __"inventory-abcde"__ then your edit would look like the following:   
 ```
 value="https://webhooks.mongodb-stitch.com/api/client/v2.0/app/inventory-abcde/service/addStoreItemService/incoming_webhook/addStoreItemWH"/></td></tr>
 ```   
-
 
 
 ### config.html
