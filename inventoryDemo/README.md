@@ -411,8 +411,14 @@ Follow the same process as in [2.6 Set up User accounts](#26-create-some-user-ac
 <a href="https://youtu.be/sdHcQYlMUm0" target="video"><img src="./img/hostingVideo.png"></a>
  
 Begin the process by navigationg to the following directory:
- 
-realm/inventoryDemo/export/backOffice/hosting/files/
+```
+realm-master/inventoryDemo/export/backOffice/hosting/files/
+```
+
+First get your application id from the atlas console.  If you need to click the "Realm" tab and open the inventory application by clicking on the icon.  When in the realm inventory application console select the copy button next to the Application ID in the upper left navigation pane.  An image is provided below.  You may need to click the copy button several times.
+
+<img src="./img/copyAppId.png" width="600">
+
 
 We will edit the following files:
 
