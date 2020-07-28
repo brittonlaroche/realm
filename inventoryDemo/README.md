@@ -102,7 +102,7 @@ When the application is created we need to copy the AppID into our clipboard and
 ![App ID](./img/2.3.realmAppId.png)
 
 #### 2.4. Creating the Schema   
-Next we create a schema for our mobile application. Selected the rules tab and creat a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the schema below into the schema for the application.  This schema is responsible for translating the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window launched by selecting the __sync__ menu item on the left navigation panel of the Realm console.
+Next we create a schema for our mobile application. Selected the rules tab and create a new rule for a database "InventoryDemo" and a collection "InventoryItem." Next click on the schema tab and copy the schema below into the schema for the application.  This schema is responsible for translating the Realm Objects stored on the mobile devices to JSON documents on the Atlas server and vice versa.  The schema can be generated two other ways, one from existing data in Atlas, or another by going into development mode on the __sync__ window launched by selecting the __sync__ menu item on the left navigation panel of the Realm console.
 
 
 ![Realm Schema](./img/2.4.realmSchema.png)
@@ -263,7 +263,7 @@ __Yarn__
 yarn global add mongodb-realm-cli
 ```
 
-#### 4.2. Creat a project API key
+#### 4.2. Create a project API key
 Next [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys).  When you create the API key be sure to give yourself the __"Project Owner"__ role as you will need this to import the stitch application. Additionally, be sure to whitelist your current ip address.  Right click this link [Create a Project API key](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) open in new tab. Follow instruction under __Manage Programmatic Access to a Project__ perform each step listed in the section __Create an API Key for a Project__ be sure to copy the private API key somewhere safe for future reference.
 
 
