@@ -466,7 +466,7 @@ Save all the edits and then open the hosting console by selecting the __"Hosting
 
 ![Hosting 1](./img/hosting1.png)  
 
-Be sure to enable hosting.  Once hosting is enabled click the upload button and load all of the files in the following directory
+Be sure to enable hosting. If you see the error message __"Invaild directory"__ you need to click on the __"Settings"__ tab and disable hosting.  Then enable hosting again. Once hosting is enabled click the upload button and load all of the files in the following directory.
 
 ```
 realm-master/inventoryDemo/export/backOffice/hosting/files/
