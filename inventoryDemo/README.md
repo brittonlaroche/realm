@@ -521,8 +521,15 @@ in SMS
 8. [Integrate with Kafka](#--integrate-with-kafka)
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
+
+<a href="https://youtu.be/MIoWkp_oCBs" target="video">Click for a short video on creating charts and embedding them in the application</a>
+<a href="https://youtu.be/MIoWkp_oCBs" target="video"><img src="./img/chartsVideo.png"></a>   
+
+
 Charts
 ![CHARTS](./img/chartsEmbed.png)  
+
+
 
 ## Tutorial Contents 
 [Overview](#-overview)
