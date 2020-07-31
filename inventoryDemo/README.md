@@ -522,14 +522,17 @@ in SMS
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
 
+The entire process for setting up charts is covered in the video below.
+
 <a href="https://youtu.be/MIoWkp_oCBs" target="video">Click for a short video on creating charts and embedding them in the application</a>
 <a href="https://youtu.be/MIoWkp_oCBs" target="video"><img src="./img/chartsVideo.png"></a>   
 
+Start by inserting data into the __"InventoryItem"__ collection.  The easiest way to do this is through the __"Item Maintenance"__ window of the application, this is the __"index.html"__ file we uploaded in step 5. It can be accessd via https://<your-app-id>/mongodbstitch.com.  Click the __"REST API Add"__ button.  The addStoreItem.html file will open in a new tab with the default product information in a JSON document.  Modify the product name, price and other attributes to get enough data to build a chart.
 
 Charts
 ![CHARTS](./img/chartsEmbed.png)  
 
-
+Be sure to include the \_partition value in the chart when enabling the ability to embed the chart.
 
 ## Tutorial Contents 
 [Overview](#-overview)
