@@ -522,7 +522,7 @@ in SMS
 
 ## ![7](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/7b.png)  Set up Charts
 
-The entire process for setting up charts is covered in the video below.  It is highly recommended to watch the video as a number of topics are covered quickly in the video to get you started. The steps are outlined in the section below but will make a lot more sense when given the context shown in the video.  The officail Mongo DB Charts documentation is [Here](https://docs.mongodb.com/charts/master/)
+The entire process for setting up charts is covered in the video below.  It is highly recommended to watch the video as a number of topics are covered quickly in the video to get you started. The steps are outlined in the section below but will make a lot more sense when given the context shown in the video.  The official Mongo DB Charts documentation is [Here](https://docs.mongodb.com/charts/master/)
 
 <a href="https://youtu.be/MIoWkp_oCBs" target="video">Click for a short video on creating charts and embedding them in the application</a>
 <a href="https://youtu.be/MIoWkp_oCBs" target="video"><img src="./img/chartsVideo.png"></a>   
