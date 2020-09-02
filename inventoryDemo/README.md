@@ -553,7 +553,7 @@ If you are interested in using the Atlas Kafka connector through Confluent Cloud
 
 There are a number of good blog posts to get started:   
 
-Confluent Cloud connector blogs:
+Confluent Cloud connector blogs:   
 https://www.mongodb.com/blog/post/seamlessly-move-data-between-confluent-cloud-atlas   
 https://www.confluent.io/blog/confluent-cloud-offers-kafka-mongodb-connector-fully-managed-clusters/   
 
