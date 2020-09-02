@@ -69,6 +69,8 @@ Its an 8 step process to install the end to end Realm Inventory System Demo.  Th
 ## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png) Create an Atlas Cluster
 Our first step is to create an atlas cluster. Create a free tier cluster known as an M0. __Realm Sync requires MongoDB version 4.4__ and it is now available on the free tier.  Additionally we have more than 5 triggers in our demo. If you are interested in using the Atlas Kafka connector through Confluent Cloud you will want to create an AWS cluster in East US 2.  You can always migrate your cluster to this region in the future.
 
+## NOTE: REALM SYNQ REQUIRES ATLAS 4.4 OR GREATER IF YOU DON'T USE 4.4 YOU HAVE TO START OVER AT STEP 1 ##
+
 Click the following link https://cloud.mongodb.com to sign up. Additional instructions on creating an Atlas cluster are available here: [Atlas getting started Guide](https://docs.atlas.mongodb.com/getting-started/)  
 
 When you create your account you will be asked to create a project.  If you have gone with the default __"Project0"__ then create a new project and name it __"RealmDemo"__.  This is not necessary, but it is good form to clearly identify what your project is.
@@ -547,6 +549,18 @@ Be sure to include the \_partition value in the chart when enabling the ability 
 
 ## ![8](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/8b.png)  Integrate with Kafka
 https://confluent.cloud/login
+
+There are a number of good blog posts to get started.
+
+Confluent Cloud connector blog:
+https://www.mongodb.com/blog/post/seamlessly-move-data-between-confluent-cloud-atlas
+https://www.confluent.io/blog/confluent-cloud-offers-kafka-mongodb-connector-fully-managed-clusters/
+
+https://docs.google.com/document/d/1VG1Em3_dZ4bes7fqPMSX1L58dl6A9ZZXmzpBw97WIf4/edit
+
+Confluent blog site:
+https://www.confluent.io/blog/getting-started-mongodb-connector-for-apache-kafka-and-mongodb/
+
 ![Kafka](./img/Kafka1.png) 
 ![Kafka](./img/Kafka2.png) 
 ![Kafka](./img/kafka3.png) 
