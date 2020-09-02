@@ -69,7 +69,7 @@ Its an 8 step process to install the end to end Realm Inventory System Demo.  Th
 ## ![1](https://github.com/brittonlaroche/MongoDB-Demos/blob/master/Stitch/tools/img/1b.png) Create an Atlas Cluster
 Our first step is to create an atlas cluster. Create a free tier cluster known as an M0. __Realm Sync requires MongoDB version 4.4__ and it is now available on the free tier.  Additionally we have more than 5 triggers in our demo. If you are interested in using the Atlas Kafka connector through Confluent Cloud you will want to create an AWS cluster in East US 2.  You can always migrate your cluster to this region in the future.
 
-## NOTE: REALM SYNQ REQUIRES ATLAS 4.4 OR GREATER IF YOU DON'T USE 4.4 YOU HAVE TO START OVER AT STEP 1 ##
+__NOTE: REALM SYNQ REQUIRES ATLAS 4.4 OR GREATER IF YOU DON'T USE 4.4 YOU HAVE TO START OVER AT STEP 1__
 
 Click the following link https://cloud.mongodb.com to sign up. Additional instructions on creating an Atlas cluster are available here: [Atlas getting started Guide](https://docs.atlas.mongodb.com/getting-started/)  
 
