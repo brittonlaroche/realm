@@ -338,6 +338,14 @@ We need to create a supplier secret for Twilio that we will update later in orde
 realm-cli secrets add --name SupplierSecret --value=TobeUpdated
 ```   
 
+__NOTE__: If you receive an error when adding the SupplierSecret that says that the realm-cli could not find realm app, you need to specify the App-Id for the new Inventory application you are creating in Realm as follows:
+
+```
+realm-cli secrets add --name SupplierSecret --value=TobeUpdated --app-id=my-inventory-app-id
+```
+
+You can retrieve that App-Id by going into Realm, where an application called 'Inventory' should have been created by the previous import attempt. You can retrieve the App-Id value the same way you did in Section 2.3 for the InventorySync app.
+
 Again we import...   
 
 ```
