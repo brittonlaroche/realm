@@ -250,9 +250,8 @@
           $('#itemList').addClass('bs-select');
 
         }
-        async function showCharts(){
-          var ck = document.getElementById('showCharts').checked;
-          //alert(ck);
+        async function showChart1(){
+          var ck = document.getElementById('showChart1').checked;
           if(ck){
             var vStoreId = document.getElementById('sPartition').value;
             const chart = sdk
@@ -263,20 +262,27 @@
                 height: 400,
                 refreshInterval: 60
               });
-            const chart2 = sdk
-              .createChart({
-                baseUrl: 'https://charts.mongodb.com/charts-realmdemo-pzehs',
-                chartId: '43baaa27-6452-45fa-953d-10735b154d43',
-                width: 800,
-                height: 400,
-                refreshInterval: 60
-              });
               await chart.render(document.getElementById('chart1'));
               await chart.setFilter({ "_partition": vStoreId });
-              await chart2.render(document.getElementById('chart2'))
-              await chart2.setFilter({ "_partition": vStoreId });
-          } else {
+            } else {
             document.getElementById("chart1").innerHTML = "";
+          }
+        }
+        async function showChart2(){
+          var ck = document.getElementById('showChart2').checked;
+          if(ck){
+            var vStoreId = document.getElementById('sPartition').value;
+            const chart2 = sdk
+                .createChart({
+                  baseUrl: 'https://charts.mongodb.com/charts-realmdemo-pzehs',
+                  chartId: '43baaa27-6452-45fa-953d-10735b154d43',
+                  width: 800,
+                  height: 400,
+                  refreshInterval: 60
+                });
+                await chart2.render(document.getElementById('chart2'))
+                await chart2.setFilter({ "_partition": vStoreId });
+              } else {
             document.getElementById("chart2").innerHTML = "";
           }
         }
@@ -312,7 +318,8 @@
             <input type="checkbox" id="autoRef" name="autoRef">
             <br>
             <label for="showCharts"> Show Charts</label>
-            <input type="checkbox" id="showCharts" name="showCharts" onClick="showCharts()">
+            <input type="checkbox" id="showChart1" name="showChart1" onClick="showChart1()">
+            <input type="checkbox" id="showChart2" name="showChart2" onClick="showChart2()">
             <br>
             <label for="showStores"> Show Stores</label>
             <input type="checkbox" id="showStores" name="showShowStres" onClick="mapLocations()">
