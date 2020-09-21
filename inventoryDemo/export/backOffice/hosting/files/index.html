@@ -10,10 +10,13 @@
     <!-- ====================================================================================================================*/ -->
     <!-- https://datatables.net/examples/styling/bootstrap4 -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.5.0/stitch.js"></script>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.9.0/stitch.js"></script>
     <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="./img/demo.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
     <script>
         const sdk = new ChartsEmbedSDK;
         const inventoryAppID = "inventory-hhsot";
@@ -47,7 +50,7 @@
           }
           return "";
         }
-        function editItem( aPartition, aItemId, aName, aPrice, aQuantity, aMinQuantity, aSupplier){
+        function editItem( aPartition, aItemId, aName, aPrice, aQuantity, aMinQuantity, aSupplier, aCoordinates){
             document.getElementById("partition").value = aPartition;
             document.getElementById("itemId").value = aItemId;
             document.getElementById("name").value = aName;
@@ -55,6 +58,7 @@
             document.getElementById("quantity").value = aQuantity;
             document.getElementById("mQuantity").value = aMinQuantity;
             document.getElementById("supplier").value = aSupplier;
+            drawMapCircle(aPartition, aCoordinates);
         }
         function escape(aString){
           var fixedString = aString;
@@ -62,6 +66,12 @@
             var fixedString = aString.replace(/'/g, "\\'");
           }
           return fixedString;
+        }
+        function nvl(arg){
+          if (arg){
+            return arg;
+          }
+          return "";
         }
         function displayItems() {
           var searchDoc = {};
@@ -89,6 +99,7 @@
                   var project = "";
                   docs.map(c => {
                     if (c) {
+                          //console.log("InventoryItem doc: " + JSON.stringify(c));
                           thtml = thtml + "<tr>" +
                           "<td>" + c._partition + "</td>" +
                           "<td>" + c._id + "</td>" +
@@ -106,7 +117,8 @@
                                 "\'"+ c.price + "\'," +
                                 "\'"+ c.quantity + "\'," +
                                 "\'"+ c.min_quantity + "\'," +
-                                "\'"+ c.supplier + "\'" +
+                                "\'"+ c.supplier + "\'," +
+                                "\'"+ nvl(c.coordinates) + "\'" +
                             ")\">" +
                             "<i class=\"material-icons\" style=\"font-size:18px\">" +
                             "mode_edit</i></button>" +
@@ -302,6 +314,9 @@
             <label for="showCharts"> Show Charts</label>
             <input type="checkbox" id="showCharts" name="showCharts" onClick="showCharts()">
             <br>
+            <label for="showStores"> Show Stores</label>
+            <input type="checkbox" id="showStores" name="showShowStres" onClick="mapLocations()">
+            <br>
             <input type="text" placeholder="Last Update:" id="lastUpdate"></fieldset>
 		  <button type="submit" id="refresh" onClick="displayItems()">Search</button>
 		 </div>
@@ -324,7 +339,8 @@
       <button type="submit" id="contact-submit" onClick="showCompany()">Update Company</button>
     </div>
 		<div id="contact" class="container">
-		  <h3>Item Maintenance</h3>
+      <h3>Item Maintenance</h3>
+      <div id="mapid" style="width: 1050px; height: 400px;"></div>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
@@ -345,7 +361,94 @@
 
 	</td>
 	</tr>
-	</table>
+  </table>
+  <script>
+
+    var mymap = L.map('mapid').setView([33.115929, -96.839091], 13);
+    var mapCircle;
+    var storePopup;
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(mymap);
+  
+    mymap.on('click', onMapClick);
+    async function onMapClick() {
+      //await mapLocations();
+    }
+  
+    function drawMapCircle(aStoreId, aCoordinates){
+      if(aCoordinates === ""){
+        return;
+      }
+      var vCoordinates = aCoordinates.split(",");
+      var lat = parseFloat(vCoordinates[1]);
+      var long = parseFloat(vCoordinates[0]);
+      mymap.setView([lat, long], 13);
+      if (mapCircle){
+        mymap.removeLayer(mapCircle);
+      }
+      if (storePopup){
+        mymap.removeLayer(storePopup);
+      }
+      mapCircle = L.circle([lat, long], 300, {
+        color: 'red',
+        fillColor: '#a03',
+        fillOpacity: 0.5
+      }).addTo(mymap).bindPopup(aCoordinates);
+      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
+    }
+    async function mapLocations(){
+      //console.log("Inside MapLocation Function");
+      await db.collection('location').find({},{limit: 100}).asArray()
+        .then(docs => {
+          var vStoreId = "";
+          var vCoordinates = "";
+          var lat = 0.0;
+          var long = 0.0;
+          docs.map(c => {
+            if (c) {
+              //console.log(JSON.stringify(c));
+              vStoreId = c.store_id;
+              vCoordinates = c.coordinates;
+              lat = parseFloat(vCoordinates[1]);
+              long = parseFloat(vCoordinates[0]);
+              //L.marker([33.115929,-96.839091]).addTo(mymap).bindPopup("AAA");
+              L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
+            }
+          });
+        });
+    }
+    async function mapStoreLocation(aStoreId){
+      //console.log("Inside MapLocation Function");
+      if (storePopup){
+        mymap.removeLayer(storePopup);
+      }
+      await db.collection('location').find({"store_id": aStoreId},{limit: 100}).asArray()
+        .then(docs => {
+          var vStoreId = "";
+          var vCoordinates = "";
+          var lat = 0.0;
+          var long = 0.0;
+          docs.map(c => {
+            if (c) {
+              //console.log(JSON.stringify(c));
+              vStoreId = c.store_id;
+              vCoordinates = c.coordinates;
+              lat = parseFloat(vCoordinates[1]);
+              long = parseFloat(vCoordinates[0]);
+              storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
+            }
+          });
+        });
+    }
+  </script>
   </body>
 
 </html>
