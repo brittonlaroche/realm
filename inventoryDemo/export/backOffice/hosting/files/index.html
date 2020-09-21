@@ -282,7 +282,7 @@
                 });
                 await chart2.render(document.getElementById('chart2'))
                 await chart2.setFilter({ "_partition": vStoreId });
-              } else {
+          } else {
             document.getElementById("chart2").innerHTML = "";
           }
         }
@@ -322,7 +322,7 @@
             <input type="checkbox" id="showChart2" name="showChart2" onClick="showChart2()">
             <br>
             <label for="showStores"> Show Stores</label>
-            <input type="checkbox" id="showStores" name="showShowStres" onClick="mapLocations()">
+            <input type="checkbox" id="showStores" name="showStores" onClick="showStores()">
             <br>
             <input type="text" placeholder="Last Update:" id="lastUpdate"></fieldset>
 		  <button type="submit" id="refresh" onClick="displayItems()">Search</button>
@@ -374,6 +374,7 @@
     var mymap = L.map('mapid').setView([33.115929, -96.839091], 13);
     var mapCircle;
     var storePopup;
+    var storeListPopup = [0];
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -411,6 +412,19 @@
       }).addTo(mymap).bindPopup(aCoordinates);
       storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
+    function showStores(){
+      var ck = document.getElementById('showStores').checked;
+          if(ck){
+            mapLocations();
+          } else {
+            if (storeListPopup){
+              var length = storeListPopup.length;
+              for (i=0;i<length;i++){
+                mymap.removeLayer(storeListPopup[i]);
+              }
+            }
+          }
+    }
     async function mapLocations(){
       //console.log("Inside MapLocation Function");
       await db.collection('location').find({},{limit: 100}).asArray()
@@ -419,6 +433,7 @@
           var vCoordinates = "";
           var lat = 0.0;
           var long = 0.0;
+          var i = 0;
           docs.map(c => {
             if (c) {
               //console.log(JSON.stringify(c));
@@ -427,7 +442,8 @@
               lat = parseFloat(vCoordinates[1]);
               long = parseFloat(vCoordinates[0]);
               //L.marker([33.115929,-96.839091]).addTo(mymap).bindPopup("AAA");
-              L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
+              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
+              i = i+1;
             }
           });
         });
