@@ -321,6 +321,10 @@
             <input type="checkbox" id="showChart1" name="showChart1" onClick="showChart1()">
             <input type="checkbox" id="showChart2" name="showChart2" onClick="showChart2()">
             <br>
+            <label for="showMap"> Show Map</label>
+            <input type="checkbox" id="showMap" name="showMap" checked="true" onClick="showMap()">
+            <input type="checkbox" id="showBigMap" name="showBigMap" onClick="showBigMap()">
+            <br>
             <label for="showStores"> Show Stores</label>
             <input type="checkbox" id="showStores" name="showStores" onClick="showStores()">
             <br>
@@ -347,7 +351,7 @@
     </div>
 		<div id="contact" class="container">
       <h3>Item Maintenance</h3>
-      <div id="mapid" style="width: 1050px; height: 400px;"></div>
+      <div id="mapid" style="width: 1050px; height: 300px;"></div>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
@@ -365,7 +369,6 @@
 		<hr>
 		<div id="items">Loading...<br><img src="loading.gif"></div>
     </div>
-
 	</td>
 	</tr>
   </table>
@@ -423,6 +426,22 @@
                 mymap.removeLayer(storeListPopup[i]);
               }
             }
+          }
+    }
+    function showMap(){
+      var ck = document.getElementById('showMap').checked;
+          if(ck){
+            document.getElementById('mapid').style.display = "block";
+          } else {
+            document.getElementById('mapid').style.display = "none";
+          }
+    }
+    function showBigMap(){
+    var ck = document.getElementById('showBigMap').checked;
+          if(ck){
+            document.getElementById('mapid').style.height = "500px";
+          } else {
+            document.getElementById('mapid').style.height = "300px";
           }
     }
     async function mapLocations(){
