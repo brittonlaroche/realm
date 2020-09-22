@@ -15,7 +15,8 @@
       user = await app.logIn(credentials);
       console.dir(user);
       const mongo = app.services.mongodb("mongodb-atlas");
-      const coll = mongo.db("InventoryDemo").collection("InventoryItem");
+      const db = mongo.db("InventoryDemo");
+      const coll = db.collection("InventoryItem");
       item = await coll.findOne({});
       console.dir(item);
     } finally {

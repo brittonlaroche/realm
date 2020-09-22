@@ -10,7 +10,7 @@
     <!-- ====================================================================================================================*/ -->
     <!-- https://datatables.net/examples/styling/bootstrap4 -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.9.0/stitch.js"></script>
+    <script src="https://unpkg.com/realm-web@0.8.0/dist/bundle.iife.js"></script>
     <script src="https://unpkg.com/@mongodb-js/charts-embed-dom@next"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="./img/demo.png">
@@ -19,13 +19,29 @@
 
     <script>
         const sdk = new ChartsEmbedSDK;
-        const inventoryAppID = "inventory-hhsot";
-        const client = stitch.Stitch.initializeDefaultAppClient(inventoryAppID);
-        const db = client.getServiceClient(stitch.RemoteMongoClient.factory,
-        "mongodb-atlas").db('InventoryDemo');
+
+
+        //const inventoryAppID = "inventory-hhsot";
+        //const client = stitch.Stitch.initializeDefaultAppClient(inventoryAppID);
+       // const db = client.getServiceClient(stitch.RemoteMongoClient.factory,"mongodb-atlas").db('InventoryDemo');
+
+        const appId = "inventory-fywoy"; // Set Realm app ID here.
+        const appConfig = {
+          id: appId,
+          timeout: 1000,
+        };
+        const app = new Realm.App(appConfig);
+        const credentials = Realm.Credentials.anonymous(); // create an anonymous credential
+        var user ="";
+        console.dir(user);
+        const mongo = app.services.mongodb("mongodb-atlas");
+        //const coll = mongo.db("InventoryDemo").collection("InventoryItem");
+        const db = mongo.db("InventoryDemo");
+
+        
+
         function displayItemsOnLoad() {
-          client.auth
-            .loginWithCredential(new stitch.AnonymousCredential())
+          user = app.logIn(credentials)
             .then(displayItems)
             .then(defaultCompany)
             .catch(console.error);
@@ -93,7 +109,7 @@
           }
           console.log("Search doc: "+ JSON.stringify(searchDoc));
               var theader = "<th>Store ID</th><th>_id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Supplier</th><th>Edit</th>";
-              db.collection('InventoryItem').find(searchDoc,{sort: { "_partition": 1 },limit: 100}).asArray()
+              db.collection('InventoryItem').find(searchDoc,{limit: 100}).asArray()
                 .then(docs => {
                   var thtml = "";
                   var project = "";
@@ -461,9 +477,31 @@
               lat = parseFloat(vCoordinates[1]);
               long = parseFloat(vCoordinates[0]);
               //L.marker([33.115929,-96.839091]).addTo(mymap).bindPopup("AAA");
-              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId 
-              +"</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">");
+              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
               i = i+1;
+            }
+          });
+        });
+    }
+    async function mapStoreLocation(aStoreId){
+      //console.log("Inside MapLocation Function");
+      if (storePopup){
+        mymap.removeLayer(storePopup);
+      }
+      await db.collection('location').find({"store_id": aStoreId},{limit: 100}).asArray()
+        .then(docs => {
+          var vStoreId = "";
+          var vCoordinates = "";
+          var lat = 0.0;
+          var long = 0.0;
+          docs.map(c => {
+            if (c) {
+              //console.log(JSON.stringify(c));
+              vStoreId = c.store_id;
+              vCoordinates = c.coordinates;
+              lat = parseFloat(vCoordinates[1]);
+              long = parseFloat(vCoordinates[0]);
+              storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId +"</button>");
             }
           });
         });
