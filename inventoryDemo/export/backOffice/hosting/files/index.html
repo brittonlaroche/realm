@@ -323,7 +323,7 @@
             <br>
             <label for="showMap"> Show Map</label>
             <input type="checkbox" id="showMap" name="showMap" checked="true" onClick="showMap()">
-            <input type="checkbox" id="showBigMap" name="showBigMap" checked="true" onClick="showBigMap()">
+            <input type="checkbox" id="showBigMap" name="showBigMap" onClick="showBigMap()">
             <br>
             <label for="showStores"> Show Stores</label>
             <input type="checkbox" id="showStores" name="showStores" onClick="showStores()">
@@ -352,7 +352,7 @@
     </div>
 		<div id="contact" class="container">
       <h3>Item Maintenance</h3>
-      <div id="mapid" style="width: 1050px; height: 500px;"></div>
+      <div id="mapid" style="width: 1050px; height: 300px;"></div>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
@@ -375,7 +375,7 @@
   </table>
   <script>
     //--------------------------------------------------------
-    //-- ALL MAP FUNCTIONS BELOW
+    //-- ALL LEAFLET MAP FUNCTIONS BELOW
     //--------------------------------------------------------
     var mymap = L.map('mapid').setView([33.115929, -96.839091], 13);
     var mapCircle;
@@ -465,6 +465,7 @@
           var lat = 0.0;
           var long = 0.0;
           var i = 0;
+          var popupHTML ="";
           docs.map(c => {
             if (c) {
               //console.log(JSON.stringify(c));
@@ -472,9 +473,11 @@
               vCoordinates = c.coordinates;
               lat = parseFloat(vCoordinates[1]);
               long = parseFloat(vCoordinates[0]);
-              //L.marker([33.115929,-96.839091]).addTo(mymap).bindPopup("AAA");
-              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId 
-                  +"</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">");
+              popupHTML = "<button type=\"submit\">Store ID: " + vStoreId +"</button>";
+              if (c.photo){
+                popupHTML = popupHTML + "<br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">";
+              }
+              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML);
               i = i+1;
             }
           });
@@ -487,7 +490,10 @@
       }
       var table = await getStoreItems(aStoreId);
       var button = "<button type=\"submit\">Store ID: " + nvl(aStoreId) + 
-        "</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(photo)+"\">";
+        "</button><br>";
+      if(photo != ""){
+        button = button +"<br><img width=\"150px\" height=\"100px\"src=\""+ nvl(photo)+"\">";
+      }
       var popupHtml = button+table
       return popupHtml;
     }
