@@ -323,10 +323,11 @@
             <br>
             <label for="showMap"> Show Map</label>
             <input type="checkbox" id="showMap" name="showMap" checked="true" onClick="showMap()">
-            <input type="checkbox" id="showBigMap" name="showBigMap" onClick="showBigMap()">
+            <input type="checkbox" id="showBigMap" name="showBigMap" checked="true" onClick="showBigMap()">
             <br>
             <label for="showStores"> Show Stores</label>
             <input type="checkbox" id="showStores" name="showStores" onClick="showStores()">
+            <input type="checkbox" id="showStoreItems" name="showStoreItems">
             <br>
             <input type="text" placeholder="Last Update:" id="lastUpdate"></fieldset>
 		  <button type="submit" id="refresh" onClick="displayItems()">Search</button>
@@ -351,14 +352,14 @@
     </div>
 		<div id="contact" class="container">
       <h3>Item Maintenance</h3>
-      <div id="mapid" style="width: 1050px; height: 300px;"></div>
+      <div id="mapid" style="width: 1050px; height: 500px;"></div>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
 		  <fieldset><input type="text" placeholder="Price:" id="price"></fieldset>
-          <fieldset><input type="text" placeholder="Quantity:" id="quantity"></fieldset>
-          <fieldset><input type="text" placeholder="Min Quantity:" id="mQuantity"></fieldset>
-          <fieldset><input type="text" placeholder="Supplier:" id="supplier"></fieldset>
+      <fieldset><input type="text" placeholder="Quantity:" id="quantity"></fieldset>
+      <fieldset><input type="text" placeholder="Min Quantity:" id="mQuantity"></fieldset>
+      <fieldset><input type="text" placeholder="Supplier:" id="supplier"></fieldset>
 		  <hr>
 		  <button type="submit" id="contact-submit" onClick="updateItem()">Update Item</button>
     </div>
@@ -373,11 +374,14 @@
 	</tr>
   </table>
   <script>
-
+    //--------------------------------------------------------
+    //-- ALL MAP FUNCTIONS BELOW
+    //--------------------------------------------------------
     var mymap = L.map('mapid').setView([33.115929, -96.839091], 13);
     var mapCircle;
     var storePopup;
     var storeListPopup = [0];
+    var storeProductPopup;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -394,10 +398,11 @@
       //await mapLocations();
     }
   
-    function drawMapCircle(aStoreId, aCoordinates){
+    async function drawMapCircle(aStoreId, aCoordinates){
       if(aCoordinates === ""){
         return;
       }
+      var popupHTML = "";
       var vCoordinates = aCoordinates.split(",");
       var lat = parseFloat(vCoordinates[1]);
       var long = parseFloat(vCoordinates[0]);
@@ -413,7 +418,14 @@
         fillColor: '#a03',
         fillOpacity: 0.5
       }).addTo(mymap).bindPopup(aCoordinates);
-      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
+      var ck = document.getElementById('showStoreItems').checked;
+      if (ck){
+        popupHTML = await mapStoreProducts(aStoreId,"");
+      } else {
+        popupHTML = "<button type=\"submit\">Store ID: " + aStoreId +"</button>";
+      }
+      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML).openPopup();
+      //storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
     function showStores(){
       var ck = document.getElementById('showStores').checked;
@@ -462,11 +474,46 @@
               long = parseFloat(vCoordinates[0]);
               //L.marker([33.115929,-96.839091]).addTo(mymap).bindPopup("AAA");
               storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + vStoreId 
-              +"</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">");
+                  +"</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">");
               i = i+1;
             }
           });
         });
+    }
+    async function mapStoreProducts(aStoreId,aPhoto){
+      var photo = aPhoto;
+      if (photo === ""){
+        photo = await getStorePhoto(aStoreId);
+      }
+      var table = await getStoreItems(aStoreId);
+      var button = "<button type=\"submit\">Store ID: " + nvl(aStoreId) + 
+        "</button><br><img width=\"150px\" height=\"100px\"src=\""+ nvl(photo)+"\">";
+      var popupHtml = button+table
+      return popupHtml;
+    }
+    async function getStorePhoto(aStoreId){
+      var photo = "";
+      locDoc = await db.collection('location').find({"store_id":aStoreId},{limit: 1}).asArray()
+        .then(docs => {
+          docs.map(c => {
+            if (c) {
+              photo = c.photo;
+            }
+          })
+      });
+      return photo;
+    }
+    async function getStoreItems(aStoreId){
+      var table ="<table style=\'font-size:100%\'>";
+      var items = await db.collection('InventoryItem').find({"_partition":aStoreId},{limit: 3}).asArray();
+      if(items){
+        if(Array.isArray(items)){}
+        for(i=0;i<items.length;i++){
+          table = table + "<tr><td>" + items[i].name + "</td><td>" + items[i].price + "</td></tr>"
+        }
+        table = table + "</table>";
+      }
+      return table;
     }
   </script>
   </body>
