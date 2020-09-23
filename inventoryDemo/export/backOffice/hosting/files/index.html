@@ -73,7 +73,7 @@
           }
           return "";
         }
-        function displayItems() {
+        async function displayItems() {
           var searchDoc = {};
           var vPartition = document.getElementById('sPartition');
           var vName = document.getElementById('sName');
@@ -213,7 +213,7 @@
                     bodyStyles.setProperty('--button-color', cButtonColor);
                     bodyStyles.setProperty('--hover-color', cHoverColor);
                 }
-                displayItems();
+                displayItems().then(markStoreProductsOnMap(document.getElementById('sPartition').value));
             });
         }
         async function updateItem() {
@@ -395,7 +395,7 @@
   
     mymap.on('click', onMapClick);
     async function onMapClick() {
-      //await mapLocations();
+      //markStoreProductsOnMap(document.getElementById('sPartition').value);
     }
   
     async function drawMapCircle(aStoreId, aCoordinates){
@@ -483,6 +483,20 @@
           });
         });
     }
+    async function markStoreProductsOnMap(aStoreId) {
+      var popupHTML = await mapStoreProducts(aStoreId,"");
+      var vCoordinates = await getStoreCoordinates(aStoreId);
+      var lat = 0.0;
+      var long = 0.0;
+      console.log("markStoreProductsOnMap vCoordinates: " + vCoordinates );
+      if(vCoordinates){
+        lat = parseFloat(vCoordinates[1]);
+        long = parseFloat(vCoordinates[0]);
+        mymap.setView([lat, long], 13);
+        storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML).openPopup();
+      }
+      
+    }
     async function mapStoreProducts(aStoreId,aPhoto){
       var photo = aPhoto;
       if (photo === ""){
@@ -508,6 +522,18 @@
           })
       });
       return photo;
+    }
+    async function getStoreCoordinates(aStoreId){
+      var coordinates = "";
+      locDoc = await db.collection('location').find({"store_id":aStoreId},{limit: 1}).asArray()
+        .then(docs => {
+          docs.map(c => {
+            if (c) {
+              coordinates = c.coordinates;
+            }
+          })
+      });
+      return coordinates;
     }
     async function getStoreItems(aStoreId){
       var table ="<table style=\'font-size:100%\'>";
