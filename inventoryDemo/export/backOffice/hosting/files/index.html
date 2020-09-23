@@ -223,7 +223,9 @@
                     bodyStyles.setProperty('--button-color', cButtonColor);
                     bodyStyles.setProperty('--hover-color', cHoverColor);
                 }
-                displayItems().then(markStoreProductsOnMap(document.getElementById('sPartition').value));
+                displayItems()
+                .then(markStoreProductsOnMap(document.getElementById('sPartition').value))
+                .then(showStores);
             });
         }
         async function updateItem() {
@@ -336,8 +338,8 @@
             <input type="checkbox" id="showBigMap" name="showBigMap" onClick="showBigMap()">
             <br>
             <label for="showStores"> Show Stores</label>
-            <input type="checkbox" id="showStores" name="showStores" onClick="showStores()">
-            <input type="checkbox" id="showStoreItems" name="showStoreItems">
+            <input type="checkbox" id="showStores" checked="true" name="showStores" onClick="showStores()">
+            <input type="checkbox" id="showStoreItems" checked="true" name="showStoreItems">
             <br>
             <input type="text" placeholder="Last Update:" id="lastUpdate"></fieldset>
 		  <button type="submit" id="refresh" onClick="displayItems()">Search</button>
@@ -362,7 +364,7 @@
     </div>
 		<div id="contact" class="container">
       <h3>Item Maintenance</h3>
-      <div id="mapid" style="width: 1050px; height: 300px;"></div>
+      <div id="mapid" style="width: 800px; height: 300px;"></div>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
