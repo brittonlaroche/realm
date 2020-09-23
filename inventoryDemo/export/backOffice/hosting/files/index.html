@@ -136,14 +136,24 @@
        }
        async function defaultCompany(){
             var vCompanyName = getCookie("CompanyName");
-            
+            //check the parameters to see if a company name was passed in
+            console.log("In defaultCompany: checking query string");
+            const queryString = window.location.search;
+            console.log("url queryString: " + queryString);
+            const urlParams = new URLSearchParams(queryString);
+            const company = urlParams.get('company')
+            console.log("company parameter: " +company );
+            if(company) {
+              if( company != ""){
+                vCompanyName = company;
+              }
+            }
             //if we have no cookie set then check the text field and see if the user has typed one in
             if (vCompanyName != "") {
               document.getElementById("companyName").value = vCompanyName;
               showCompany();
               return;
             } 
-            
             // We have no cookie and the user has not typed one in lets go with our
             // "Brave Organics" default company
             // Find Brave Organics
