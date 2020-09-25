@@ -307,7 +307,6 @@
                 displayItems();
             }
         }
-
     </script>
 
     </head>
@@ -363,12 +362,12 @@
       <button type="submit" id="contact-submit" onClick="showCompany()">Update Company</button>
     </div>
 		<div id="contact" class="container">
-      <h3>Item Maintenance</h3>
       <div id="mapid" 
         style="width: 800px; height: 300px; 
         margin-left: auto; margin-right: auto; 
         border: 5px solid rgb(161, 185, 236);
         border-radius: 8px"></div>
+      <h3>Item Maintenance</h3>
 		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
 		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
 		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
@@ -397,23 +396,28 @@
     var mapCircle;
     var storePopup;
     var storeListPopup = [0];
+    var storeBtnList = [0];
     var storeProductPopup;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        'Imagery Â© <a href="https://www.mapbox.com/">Mapbox</a>',
       id: 'mapbox/streets-v11',
       tileSize: 512,
       zoomOffset: -1
     }).addTo(mymap);
-  
+
     mymap.on('click', onMapClick);
     async function onMapClick() {
       //markStoreProductsOnMap(document.getElementById('sPartition').value);
     }
   
+    function setStoreFromMap(aStoreId){
+        document.getElementById('sPartition').value = aStoreId;
+        displayItems();
+    }
     async function drawMapCircle(aStoreId, aCoordinates){
       if(aCoordinates === ""){
         return;
@@ -438,8 +442,9 @@
       if (ck){
         popupHTML = await mapStoreProducts(aStoreId,"");
       } else {
-        popupHTML = "<button type=\"submit\">Store ID: " + aStoreId +"</button>";
+        popupHTML = "<button id=\"button-submit\" type=\"submit\">Store ID: " + aStoreId +"</button>";
       }
+        
       storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML).openPopup();
       //storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
@@ -472,9 +477,15 @@
             document.getElementById('mapid').style.height = "300px";
           }
     }
+    function createButton(label, container) {
+        var btn = L.DomUtil.create('button', '', container);
+        btn.setAttribute('type', 'submit');
+        btn.innerHTML = label;
+        return btn;
+    }
     async function mapLocations(){
       //console.log("Inside MapLocation Function");
-      await db.collection('location').find({},{limit: 100}).asArray()
+      await db.collection('location').find({},{sort: { "store_id": 1 }},{limit: 100}).asArray()
         .then(docs => {
           var vStoreId = "";
           var vCoordinates = "";
@@ -484,17 +495,146 @@
           var popupHTML ="";
           docs.map(c => {
             if (c) {
-              //console.log(JSON.stringify(c));
-              vStoreId = c.store_id;
-              vCoordinates = c.coordinates;
-              lat = parseFloat(vCoordinates[1]);
-              long = parseFloat(vCoordinates[0]);
-              popupHTML = "<button type=\"submit\">Store ID: " + vStoreId +"</button>";
-              if (c.photo){
-                popupHTML = popupHTML + "<br><img width=\"150px\" height=\"100px\"src=\""+ nvl(c.photo)+"\">";
-              }
-              storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML);
-              i = i+1;
+                //console.log(JSON.stringify(c));
+                vStoreId = c.store_id;
+                vCoordinates = c.coordinates;
+                lat = parseFloat(vCoordinates[1]);
+                long = parseFloat(vCoordinates[0]);
+            
+                var container = L.DomUtil.create('div');
+                storeBtnList[i] = vStoreId;
+                // THERE HAS GOT TO BE A BETTER WAY TO DO THIS
+                // DYNAMIC LISTENERS - CAN'T FIND IT IN LEAFLET API
+                switch(i) {
+                case 0:
+                    storeBtn0 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn0, 'click', () => {
+                        setStoreFromMap(storeBtnList[0]);
+                    });
+                    break;
+                case 1:
+                    storeBtn1 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn1, 'click', () => {
+                        setStoreFromMap(storeBtnList[1]);
+                    });
+                    break;
+                case 2:
+                    storeBtn2 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn2, 'click', () => {
+                        setStoreFromMap(storeBtnList[2]);
+                    });
+                    break;
+                case 3:
+                    storeBtn3 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn3, 'click', () => {
+                        setStoreFromMap(storeBtnList[3]);;
+                    });
+                    break;
+                case 4:
+                    storeBtn4 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn4, 'click', () => {
+                        setStoreFromMap(storeBtnList[4]);
+                    });
+                    break;
+                case 5:
+                    storeBtn5 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn5, 'click', () => {
+                        setStoreFromMap(storeBtnList[5]);
+                    });
+                    break;
+                case 6:
+                    storeBtn6 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn6, 'click', () => {
+                        setStoreFromMap(storeBtnList[6]);
+                    });
+                    break;
+                case 7:
+                    storeBtn7 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn7, 'click', () => {
+                        setStoreFromMap(storeBtnList[7]);
+                    });
+                    break;
+                case 8:
+                    storeBtn8 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn8, 'click', () => {
+                        setStoreFromMap(storeBtnList[8]);;
+                    });
+                    break;
+                case 9:
+                    storeBtn9 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn9, 'click', () => {
+                        setStoreFromMap(storeBtnList[9]);
+                    });
+                    break;
+                case 10:
+                    storeBtn10 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn10, 'click', () => {
+                        setStoreFromMap(storeBtnList[10]);
+                    });
+                    break;
+                case 11:
+                    storeBtn11 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn11, 'click', () => {
+                        setStoreFromMap(storeBtnList[11]);
+                    });
+                    break;
+                case 12:
+                    storeBtn12 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn12, 'click', () => {
+                        setStoreFromMap(storeBtnList[12]);
+                    });
+                    break;
+                case 13:
+                    storeBtn13 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn13, 'click', () => {
+                        setStoreFromMap(storeBtnList[13]);;
+                    });
+                    break;
+                case 14:
+                    storeBtn14 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn14, 'click', () => {
+                        setStoreFromMap(storeBtnList[14]);
+                    });
+                    break;
+                case 15:
+                    storeBtn15 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn15, 'click', () => {
+                        setStoreFromMap(storeBtnList[15]);
+                    });
+                    break;
+                case 16:
+                    storeBtn16 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn16, 'click', () => {
+                        setStoreFromMap(storeBtnList[16]);
+                    });
+                    break;
+                case 17:
+                    storeBtn17 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn17, 'click', () => {
+                        setStoreFromMap(storeBtnList[17]);
+                    });
+                    break;
+                case 18:
+                    storeBtn18 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn18, 'click', () => {
+                        setStoreFromMap(storeBtnList[18]);;
+                    });
+                    break;
+                case 19:
+                    storeBtn19 = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn19, 'click', () => {
+                        setStoreFromMap(storeBtnList[19]);
+                    });
+                    break;
+                default:
+                    storeBtn = this.createButton('Store ID: ' + vStoreId, container)
+                    L.DomEvent.on(storeBtn, 'click', () => {
+                        setStoreFromMap(vStoreId);
+                    });
+                }
+
+                storeListPopup[i] = L.marker([lat,long]).addTo(mymap).bindPopup(container);
+                i = i+1;
             }
           });
         });
