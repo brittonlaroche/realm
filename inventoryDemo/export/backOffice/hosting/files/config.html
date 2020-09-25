@@ -215,6 +215,35 @@
             document.getElementById("dbResult2").value = "";
             document.getElementById("dbResult3").value = "";
         }
+        async function updateStore(){
+          var storeId = document.getElementById("updStoreId").value;
+          var photo = document.getElementById("updPhoto").value;
+          var coords = document.getElementById("updCoords").value;
+          if (photo != ""){
+            console.log("updateStore setting photo");
+            await db.collection('location').updateOne(
+              { "store_id":  storeId},
+              { $set: {   
+                "photo": photo
+              } },
+                  {upsert: true}
+              );
+          }
+          if (coords != ""){
+            var vCoordinates = coords.split(",");
+            var lat = parseFloat(vCoordinates[1]);
+            var long = parseFloat(vCoordinates[0]);
+            var arrayCoords = [long,lat];
+            console.log("updateStore coords: "+ coords);
+            await db.collection('location').updateOne(
+              { "store_id":  storeId},
+              { $set: {   
+                "coordinates": arrayCoords
+              } },
+                  {upsert: true}
+              );
+          }
+        }
         async function deleteInventoryTransactions() {
             resetResults();
             var vStoreId = document.getElementById('deleteStoreId').value;
@@ -320,6 +349,13 @@
           <button type="submit" id="contact-submit" onClick="deleteInventoryTransactions()">Delete Transactions</button>
           <button type="submit" id="contact-submit" onClick="deleteInventoryHistory()">Delete Inventory History</button>
           <button type="submit" id="contact-submit" onClick="deleteSales()">Delete Sales</button>
+    </div>
+    <div id="contact" class="container">
+      <h3>Manage Stores</h3>
+      <fieldset><input type="text" placeholder="Update Store ID:" id="updStoreId"></fieldset>
+      <fieldset><input type="text" placeholder="Image Source:" id="updPhoto"></fieldset>
+      <fieldset><input type="text" placeholder="Cooridnates longitude,latitude:" id="updCoords"></fieldset>
+      <button type="submit" id="store-submit" onClick="updateStore()">Update Store</button>
     </div>
 
 		<div id="contact" class= container>
