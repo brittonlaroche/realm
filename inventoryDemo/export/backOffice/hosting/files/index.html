@@ -58,7 +58,7 @@
             document.getElementById("quantity").value = aQuantity;
             document.getElementById("mQuantity").value = aMinQuantity;
             document.getElementById("supplier").value = aSupplier;
-            drawMapCircle(aPartition, aCoordinates);
+            drawStoreCircle(aPartition, aCoordinates);
         }
         function escape(aString){
           var fixedString = aString;
@@ -398,6 +398,7 @@
     var storeListPopup = [0];
     var storeBtnList = [0];
     var storeProductPopup;
+    var selectedStore = "";
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -418,11 +419,17 @@
         document.getElementById('sPartition').value = aStoreId;
         displayItems();
     }
-    async function drawMapCircle(aStoreId, aCoordinates){
+    async function markStoreProductsOnMap(aStoreId){
+      var coordinates = await getStoreCoordinates(aStoreId);
+      var strCoordinates = nvl(coordinates).toString();
+      drawStoreCircle(aStoreId,strCoordinates);
+    }
+    async function drawStoreCircle(aStoreId, aCoordinates){
       if(aCoordinates === ""){
         return;
       }
       var popupHTML = "";
+      console.log("drawStoreCircle aCoordinates: "+aCoordinates);
       var vCoordinates = aCoordinates.split(",");
       var lat = parseFloat(vCoordinates[1]);
       var long = parseFloat(vCoordinates[0]);
@@ -438,14 +445,36 @@
         fillColor: '#a03',
         fillOpacity: 0.5
       }).addTo(mymap).bindPopup(aCoordinates);
+
+      selectedStore = aStoreId;
+      var container = L.DomUtil.create('div');
+      selectedBtn = this.createButton('Store ID: ' + aStoreId, container);
+      selectedBtn.style.width = '150px';
       var ck = document.getElementById('showStoreItems').checked;
       if (ck){
-        popupHTML = await mapStoreProducts(aStoreId,"");
-      } else {
-        popupHTML = "<button id=\"button-submit\" type=\"submit\">Store ID: " + aStoreId +"</button>";
+        var photo = await getStorePhoto(aStoreId);
+        if (photo) {
+          if(photo != ""){
+            L.DomUtil.create('br','', container)
+            var storeImg = L.DomUtil.create('img','', container);
+            storeImg.src = photo;
+            storeImg.style.width = '150px';
+            storeImg.style.height = '100px';
+          }
+        }
+        var itemTable = await getStoreItems(aStoreId);
+        if (itemTable) {
+          if(itemTable != ""){
+            var divtable = L.DomUtil.create('div','', container);
+            divtable.innerHTML = itemTable;
+          }
+        }
       }
-        
-      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML).openPopup();
+      L.DomEvent.on(selectedBtn, 'click', () => {
+          setStoreFromMap(selectedStore);
+      });
+      
+      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(container).openPopup();
       //storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
     function showStores(){
@@ -638,20 +667,6 @@
             }
           });
         });
-    }
-    async function markStoreProductsOnMap(aStoreId) {
-      var popupHTML = await mapStoreProducts(aStoreId,"");
-      var vCoordinates = await getStoreCoordinates(aStoreId);
-      var lat = 0.0;
-      var long = 0.0;
-      console.log("markStoreProductsOnMap vCoordinates: " + vCoordinates );
-      if(vCoordinates){
-        lat = parseFloat(vCoordinates[1]);
-        long = parseFloat(vCoordinates[0]);
-        mymap.setView([lat, long], 13);
-        storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(popupHTML).openPopup();
-      }
-      
     }
     async function mapStoreProducts(aStoreId,aPhoto){
       var photo = aPhoto;
