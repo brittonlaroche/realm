@@ -92,7 +92,7 @@
           searchDoc["quantity"] = parseInt(vQuantity.value);
           }
           console.log("Search doc: "+ JSON.stringify(searchDoc));
-              var theader = "<th>Store ID</th><th>_id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Supplier</th><th>Edit</th>";
+              var theader = "<th>Store ID</th><th>_id</th><th>Device</th><th>Price</th><th>Current Build Version</th><th>Min Build Version</th><th>Contact</th><th>Edit</th>";
               db.collection('InventoryItem').find(searchDoc,{sort: { "_partition": 1 },limit: 100}).asArray()
                 .then(docs => {
                   var thtml = "";
