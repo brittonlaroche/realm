@@ -58,7 +58,8 @@
             document.getElementById("quantity").value = aQuantity;
             document.getElementById("mQuantity").value = aMinQuantity;
             document.getElementById("supplier").value = aSupplier;
-            drawStoreCircle(aPartition, aCoordinates);
+            document.getElementById("coordinates").value = aCoordinates;
+            drawStoreCircle(aPartition, aCoordinates, aName);
         }
         function escape(aString){
           var fixedString = aString;
@@ -92,7 +93,7 @@
           searchDoc["quantity"] = parseInt(vQuantity.value);
           }
           console.log("Search doc: "+ JSON.stringify(searchDoc));
-              var theader = "<th>Store ID</th><th>_id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Supplier</th><th>Edit</th>";
+              var theader = "<th>Store ID</th><th>_id</th><th>Device</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Supplier</th><th>Coordinates</th><th>Edit</th>";
               db.collection('InventoryItem').find(searchDoc,{sort: { "_partition": 1 },limit: 100}).asArray()
                 .then(docs => {
                   var thtml = "";
@@ -108,6 +109,7 @@
                           "<td>" + c.quantity + "</td>" +
                           "<td>" + c.min_quantity + "</td>" +
                           "<td>" + c.supplier + "</td>" +
+                          "<td>" + c.coordinates + "</td>" +
                           "<td>" +
                             "<button type=\"checkbox\" class=\"blueTable\"" +
                             "onClick=\"editItem(" +
@@ -236,6 +238,14 @@
             var vQuantity = document.getElementById('quantity').value;
             var vMinQuantity = document.getElementById('mQuantity').value;
             var vSupplier = document.getElementById('supplier').value;
+            var vCoordinates = document.getElementById('coordinates').value;
+            var vCoordinatesArray;
+            if(vCoordinates){
+                vCoordinates = vCoordinates.split(",");
+                var lat = parseFloat(vCoordinates[1]);
+                var long = parseFloat(vCoordinates[0]);
+                vCoordinatesArray = [long,lat];
+            }
             if ( isNaN(vQuantity)){
               vQuantity = 0;
             }
@@ -249,7 +259,8 @@
                         "price": {"$numberDouble": vPrice}, 
                         "quantity": {"$numberInt": vQuantity},
                         "min_quantity": {"$numberInt": vMinQuantity},
-                        "supplier": vSupplier	}
+                        "supplier": vSupplier,
+                        "coordinates": 	vCoordinatesArray }
                 },
                 {upsert: true}
             );
@@ -334,7 +345,7 @@
             <br>
             <label for="showMap"> Show Map</label>
             <input type="checkbox" id="showMap" name="showMap" checked="true" onClick="showMap()">
-            <input type="checkbox" id="showBigMap" name="showBigMap" onClick="showBigMap()">
+            <input type="checkbox" id="showBigMap" checked="true" name="showBigMap" onClick="showBigMap()">
             <br>
             <label for="showStores"> Show Stores</label>
             <input type="checkbox" id="showStores" checked="true" name="showStores" onClick="showStores()">
@@ -363,18 +374,19 @@
     </div>
 		<div id="contact" class="container">
       <div id="mapid" 
-        style="width: 800px; height: 300px; 
+        style="width: 800px; height: 500px; 
         margin-left: auto; margin-right: auto; 
         border: 5px solid rgb(161, 185, 236);
         border-radius: 8px"></div>
       <h3>Item Maintenance</h3>
-		  <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
-		  <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
-		  <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
-		  <fieldset><input type="text" placeholder="Price:" id="price"></fieldset>
-      <fieldset><input type="text" placeholder="Quantity:" id="quantity"></fieldset>
-      <fieldset><input type="text" placeholder="Min Quantity:" id="mQuantity"></fieldset>
-      <fieldset><input type="text" placeholder="Supplier:" id="supplier"></fieldset>
+            <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
+            <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
+            <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
+            <fieldset><input type="text" placeholder="Price:" id="price"></fieldset>
+            <fieldset><input type="text" placeholder="Quantity:" id="quantity"></fieldset>
+            <fieldset><input type="text" placeholder="Min Quantity:" id="mQuantity"></fieldset>
+            <fieldset><input type="text" placeholder="Supplier:" id="supplier"></fieldset>
+            <fieldset><input type="text" placeholder="Coordinates:" id="coordinates"></fieldset>
 		  <hr>
 		  <button type="submit" id="contact-submit" onClick="updateItem()">Update Item</button>
     </div>
@@ -422,9 +434,9 @@
     async function markStoreProductsOnMap(aStoreId){
       var coordinates = await getStoreCoordinates(aStoreId);
       var strCoordinates = nvl(coordinates).toString();
-      drawStoreCircle(aStoreId,strCoordinates);
+      drawStoreCircle(aStoreId,strCoordinates,"");
     }
-    async function drawStoreCircle(aStoreId, aCoordinates){
+    async function drawStoreCircle(aStoreId, aCoordinates, aItemName){
       if(aCoordinates === ""){
         return;
       }
@@ -447,6 +459,16 @@
 
       selectedStore = aStoreId;
       var container = L.DomUtil.create('div');
+      if (aItemName) {
+          if(aItemName != ""){
+            selectedItemBtn = this.createButton('Item: ' + aItemName, container);
+            selectedItemBtn.style.width = '150px';
+            L.DomUtil.create('br','', container);
+            L.DomEvent.on(selectedItemBtn, 'click', () => {
+                setStoreFromMap(selectedStore);
+            });
+          }
+      }
       selectedBtn = this.createButton('Store ID: ' + aStoreId, container);
       selectedBtn.style.width = '150px';
       var ck = document.getElementById('showStoreItems').checked;
@@ -454,7 +476,7 @@
         var photo = await getStorePhoto(aStoreId);
         if (photo) {
           if(photo != ""){
-            L.DomUtil.create('br','', container)
+            L.DomUtil.create('br','', container);
             var storeImg = L.DomUtil.create('img','', container);
             storeImg.src = photo;
             storeImg.style.width = '150px';
@@ -469,11 +491,13 @@
           }
         }
       }
+
+      
+      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(container).openPopup();
       L.DomEvent.on(selectedBtn, 'click', () => {
           setStoreFromMap(selectedStore);
       });
-      
-      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(container).openPopup();
+
       //storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
     function showStores(){
