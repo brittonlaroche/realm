@@ -546,10 +546,6 @@
               var coordString = aStoreCoordinates.toString();
               console.log("mapLocations coordString: "+ coordString);
               var searchString = '{"coordinates": {"$geoWithin": { "$centerSphere": [ [' + coordString +  '], 0.005430642146122155 ]}}}';
-              var text = '{ "employees" : [' +
-                '{ "firstName":"John" , "lastName":"Doe" },' +
-                '{ "firstName":"Anna" , "lastName":"Smith" },' +
-                '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
               searchDoc = JSON.parse(searchString);
               console.log("mapLocations searchDoc: "+ JSON.stringify(searchDoc));
             }
