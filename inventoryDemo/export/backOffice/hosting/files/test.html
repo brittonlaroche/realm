@@ -17,8 +17,9 @@
       const mongo = app.services.mongodb("mongodb-atlas");
       const db = mongo.db("InventoryDemo");
       const coll = db.collection("InventoryItem");
-      item = await coll.findOne({});
-      console.dir(item);
+      items = await coll.find({});
+      console.log("Items Length: " + items.length);
+      console.dir(items);
     } finally {
       if (user) {
         user.logOut();
