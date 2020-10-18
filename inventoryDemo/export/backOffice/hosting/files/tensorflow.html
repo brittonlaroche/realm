@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--
+  ==============================================================================================================================
+  - Date:       Author:           Version:     Notes:
+  ------------------------------------------------------------------------------------------------------------------------------
+  - 2020-02-15  Justin Emery      1.0          https://www.udemy.com/course/machine-learning-in-javascript-with-tensorflow-js/
+  -                                            https://github.com/tech-courses/tensorflowjs-course-solutions
+  - 2020-10-15  Britton LaRoche   2.0          Added in MongoDB Atlas and Realm Fucntionality to store and retrieve training 
+  -                                            data from MongoDB
+  - 2020-10-18  Britton LaRoche   2.1          Added ability to store and retrieve trained TensorFlow models in MongoDB Atlas
+  -
+  ==============================================================================================================================
+  -->
   <title>TensorFlow.js linear regression</title>
   <script src="https://unpkg.com/realm-web@0.9.0/dist/bundle.iife.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
@@ -241,7 +253,6 @@
       });
     }
   }
-
   async function save () {
     //I can't get model.save to work directly with a realm function
     //so we have to save it to local storage
@@ -252,7 +263,6 @@
     const saveResults = await model.save(`localstorage://${storageID}`);
     document.getElementById("model-status").innerHTML = `Trained (saved ${saveResults.modelArtifactsInfo.dateSaved})`;
 
-
     // Retrieve the objects from storage that model.save just put there
     var info = localStorage.getItem(`tensorflowjs_models/${storageID}/info`);
     var weight_specs = localStorage.getItem(`tensorflowjs_models/${storageID}/weight_specs`);
@@ -260,21 +270,15 @@
     var model_topology = localStorage.getItem(`tensorflowjs_models/${storageID}/model_topology`);
     var model_metadata = localStorage.getItem(`tensorflowjs_models/${storageID}/model_metadata`);
     
-    //keep binary value as a string
     //docs get converted in a funny way
-    //keep its simple stuff everything in as a string
-    var info_doc = {"info_string": info};
-    var weight_specs_doc = {"object": weight_specs};
-    var weight_data_doc = {"binaryValue": weight_data};
-    var model_topology_doc = {"model_topology_string": model_topology};
-    var model_metadata_doc = {"model_metadata_string": model_metadata};
-  
-
-    await sendJsonModel(`tensorflowjs_models/${storageID}/info`, info_doc);
-    await sendJsonModel(`tensorflowjs_models/${storageID}/weight_specs`, weight_specs_doc);
-    await sendJsonModel(`tensorflowjs_models/${storageID}/weight_data`, weight_data_doc);
-    await sendJsonModel(`tensorflowjs_models/${storageID}/model_topology`, model_topology_doc);
-    await sendJsonModel(`tensorflowjs_models/${storageID}/model_metadata`, model_metadata_doc);
+    //keep it simple, stuff everything in as a string value
+    var modelDoc = {};
+    modelDoc["info_value"] = info;
+    modelDoc["weight_specs_value"] = weight_specs;
+    modelDoc["weight_data_value"] = weight_data;
+    modelDoc["model_topology_value"] = model_topology;
+    modelDoc["model_metadata_value"] = model_metadata;
+    await sendJsonModel(`tensorflowjs_models/${storageID}/model`, modelDoc);
 
   }
  async function sendJsonModel ( fileName, inputDoc ) {
@@ -331,35 +335,28 @@
     //This is all a work around because google tensorflow model.save() and model.load() does not work with the REST API
     //I know, right? Like really? :(
 
-    //Start with info
-    var jsonInfo = await getJsonModel(`tensorflowjs_models/${storageID}/info`);
-    var info = jsonInfo.info_string;
+    var modelDoc = await getJsonModel(`tensorflowjs_models/${storageID}/model`);
+    
+    var info = modelDoc.info_value;
     localStorage.removeItem(`tensorflowjs_models/${storageID}/info`);
     localStorage.setItem(`tensorflowjs_models/${storageID}/info`, info);
 
-    //weight specs
-    var jsonWeight_specs = await getJsonModel(`tensorflowjs_models/${storageID}/weight_specs`);
-    var weight_specs = jsonWeight_specs.object;
+    var weight_specs = modelDoc.weight_specs_value;
     localStorage.removeItem(`tensorflowjs_models/${storageID}/weight_specs`);
     localStorage.setItem(`tensorflowjs_models/${storageID}/weight_specs`, weight_specs);
 
-    //weight data
-    var jsonWeight_data = await getJsonModel(`tensorflowjs_models/${storageID}/weight_data`);
-    var weight_data = jsonWeight_data.binaryValue;
+    var weight_data = modelDoc.weight_data_value;
     localStorage.removeItem(`tensorflowjs_models/${storageID}/weight_data`);
     localStorage.setItem(`tensorflowjs_models/${storageID}/weight_data`, weight_data);
 
-    //model topology
-    var jsonModel_topology = await getJsonModel(`tensorflowjs_models/${storageID}/model_topology`);
-    var model_topology = jsonModel_topology.model_topology_string;
+    var model_topology = modelDoc.model_topology_value;
     localStorage.removeItem(`tensorflowjs_models/${storageID}/model_topology`);
     localStorage.setItem(`tensorflowjs_models/${storageID}/model_topology`, model_topology);
 
-    //model metadata
-    var jsonModel_metadata = await getJsonModel(`tensorflowjs_models/${storageID}/model_metadata`);
-    var model_metadata = jsonModel_metadata.model_metadata_string;
+    var model_metadata = modelDoc.model_metadata_value;
     localStorage.removeItem(`tensorflowjs_models/${storageID}/model_metadata`);
     localStorage.setItem(`tensorflowjs_models/${storageID}/model_metadata`, model_metadata);
+
   }
   async function load () {
     await loadModelFromDB();
@@ -401,6 +398,7 @@
       document.getElementById(`${id}-button`).setAttribute("disabled", "disabled");
     });
     document.getElementById("model-status").innerHTML = "Training...";
+    document.getElementById('progressbar').style.display = "block";
 
     const model = createModel();
     tfvis.show.modelSummary({ name: "Model summary" }, model);
@@ -421,6 +419,7 @@
     document.getElementById("test-button").removeAttribute("disabled");
     document.getElementById("save-button").removeAttribute("disabled");
     document.getElementById("predict-button").removeAttribute("disabled");
+    document.getElementById('progressbar').style.display = "none";
   }
 
   async function plotParams(weight, bias) {
@@ -591,7 +590,9 @@
             <button autocomplete="off" id="test-button" class="waves-effect green darken-3 waves-light btn" disabled onclick="test()">Test Model</button>
           </div>
           <br/>
-
+          <div id="progressbar" class="progress" style="display:none">
+            <div class="indeterminate green darken-3"></div>
+          </div>
           <div>
             <button autocomplete="off" id="load-button" class="waves-effect green darken-3 waves-light btn-small" disabled onclick="load()">Load Model</button>
             <button autocomplete="off" id="save-button" class="waves-effect green darken-3 waves-light btn-small" disabled onclick="save()">Save Model</button>
