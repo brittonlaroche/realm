@@ -62,7 +62,7 @@ The vast majority of handheld devices manufactured for use in commercial applica
 
 Finally, the barrier to entry as a mobile developer is much higher for iOS development as it requires upgrading to the latest version of the Mac OS just to install Xcode. Once installed, the security certificate set up is not intuitive, and no development can begin until the certificates have been set properly.  For these reasons we went with a simple Android Kotlin application for this demo.  That being said Realm supports iOS development.
 
-Realm supports iOS and a wide variety of mobile platforms. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and iOS as well as other development platforms.
+Realm supports iOS and a wide variety of mobile platforms. [The MongoDB Realm Documentation](https://docs.mongodb.com/realm/) has great tutorials on getting started with React Native, and iOS as well as other development platforms.  Palo Manna has created an iOS version of this app here:https://github.com/pmanna-tse-realm/inventory-system
 
 Its an 8 step process to install the end to end Realm Inventory System Demo.  The following sections walk us through each step in great detail.  Its not a difficult process but it does require following a prescribed set of steps to be successful.  Estimated time to completion about 60 to 90 minutes.  Each step yields its own independent results so you will see great progress and powerful features along the way.
 
