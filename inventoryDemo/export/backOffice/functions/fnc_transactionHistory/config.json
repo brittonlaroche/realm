@@ -1,5 +1,5 @@
 {
+    "can_evaluate": {},
     "name": "fnc_transactionHistory",
-    "private": true,
-    "can_evaluate": {}
+    "private": true
 }

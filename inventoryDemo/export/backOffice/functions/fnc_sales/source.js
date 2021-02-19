@@ -48,6 +48,7 @@ exports = async function(changeEvent) {
   const sales = context.services.get("mongodb-atlas").db("InventoryDemo").collection("sales");
   const inventoryHist = context.services.get("mongodb-atlas").db("InventoryDemo").collection("inventory_hist");
   const last = context.services.get("mongodb-atlas").db("InventoryDemo").collection("inventory_last");
+  const inventory = context.services.get("mongodb-atlas").db("InventoryDemo").collection("InventoryItem");
   console.log("inside fnc_sales")
   
   //check to make sure we have a full document
@@ -66,6 +67,58 @@ exports = async function(changeEvent) {
     return;
   }
   
+  //check to make sure we did not update the location coordinates only
+  //See which fields were changed (if any):
+  const updateDescription = changeEvent.updateDescription;
+  if (updateDescription) {
+    const updatedFields = updateDescription.updatedFields; // A document containing updated fields
+    console.log("updatedFields in fnc_sales: " + JSON.stringify(updatedFields));
+    if(updatedFields.coordinates){
+      console.log("Detected coordinate update exiting");
+      return;
+    }
+  }
+      //Check the location Data
+  if (fullDocument.coordinates) {
+    //We dont need to add coordinates if we already have them
+    return;
+  } 
+  //-----------------------------------------------------------------
+  //-- Update the item location data
+  //-----------------------------------------------------------------
+  const location = context.services.get("mongodb-atlas").db("InventoryDemo").collection("location");
+  var searchDoc = { store_id: fullDocument._partition };
+  console.log("fullDocument._partition: " + fullDocument._partition);
+  console.log("searchDoc: " + JSON.stringify(searchDoc));
+  await location.find(searchDoc).toArray()
+  .then(docs => {
+      var vCoordinates = "";
+      docs.map(c => {
+        if (c) {
+          console.log("loaction search result doc: " + JSON.stringify(c));
+          vCoordinates =  c.coordinates;
+          console.log("Inside doc loop vCoordinates: " + vCoordinates);
+        }
+        
+      });
+      console.log("before null check vCoordinates: " + vCoordinates);
+      if (vCoordinates) {
+        console.log("after null check vCoordinates: " + vCoordinates);
+        if (Array.isArray(vCoordinates)) {
+          console.log("after array check vCoordinates: " + vCoordinates);
+          //we have found a store coordinate lets update the inventory item with the location of the store
+          inventory.updateOne(
+            { "_id": fullDocument._id},
+            {$set: 
+              { "coordinates": vCoordinates }
+            });
+        }
+      }
+    });
+  
+  //-----------------------------------------------------------------
+  //-- Update the sales data
+  //-----------------------------------------------------------------  
   var fullCopy = fullDocument;
   var vDate = new Date();
   
@@ -113,7 +166,5 @@ exports = async function(changeEvent) {
       }},
       {upsert: true}
     );
-  
-  //Lets calculate the number sold based on the last inventory amount. 
-  
-};
+
+}

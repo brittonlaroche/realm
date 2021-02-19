@@ -1,6 +1,6 @@
 {
-    "database": "InventoryDemo",
     "collection": "inventory_hist",
+    "database": "InventoryDemo",
     "roles": [
         {
             "name": "default",
@@ -8,6 +8,7 @@
             "write": true,
             "insert": true,
             "delete": true,
+            "search": true,
             "additional_fields": {}
         }
     ],

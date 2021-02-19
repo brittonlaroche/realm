@@ -1,0 +1,20 @@
+{
+    "name": "trg_tfModel",
+    "type": "DATABASE",
+    "config": {
+        "operation_types": [
+            "INSERT",
+            "UPDATE",
+            "REPLACE"
+        ],
+        "database": "InventoryDemo",
+        "collection": "tfModel",
+        "service_name": "mongodb-atlas",
+        "match": {},
+        "project": {},
+        "full_document": true,
+        "unordered": false
+    },
+    "function_name": "fnc_modelHistory",
+    "disabled": false
+}

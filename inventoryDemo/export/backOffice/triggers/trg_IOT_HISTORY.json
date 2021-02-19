@@ -1,0 +1,18 @@
+{
+    "name": "trg_IOT_HISTORY",
+    "type": "DATABASE",
+    "config": {
+        "operation_types": [
+            "INSERT"
+        ],
+        "database": "InventoryDemo",
+        "collection": "IOT_DATA",
+        "service_name": "mongodb-atlas",
+        "match": {},
+        "project": {},
+        "full_document": true,
+        "unordered": false
+    },
+    "function_name": "fnc_IOT_HIST",
+    "disabled": false
+}

@@ -1,0 +1,9 @@
+{
+    "name": "trg_clean_IOT_data",
+    "type": "SCHEDULED",
+    "config": {
+        "schedule": "0 */1 * * *"
+    },
+    "function_name": "fnc_clean_IOT_data",
+    "disabled": false
+}

@@ -1,6 +1,6 @@
 {
-    "database": "covid",
     "collection": "timeseries",
+    "database": "covid",
     "roles": [
         {
             "name": "default",
@@ -10,6 +10,7 @@
             },
             "insert": true,
             "delete": true,
+            "search": true,
             "additional_fields": {
                 "write": true,
                 "read": true

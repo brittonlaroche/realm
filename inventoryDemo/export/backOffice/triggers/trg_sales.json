@@ -11,6 +11,7 @@
         "collection": "InventoryItem",
         "service_name": "mongodb-atlas",
         "match": {},
+        "project": {},
         "full_document": true,
         "unordered": false
     },

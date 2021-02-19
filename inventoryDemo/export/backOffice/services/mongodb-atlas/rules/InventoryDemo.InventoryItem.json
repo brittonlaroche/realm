@@ -1,6 +1,6 @@
 {
-    "database": "InventoryDemo",
     "collection": "InventoryItem",
+    "database": "InventoryDemo",
     "roles": [
         {
             "name": "default",
@@ -10,6 +10,12 @@
                     "write": true
                 },
                 "_partition": {
+                    "write": true
+                },
+                "coordinates": {
+                    "write": true
+                },
+                "max_temp": {
                     "write": true
                 },
                 "min_quantity": {
@@ -24,12 +30,22 @@
                 "quantity": {
                     "write": true
                 },
+                "sensorId": {
+                    "write": true
+                },
+                "spoiled": {
+                    "write": true
+                },
                 "supplier": {
+                    "write": true
+                },
+                "temp": {
                     "write": true
                 }
             },
             "insert": true,
             "delete": true,
+            "search": true,
             "additional_fields": {}
         }
     ],

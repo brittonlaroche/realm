@@ -200,9 +200,10 @@
       ['loss']
     );
     var numEpochs = parseInt(document.getElementById("numEpochs").value);
+    var setBatchSize = parseInt(document.getElementById("batchSize").value);
     if (document.getElementById("graphLoss").checked){
       return model.fit(trainingFeatureTensor, trainingLabelTensor, {
-        batchSize: 32,
+        batchSize: setBatchSize,
         epochs: numEpochs,
         validationSplit: 0.2,
         callbacks: {
@@ -238,13 +239,14 @@
         const normalizedOutputTensor = model.predict(normalizedInput.tensor);
         const outputTensor = denormalize(normalizedOutputTensor, normalizedLabel.min, normalizedLabel.max);
         const outputValue = outputTensor.dataSync()[0];
-        const outputValueRounded = (outputValue/1000).toFixed(0)*1000;
+        const outputValueRounded = Math.round(outputValue);//(outputValue/1000).toFixed(0)*1000;
         var yDataField = document.getElementById("yData").value;
         var xDataField = document.getElementById("xData").value;
         if (xDataField === "price"){
           var totalSales = predictionInput * outputValueRounded;
+          var totalSalesRounded = Math.round(totalSales,2);
           document.getElementById("prediction-quantity").innerHTML = `${outputValueRounded}`;
-            document.getElementById("prediction-sales").innerHTML = `\$${totalSales}`  ;
+            document.getElementById("prediction-sales").innerHTML = `\$${totalSalesRounded}`  ;
 
         } else {
           document.getElementById("prediction-quantity").innerHTML = `${outputValueRounded}`;
@@ -260,6 +262,13 @@
     //console.log("model");
     //console.log("model: " + JSON.stringify(model));
     console.dir(model);
+    var storeId = parseFloat(document.getElementById("searchStoreId").value);
+    var searchDoc = {};
+    if (storeId && storeId != ""){
+      storageID = "realm-tensorflow-model-" + storeId;
+    } else {
+      storageID = "realm-tensorflow-model";
+    }
     const saveResults = await model.save(`localstorage://${storageID}`);
     document.getElementById("model-status").innerHTML = `Trained (saved ${saveResults.modelArtifactsInfo.dateSaved})`;
 
@@ -405,8 +414,10 @@
     const layer = model.getLayer(undefined, 0);
     tfvis.show.layer({ name: "Layer 1" }, layer);
     await plotPredictionLine();
-
+    var trainStart = new Date();
     const result = await trainModel(model, trainingFeatureTensor, trainingLabelTensor);
+    var trainEnd = new Date()
+    var trainTime = (trainEnd - trainStart)/1000;
     console.log(result);
     const trainingLoss = result.history.loss.pop();
     console.log(`Training set loss: ${trainingLoss}`);
@@ -415,7 +426,8 @@
 
     document.getElementById("model-status").innerHTML = "Trained (unsaved)\n"
       + `Loss: ${trainingLoss.toPrecision(5)}\n`
-      + `Validation loss: ${validationLoss.toPrecision(5)}`;
+      + `Validation loss: ${validationLoss.toPrecision(5)}\n`
+      + `Training time in seconds: ${trainTime}`;
     document.getElementById("test-button").removeAttribute("disabled");
     document.getElementById("save-button").removeAttribute("disabled");
     document.getElementById("predict-button").removeAttribute("disabled");
@@ -504,7 +516,7 @@
 <!--   Header   -->
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
-    <h5 class="header center green-text small">Linear regression with MongoDB Atlas, Realm and TensorFlow.js</h5>
+    <h5 class="header center green-text small">Machine Learning with MongoDB Atlas, Realm and TensorFlow.js</h5>
     <div class="row center">
       <h6 class="header col s12 light">Train a model to predict Gallons sold from Gas Price and Weather Data.</h6>
     </div>
@@ -581,7 +593,13 @@
 
             <p><label>Testing status:</label></p>
             <pre class="grey lighten-4" style="overflow-x: auto"><em id="testing-status">Not yet tested</em></pre>
-            <label>Number of Epochs: <input type="text" id="numEpochs" value="100"/></label>
+            <table><tr><td>
+              <label>Number of Epochs: <input type="text" id="numEpochs" value="100"/></label>
+            </td><td>
+              <label>Batch Size: <input type="text" id="batchSize" value="10"/></label>
+            </td></tr></table>
+            
+            
             <label>
               <input type="checkbox" id="graphLoss" checked/>
               <span>Graph Loss</span>
@@ -612,7 +630,7 @@
           <h5 class="center">Predict</h5>
 
           <label>Independent Variable (price/temp): <input type="number" id="prediction-input" value="2.89"/></label>
-          <button autocomplete="off" id="predict-button" class="waves-effect green darken-3 waves-light btn" disabled onclick="predict()">Predict Gallons Sold</button>
+          <button autocomplete="off" id="predict-button" class="waves-effect green darken-3 waves-light btn" disabled onclick="predict()">Predict Amounts</button>
           <button autocomplete="off" id="addNotes-button" class="waves-effect green darken-3 waves-light btn" disabled onclick="addNotes()">Add Notes</button>
           <p>Predicted quantity: <span style="font-size: 2em"><strong id="prediction-quantity"></strong></span></p>
           <p>Predicted Sales: <span style="font-size: 2em"><strong id="prediction-sales"></strong></span></p>

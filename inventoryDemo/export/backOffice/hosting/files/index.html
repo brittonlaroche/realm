@@ -7,6 +7,7 @@
     <!-- ---------------------------------------------------------------------------------------------------------------------- -->
     <!-- 2020-06-24  Britton LaRoche   1.0            Initial Release                                                           -->
     <!-- 2020-06-26  Britton LaRoche   1.1            Updated for multi tennant                                                 -->
+    <!-- 2020-11-16  Britton LaRoche   1.2            Updated for IOT data                                                      -->
     <!-- ====================================================================================================================*/ -->
     <!-- https://datatables.net/examples/styling/bootstrap4 -->
     <link rel="stylesheet" type="text/css" href="./customer.css">
@@ -50,13 +51,17 @@
           }
           return "";
         }
-        function editItem( aPartition, aItemId, aName, aPrice, aQuantity, aMinQuantity, aSupplier, aCoordinates){
+        function editItem( aPartition, aItemId, aName, aPrice, aQuantity, aMinQuantity, aSensorId, aTemp, aMaxTemp, aSpoiled, aSupplier, aCoordinates){
             document.getElementById("partition").value = aPartition;
             document.getElementById("itemId").value = aItemId;
             document.getElementById("name").value = aName;
             document.getElementById("price").value = aPrice;
             document.getElementById("quantity").value = aQuantity;
             document.getElementById("mQuantity").value = aMinQuantity;
+            document.getElementById("sensorId").value = aSensorId;
+            document.getElementById("temp").value = aTemp;
+            document.getElementById("mTemp").value = aMaxTemp;
+            document.getElementById("spoiled").value = aSpoiled;
             document.getElementById("supplier").value = aSupplier;
             document.getElementById("coordinates").value = aCoordinates;
             drawStoreCircle(aPartition, aCoordinates, aName);
@@ -73,6 +78,28 @@
             return arg;
           }
           return "";
+        }
+        function padDigits(number, digits) {
+          return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+        }
+        function checkDate(argDate){
+          if (argDate) {
+            return argDate.toLocaleDateString();
+          } else {
+            return "";
+          }
+        }
+        function formatDate(argdate){
+          if (!argdate || argdate == ""){
+            return ""
+          }
+          if ( argdate instanceof Date) {
+            var date = argdate.getFullYear()+'-'+padDigits((argdate.getMonth()+1),2) +'-'+padDigits(argdate.getDate(),2);
+            var time = padDigits(argdate.getHours(),2) + ":" + padDigits(argdate.getMinutes(),2) + ":" + padDigits(argdate.getSeconds(),2);
+            var dateTime = date+' '+time;
+            return dateTime;
+          }
+          return argdate;
         }
         async function displayItems() {
           var searchDoc = {};
@@ -93,7 +120,7 @@
           searchDoc["quantity"] = parseInt(vQuantity.value);
           }
           console.log("Search doc: "+ JSON.stringify(searchDoc));
-              var theader = "<th>Store ID</th><th>_id</th><th>Device</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Supplier</th><th>Coordinates</th><th>Edit</th>";
+              var theader = "<th>Store ID</th><th>_id</th><th>Item Name</th><th>Price</th><th>Quantity</th><th>Min Quantity</th><th>Sensor ID</th><th>Temp</th><th>Max Temp</th><th>Spoiled</th><th>Supplier</th><th>Coordinates</th><th>Edit</th>";
               db.collection('InventoryItem').find(searchDoc,{sort: { "_partition": 1 },limit: 100}).asArray()
                 .then(docs => {
                   var thtml = "";
@@ -107,9 +134,13 @@
                           "<td>" + c.name + "</td>" +
                           "<td>" + c.price + "</td>" +
                           "<td>" + c.quantity + "</td>" +
-                          "<td>" + c.min_quantity + "</td>" +
-                          "<td>" + c.supplier + "</td>" +
-                          "<td>" + c.coordinates + "</td>" +
+                          "<td>" + nvl(c.min_quantity) + "</td>" +
+                          "<td>" + nvl(c.sensorId) + "</td>" +
+                          "<td>" + nvl(c.temp) + "</td>" +
+                          "<td>" + nvl(c.max_temp) + "</td>" +
+                          "<td>" + nvl(formatDate(c.spoiled)) + "</td>" +
+                          "<td>" + nvl(c.supplier) + "</td>" +
+                          "<td>" + nvl(c.coordinates) + "</td>" +
                           "<td>" +
                             "<button type=\"checkbox\" class=\"blueTable\"" +
                             "onClick=\"editItem(" +
@@ -118,7 +149,11 @@
                                 "\'"+ escape(c.name) + "\'," +
                                 "\'"+ c.price + "\'," +
                                 "\'"+ c.quantity + "\'," +
-                                "\'"+ c.min_quantity + "\'," +
+                                "\'"+ nvl(c.min_quantity) + "\'," +
+                                "\'"+ nvl(c.sensorId) + "\'," +
+                                "\'"+ nvl(c.temp) + "\'," +
+                                "\'"+ nvl(c.max_temp) + "\'," +
+                                "\'"+ nvl(formatDate(c.spoiled)) + "\'," +
                                 "\'"+ c.supplier + "\'," +
                                 "\'"+ nvl(c.coordinates) + "\'" +
                             ")\">" +
@@ -232,13 +267,17 @@
         }
         async function updateItem() {
             var vPartition = document.getElementById('partition').value;
-            var vItemId = new stitch.BSON.ObjectId(document.getElementById('itemId').value);
+            var vItemId = document.getElementById('itemId').value;
             var vName = document.getElementById('name').value;
             var vPrice = document.getElementById('price').value;
             var vQuantity = document.getElementById('quantity').value;
             var vMinQuantity = document.getElementById('mQuantity').value;
             var vSupplier = document.getElementById('supplier').value;
             var vCoordinates = document.getElementById('coordinates').value;
+            var vSensorId = document.getElementById('sensorId').value;
+            var vTemp = document.getElementById('temp').value;
+            var vMaxTemp = document.getElementById('mTemp').value;
+            var vSpoiled = document.getElementById('spoiled').value;
             var vCoordinatesArray;
             if(vCoordinates){
                 vCoordinates = vCoordinates.split(",");
@@ -252,19 +291,36 @@
             if ( isNaN(vMinQuantity)){
               vMinQuantity = 0;
             }
-            var result1 = await db.collection('InventoryItem').updateOne(
-  	        { _id:  vItemId},
-  	        { $set: {   "name": vName, 
+            if (vItemId && vItemId != ""){
+              vItemId = new stitch.BSON.ObjectId(document.getElementById('itemId').value);
+            } else {
+              //we are inserting lets generate an objectid
+              vItemId = new stitch.BSON.ObjectId();
+            }
+            var setDoc = { "name": vName, 
                         "_partition": vPartition, 
                         "price": {"$numberDouble": vPrice}, 
                         "quantity": {"$numberInt": vQuantity},
                         "min_quantity": {"$numberInt": vMinQuantity},
+                        "sensorId": vSensorId,
                         "supplier": vSupplier,
-                        "coordinates": 	vCoordinatesArray }
-                },
-                {upsert: true}
+                        "spoiled": vSpoiled,
+                        "coordinates": 	vCoordinatesArray };
+            if (vTemp && vTemp != ""){
+              setDoc["temp"] = {"$numberDouble": vTemp}; 
+            }
+            if (vMaxTemp && vMaxTemp != ""){
+              setDoc["max_temp"] = {"$numberDouble": vMaxTemp}; 
+            }
+            console.log("vItemId: " + vItemId);
+            console.log("setDoc: " + JSON.stringify(setDoc));
+            var result1 = await db.collection('InventoryItem').updateOne(
+              { _id:  vItemId },
+              { $set: setDoc },
+                { upsert: true }
             );
             console.log("result1: " + JSON.stringify(result1));
+            
             displayItems();
         }
         function sortTable(){
@@ -322,18 +378,18 @@
 
     </head>
   <body onload="displayItemsOnLoad()">
-	<table>
-	<tr>
-	<td>
-		<div id="contact" class="leftpane">
+    <table>
+    <tr>
+    <td>
+        <div id="contact" class="leftpane">
       <h3>Item Search</h3>
       <div id=displayLogo></div>
       <p id="user"></p>
       <p id="defaultStore"></p>
           <fieldset><input type="text" placeholder="Store Id:" id="sPartition"></fieldset>
           <fieldset><input type="text" placeholder="Item Id:" id="sItemId"></fieldset>
-		      <fieldset><input type="text" placeholder="Item Name:" id="sName"></fieldset>
-		      <fieldset><input type="text" placeholder="Price:" id="sPrice"></fieldset>
+              <fieldset><input type="text" placeholder="Item Name:" id="sName"></fieldset>
+              <fieldset><input type="text" placeholder="Price:" id="sPrice"></fieldset>
           <fieldset><input type="text" placeholder="Quantity:" id="sQuantity"></fieldset>
           <fieldset>
             <label for="autoRef"> Auto Refresh</label>
@@ -352,11 +408,11 @@
             <input type="checkbox" id="showStoreItems" checked="true" name="showStoreItems">
             <br>
             <input type="text" placeholder="Last Update:" id="lastUpdate"></fieldset>
-		  <button type="submit" id="refresh" onClick="displayItems()">Search</button>
-		 </div>
-	</td>
-	<td>...</td>
-	<td>
+          <button type="submit" id="refresh" onClick="displayItems()">Search</button>
+         </div>
+    </td>
+    <td>...</td>
+    <td>
     <div id="contact" class="container">
       <h1>Back office Administration (Realm Hosted)</h1>
       <div id="chart1"></div>
@@ -373,33 +429,46 @@
       <fieldset><input type="text" placeholder="Company Name:" id="companyName"></fieldset>
       <button type="submit" id="contact-submit" onClick="showCompany()">Update Company</button>
     </div>
-		<div id="contact" class="container">
+        <div id="contact" class="container">
       <div id="mapid" 
-        style="width: 800px; height: 500px; 
+        style="width: 1080px; height: 500px; 
         margin-left: auto; margin-right: auto; 
         border: 5px solid rgb(161, 185, 236);
         border-radius: 8px"></div>
       <h3>Item Maintenance</h3>
+      <table class="container">
+        <tr>
+          <td>
             <fieldset><input type="text" placeholder="Store Id:" id="partition"></fieldset>
             <fieldset><input type="text" placeholder="Item Id:" id="itemId"></fieldset>
             <fieldset><input type="text" placeholder="Name:" id="name"></fieldset>
             <fieldset><input type="text" placeholder="Price:" id="price"></fieldset>
             <fieldset><input type="text" placeholder="Quantity:" id="quantity"></fieldset>
             <fieldset><input type="text" placeholder="Min Quantity:" id="mQuantity"></fieldset>
+          </td>
+          <td>
+            <fieldset><input type="text" placeholder="Sensor ID:" id="sensorId"></fieldset>
+            <fieldset><input type="text" placeholder="Temperature:" id="temp"></fieldset>
+            <fieldset><input type="text" placeholder="Max Temperature:" id="mTemp"></fieldset>
+            <fieldset><input type="text" placeholder="Spoiled:" id="spoiled"></fieldset>
             <fieldset><input type="text" placeholder="Supplier:" id="supplier"></fieldset>
             <fieldset><input type="text" placeholder="Coordinates:" id="coordinates"></fieldset>
-		  <hr>
-		  <button type="submit" id="contact-submit" onClick="updateItem()">Update Item</button>
+          </td>
+          </tr>
+        </tr>
+      </table>
+          <hr>
+          <button type="submit" id="contact-submit" onClick="updateItem()">Update Item</button>
     </div>
 
-		<div id="contact" class= container>
-		<hr>
-			<button type="submit" id="refresh" onClick="displayItems()">Refresh Display</button>
-		<hr>
-		<div id="items">Loading...<br><img src="loading.gif"></div>
+        <div id="contact" class= container>
+        <hr>
+            <button type="submit" id="refresh" onClick="displayItems()">Refresh Display</button>
+        <hr>
+        <div id="items">Loading...<br><img src="loading.gif"></div>
     </div>
-	</td>
-	</tr>
+    </td>
+    </tr>
   </table>
   <script>
     //--------------------------------------------------------
@@ -412,6 +481,16 @@
     var storeBtnList = [0];
     var storeProductPopup;
     var selectedStore = "";
+    var truckIcon = L.icon({
+        iconUrl: './img/TruckIconTrans.png',
+        shadowUrl: './img/TruckShadow.png',
+
+        iconSize:     [60, 60], // size of the icon
+        shadowSize:   [60, 60], // size of the shadow
+        iconAnchor:   [30, 60], // point of the icon which will correspond to marker's location
+        shadowAnchor: [30, 62],  // the same for the shadow
+        popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
+    });
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -454,7 +533,7 @@
       }
       mapCircle = L.circle([lat, long], 300, {
         color: 'red',
-        fillColor: '#a03',
+        fillColor: '#a25',
         fillOpacity: 0.5
       }).addTo(mymap).bindPopup(aCoordinates);
 
@@ -462,7 +541,7 @@
       var container = L.DomUtil.create('div');
       if (aItemName) {
           if(aItemName != ""){
-            selectedItemBtn = this.createButton('Item: ' + aItemName, container);
+            selectedItemBtn = this.createButton(aItemName, container);
             selectedItemBtn.style.width = '150px';
             L.DomUtil.create('br','', container);
             L.DomEvent.on(selectedItemBtn, 'click', () => {
@@ -470,7 +549,7 @@
             });
           }
       }
-      selectedBtn = this.createButton('Store ID: ' + aStoreId, container);
+      selectedBtn = this.createButton(aStoreId, container);
       selectedBtn.style.width = '150px';
       var ck = document.getElementById('showStoreItems').checked;
       if (ck){
@@ -492,12 +571,18 @@
           }
         }
       }
-
-      
-      storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(container).openPopup();
-      L.DomEvent.on(selectedBtn, 'click', () => {
-          setStoreFromMap(selectedStore);
-      });
+      //choose the icon
+      if (aStoreId.includes("TRUCK")){
+        storePopup = L.marker([lat,long], {icon: truckIcon}).addTo(mymap).bindPopup(container).openPopup();
+        L.DomEvent.on(selectedBtn, 'click', () => {
+            setStoreFromMap(selectedStore);
+        });
+      } else {
+        storePopup = L.marker([lat,long]).addTo(mymap).bindPopup(container).openPopup();
+        L.DomEvent.on(selectedBtn, 'click', () => {
+            setStoreFromMap(selectedStore);
+        });
+      }
 
       //storePopup = L.marker([lat,long]).addTo(mymap).bindPopup("<button type=\"submit\">Store ID: " + aStoreId +"</button>").openPopup();
     }
@@ -732,7 +817,7 @@
                 default:
                     storeBtn = this.createButton('Store ID: ' + vStoreId, container)
                     L.DomEvent.on(storeBtn, 'click', () => {
-                        setStoreFromMap(vStoreId);
+                        //Do nothing
                     });
                 }
 

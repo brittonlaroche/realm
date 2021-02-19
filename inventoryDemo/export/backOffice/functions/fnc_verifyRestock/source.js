@@ -15,10 +15,30 @@ exports = async function(recipient, aStoreId, aItemName, aQuantity, aMinQuantity
   console.log(JSON.stringify("fnc_verifyRestock called with arguments: " + recipient + ", " + aStoreId + ", " + aItemName + ", " + aQuantity));
   console.log("COMPANY_NAME: "+ vcompanyName);
   
+  /*
+  //Zebra
+  twilio.send({
+    from: ourNumber,
+    to: recipient,
+    body: `Hello from ${vcompanyName}. We have a configuration number of ${aQuantity} for ${aItemName} for store ${aStoreId}, we need a minimum configuration of ${aMinQuantity}. Please update your device, or respond with 1 to apply the next configuration.`
+  });
+  */
+
+  //Normal
+  twilio.send({
+    from: ourNumber,
+    to: recipient,
+    body: `Hello from ${vcompanyName}. We have ${aQuantity} units of ${aItemName} for store ${aStoreId}, we need a minimum of ${aMinQuantity}. Please reply with the number of units you can deliver. 0 if you can not deliver.`
+  });
+  
+  
+  /*
   twilio.send({
     from: ourNumber,
     to: recipient,
     body: `Hello from ${vcompanyName}. We have ${aQuantity} units of ${aItemName} for store ${aStoreId}, we need a minimum of ${aMinQuantity}. Please reply with the number of units you can deliver. 0 if you can not deliver.`,
     mediaUrl: vcompanyLogo
   });
+  */
+  
 };

@@ -537,21 +537,7 @@
     }
     async function mapLocations(){
       //console.log("Inside MapLocation Function");
-      var searchDoc = {};
-      var aStoreId = document.getElementById("sPartition").value;
-      if (aStoreId != ""){
-        var aStoreCoordinates  = await getStoreCoordinates(aStoreId);
-          if(aStoreCoordinates){
-            if(aStoreCoordinates != ""){
-              var coordString = aStoreCoordinates.toString();
-              console.log("mapLocations coordString: "+ coordString);
-              var searchString = '{"coordinates": {"$geoWithin": { "$centerSphere": [ [' + coordString +  '], 0.005430642146122155 ]}}}';
-              searchDoc = JSON.parse(searchString);
-              console.log("mapLocations searchDoc: "+ JSON.stringify(searchDoc));
-            }
-          }
-      }
-      await db.collection('location').find(searchDoc,{sort: { "store_id": 1 }},{limit: 100}).asArray()
+      await db.collection('location').find({},{sort: { "store_id": 1 }},{limit: 100}).asArray()
         .then(docs => {
           var vStoreId = "";
           var vCoordinates = "";

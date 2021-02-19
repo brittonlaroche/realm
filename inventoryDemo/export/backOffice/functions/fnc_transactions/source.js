@@ -39,8 +39,29 @@ exports = async function(changeEvent) {
   ===============================================================*/
   var fullDocument = changeEvent.fullDocument;
   console.log("Inside fnc_transactions");
+  const item = context.services.get("mongodb-atlas").db("InventoryDemo").collection("InventoryItem");
+  var vDate = new Date();
+  
+  //check to make sure we did not update the location coordinates only
+  //See which fields were changed (if any):
+  const updateDescription = changeEvent.updateDescription;
+  if (updateDescription) {
+    const updatedFields = updateDescription.updatedFields; // A document containing updated fields
+    console.log("updatedFields in fnc_transactions: " + JSON.stringify(updatedFields));
+    if(updatedFields.coordinates){
+      console.log("Detected coordinate update, calling fnc_geoFence and exiting");
+      context.functions.execute("fnc_geoFence", fullDocument );
+      return;
+    }
+    if(updatedFields.spoiled){
+      console.log("Detected spoiled update, calling fnc_notifySpoilage and exiting");
+      context.functions.execute("fnc_notifySpoilage", fullDocument );
+      return;
+    }
+  }
+  
   //------------------------------------------------
-  //verify we need to restock Before proceeeding
+  //check that we have the fill document
   //------------------------------------------------
   if( fullDocument){
     console.log("got fullDocument");
@@ -49,6 +70,26 @@ exports = async function(changeEvent) {
     return;
   }
   
+  
+  //------------------------------------------------
+  //Spoil items that have exceeded the max temp
+  //------------------------------------------------
+  if (fullDocument.temp){
+    if(fullDocument.max_temp){
+      if(!fullDocument.spoiled){
+        if (fullDocument.temp > fullDocument.max_temp ){
+          item.updateOne(
+            {"_id":fullDocument._id},
+            {$set: {"spoiled": vDate}}
+            );
+        }
+      }
+    }
+  }
+ 
+  //------------------------------------------------
+  //verify we need to restock Before proceeeding
+  //------------------------------------------------ 
   if( fullDocument.min_quantity){
     console.log("got fullDocument.min_quantity");
   } else {
@@ -76,10 +117,8 @@ exports = async function(changeEvent) {
   }
   var fullCopy = fullDocument;
   var cTransactions = context.services.get("mongodb-atlas").db("InventoryDemo").collection("transactions");
-  var vDate = new Date();
   var insertDoc = {};
 
-  var updateDescription = changeEvent.updateDescription;
   console.log(JSON.stringify("Full Document"));
   console.log(JSON.stringify(changeEvent.fullDocument));
   
