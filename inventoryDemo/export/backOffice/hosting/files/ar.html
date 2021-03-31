@@ -1,0 +1,74 @@
+<html>
+<head>
+<!--
+  ==============================================================================================================================
+  - Date:       Author:           Version:     Notes:
+  ------------------------------------------------------------------------------------------------------------------------------
+  - 2021-03-31  Britton LaRoche   1.0          First Version
+  -
+  ==============================================================================================================================
+  -->
+<title>Augmented reality simulation</title>
+  <script src="https://unpkg.com/realm-web@0.9.0/dist/bundle.iife.js"></script>
+  <script type="text/javascript">
+  const appId = "inventory-hhsot"; // Set Realm app ID here.
+  let user;
+  let app;
+  let credentials;
+  let mongo;
+  let items;
+  const appConfig = {
+    id: appId,
+    timeout: 1000,
+  };
+  async function init(){
+    try{
+      await atlasConnect();
+    } finally {
+      console.log("Init Complete");
+    }
+  }
+  async function atlasConnect(){
+      app = new Realm.App(appConfig);
+      credentials = Realm.Credentials.anonymous(); // create an anonymous credential
+      user = await app.logIn(credentials);
+      console.dir(user);
+      mongo = app.services.mongodb("mongodb-atlas");
+  }
+  async function loadDbData(){
+    var destDatabase = "InventoryDemo";
+    var destCollection = "InventoryItem";
+    const db = mongo.db(destDatabase);
+    const coll = db.collection(destCollection);
+    result = await coll.findOne({"sensorId":"T89176"});
+    console.dir(result);
+    document.getElementById("tempData").innerHTML = "{ " + result.temp + " }";
+  }
+  var myVar = setInterval(myTimer, 3000);
+    function myTimer() {
+        loadDbData()
+    }
+  init();
+</script>
+</head>
+<style>
+body {
+    background-image: url('./img/fakeAR.png');
+    background-repeat: no-repeat;
+}
+</style>
+<div id="tempData"
+   style="
+      top: 285;
+      left: 250;
+      position: absolute;
+      z-index: 1;
+      visibility: show;
+      font-size: 34; 
+      font-family: sans-serif;
+      color: #CCFFCC;
+      background-color: #555544">
+     { 42 f }
+</div>
+</body>
+</html>
